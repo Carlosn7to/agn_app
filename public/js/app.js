@@ -5647,11 +5647,120 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Forms",
-  props: [],
+  props: ['actions_new', 'token'],
   methods: {
-    cliick: function cliick(status, type_form) {
+    formStep: function formStep(status, type_form) {
       if (status === 0) {
         this.form.modal = false;
         this.form.type_form = type_form;
@@ -28913,7 +29022,7 @@ var render = function () {
               staticClass: "item-form",
               on: {
                 click: function ($event) {
-                  return _vm.cliick(1, 1)
+                  return _vm.formStep(1, 1)
                 },
               },
             },
@@ -28930,7 +29039,7 @@ var render = function () {
               staticClass: "item-form",
               on: {
                 click: function ($event) {
-                  return _vm.cliick(1, 2)
+                  return _vm.formStep(1, 2)
                 },
               },
             },
@@ -28947,7 +29056,7 @@ var render = function () {
               staticClass: "item-form",
               on: {
                 click: function ($event) {
-                  return _vm.cliick(1, 3)
+                  return _vm.formStep(1, 3)
                 },
               },
             },
@@ -28964,7 +29073,7 @@ var render = function () {
               staticClass: "item-form",
               on: {
                 click: function ($event) {
-                  return _vm.cliick(1, 4)
+                  return _vm.formStep(1, 4)
                 },
               },
             },
@@ -28981,7 +29090,7 @@ var render = function () {
               staticClass: "item-form",
               on: {
                 click: function ($event) {
-                  return _vm.cliick(1, 5)
+                  return _vm.formStep(1, 5)
                 },
               },
             },
@@ -28998,7 +29107,7 @@ var render = function () {
               staticClass: "item-form",
               on: {
                 click: function ($event) {
-                  return _vm.cliick(1, 6)
+                  return _vm.formStep(1, 6)
                 },
               },
             },
@@ -29015,7 +29124,7 @@ var render = function () {
               staticClass: "item-form",
               on: {
                 click: function ($event) {
-                  return _vm.cliick(1, 7)
+                  return _vm.formStep(1, 7)
                 },
               },
             },
@@ -29050,7 +29159,7 @@ var render = function () {
                     },
                     on: {
                       click: function ($event) {
-                        return _vm.cliick(0, 0)
+                        return _vm.formStep(0, 0)
                       },
                     },
                   }),
@@ -29061,7 +29170,52 @@ var render = function () {
                 ? _c("div", { staticClass: "selections-form" }, [
                     _c("h6", [_vm._v("Formulário de Instalação")]),
                     _vm._v(" "),
-                    _vm._m(0),
+                    _c(
+                      "form",
+                      {
+                        attrs: {
+                          action: _vm.actions_new,
+                          method: "POST",
+                          id: "form",
+                        },
+                      },
+                      [
+                        _c("input", {
+                          attrs: { type: "hidden", name: "_token" },
+                          domProps: { value: _vm.token },
+                        }),
+                        _vm._v(" "),
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _vm._m(9),
+                        _vm._v(" "),
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: {
+                            type: "submit",
+                            value: "Enviar",
+                            form: "form",
+                          },
+                        }),
+                      ]
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -29075,75 +29229,325 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#" } }, [
-      _c("div", { staticClass: "item-selection-form" }, [
-        _c("span", [
-          _vm._v("TIPO "),
-          _c("b", { staticStyle: { color: "var(--color-red)" } }, [
-            _vm._v("*"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-selection-form" }, [
-          _c("input", {
-            attrs: {
-              type: "radio",
-              name: "type",
-              value: "1",
-              id: "type",
-              checked: "",
-            },
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "type" } }, [_vm._v("Instalação")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-selection-form" }, [
-          _c("input", { attrs: { type: "radio", name: "type", value: "2" } }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "type" } }, [
-            _vm._v("Reagendamento da instalação"),
-          ]),
-        ]),
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("TIPO "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "item-selection-form" }, [
-        _c("span", [
-          _vm._v("EMPRESA RESPONSÁVEL PELA VENDA "),
-          _c("b", { staticStyle: { color: "var(--color-red)" } }, [
-            _vm._v("*"),
-          ]),
-        ]),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: {
+            type: "radio",
+            name: "type",
+            value: "1",
+            id: "type",
+            checked: "",
+          },
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "input-selection-form" }, [
-          _c("input", {
-            attrs: {
-              type: "radio",
-              name: "company",
-              id: "company",
-              value: "1",
-              checked: "",
-            },
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "company" } }, [_vm._v("AGE")]),
-        ]),
+        _c("label", { attrs: { for: "type" } }, [_vm._v("Instalação")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "type", value: "2" } }),
         _vm._v(" "),
-        _c("div", { staticClass: "input-selection-form" }, [
-          _c("input", {
-            attrs: { type: "radio", name: "company", value: "2" },
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "company" } }, [_vm._v("WT")]),
+        _c("label", { attrs: { for: "type" } }, [
+          _vm._v("Reagendamento da instalação"),
         ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("EMPRESA RESPONSÁVEL PELA VENDA "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: {
+            type: "radio",
+            name: "company",
+            id: "company",
+            value: "1",
+            checked: "",
+          },
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "input-selection-form" }, [
-          _c("input", {
-            attrs: { type: "radio", name: "company", value: "3" },
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "company" } }, [_vm._v("Não se aplica")]),
-        ]),
+        _c("label", { attrs: { for: "company" } }, [_vm._v("AGE")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "company", value: "2" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "company" } }, [_vm._v("WT")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "company", value: "3" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "company" } }, [_vm._v("Não se aplica")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("DATA "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          staticStyle: {
+            border: "none",
+            "border-bottom": "1px solid #cccccc90",
+            "font-size": "1.6rem",
+          },
+          attrs: { type: "date", name: "date" },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("CIDADES "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "1", checked: "" },
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Samambaia")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "2" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Recanto das Emas")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "3" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Riacho Fundo I")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "4" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Riacho Fundo II")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "5" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Gama")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "6" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Lago Sul")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "7" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Santa Maria")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "8" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Guará")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "9" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Ponte Alta")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "10" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Jardim Botânico")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "11" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Vicente Pires")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "city", value: "12" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "city" } }, [_vm._v("Ceilândia")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("PERÍODO "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("span", { staticStyle: { "font-size": "1.2rem" } }, [
+        _vm._v("Manhã: 08h às 12h: 14h às 18h."),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: { type: "radio", name: "period", value: "1", checked: "" },
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "period" } }, [_vm._v("MANHÃ")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", { attrs: { type: "radio", name: "period", value: "2" } }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "period" } }, [_vm._v("TARDE")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("NOME DO CLIENTE "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: {
+            type: "text",
+            name: "name",
+            id: "",
+            placeholder: "Sua resposta",
+          },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("CÓDIGO DO CLIENTE "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: {
+            type: "text",
+            name: "name",
+            id: "",
+            placeholder: "Sua resposta",
+          },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("O.S "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("span", { staticStyle: { "font-size": "1.2rem" } }, [
+        _vm._v("Número da ordem de serviço"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: { type: "text", name: "name", placeholder: "Sua resposta" },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("TELEFONE "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("span", { staticStyle: { "font-size": "1.2rem" } }, [
+        _vm._v("Com (DDD)"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: { type: "text", name: "tel", placeholder: "Sua resposta" },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("ENDEREÇO "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: { type: "text", name: "address", placeholder: "Sua resposta" },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "item-selection-form" }, [
+      _c("span", [
+        _vm._v("Observações "),
+        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-selection-form" }, [
+        _c("input", {
+          attrs: { type: "text", name: "name", placeholder: "Sua resposta" },
+        }),
       ]),
     ])
   },

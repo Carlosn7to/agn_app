@@ -27,6 +27,11 @@ Route::middleware(\App\Http\Middleware\ValidationMiddleware::class)->prefix('/ap
     Route::prefix('/formularios')->group(function ()
     {
         Route::get('/', [\App\Http\Controllers\FormsController::class,'home'])->name('app.forms');
+
+        Route::prefix('/actions')->group(function ()
+        {
+            Route::post('/new', [\App\Http\Controllers\FormsController::class, 'new'])->name('forms.new');
+        });
     });
 
 });

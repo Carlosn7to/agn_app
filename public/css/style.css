@@ -62,7 +62,7 @@ ul {
 ::-webkit-input-placeholder {
     color: #33333380;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 }
 
 /*
@@ -366,9 +366,9 @@ ul {
     height: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 2rem;
+    overflow: auto;
 }
 
 .selections-form h6 {
@@ -379,7 +379,7 @@ ul {
 
 .selections-form form {
     width: 80%;
-    height: 90%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -393,7 +393,7 @@ ul {
     padding: 2vh 1vw;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 
 }
 
@@ -406,4 +406,38 @@ ul {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.input-selection-form input[type=text] {
+    border: none;
+    border-bottom: 2px solid #cccccc90;
+    width: 50%;
+    height: 3vh;
+    font-size: 1.6rem;
+    padding: 0.2rem 0.3rem;
+    transition: all .3s ease-in-out;
+}
+
+.input-selection-form input[type=text]:focus {
+    border-bottom: 2px solid #132e7d;
+}
+
+.selections-form input[type=submit] {
+    border: none;
+    background-color: #132e7d;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: .7rem;
+    border-radius: 5px;
+    max-width: 4vw;
+    text-align: center;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    cursor: pointer;
+    transition: all ease-in-out .3s;
+}
+
+.selections-form input[type=submit]:hover {
+    background-color: #0a1b50;
+    color: #fff;
 }

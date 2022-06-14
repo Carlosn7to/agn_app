@@ -10,4 +10,9 @@ class FormsController extends Controller
     {
         return view('app.forms.home');
     }
+
+    public function new(Request $request)
+    {
+        return dd($request);
+    }
 }
