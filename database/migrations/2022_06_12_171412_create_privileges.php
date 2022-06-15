@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table)
-        {
-           $table->string('image_path')->default('padrao.png');
+        Schema::create('privileges', function (Blueprint $table) {
+            $table->id();
+            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('privilege')->default(1);
+            $table->string('name')->default('Padrão');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropColumns('users', ['image']);
+        Schema::dropIfExists('privileges');
     }
 };

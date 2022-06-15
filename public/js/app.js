@@ -29329,74 +29329,97 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
         _c("input", {
-          attrs: { type: "radio", name: "city", value: "1", checked: "" },
+          attrs: {
+            type: "radio",
+            name: "city",
+            value: "Samambaia",
+            checked: "",
+          },
         }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Samambaia")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "2" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Recanto das Emas" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Recanto das Emas")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "3" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Riacho Fundo I" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Riacho Fundo I")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "4" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Riacho Fundo II" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Riacho Fundo II")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "5" } }),
+        _c("input", { attrs: { type: "radio", name: "city", value: "Gama" } }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Gama")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "6" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Lago Sul" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Lago Sul")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "7" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Santa Maria" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Santa Maria")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "8" } }),
+        _c("input", { attrs: { type: "radio", name: "city", value: "Guará" } }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Guará")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "9" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Ponte Alta" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Ponte Alta")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "10" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Jardim Botânico" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Jardim Botânico")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "11" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Vicente Pires" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Vicente Pires")]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
-        _c("input", { attrs: { type: "radio", name: "city", value: "12" } }),
+        _c("input", {
+          attrs: { type: "radio", name: "city", value: "Ceilândia" },
+        }),
         _vm._v(" "),
         _c("label", { attrs: { for: "city" } }, [_vm._v("Ceilândia")]),
       ]),
@@ -29467,7 +29490,7 @@ var staticRenderFns = [
         _c("input", {
           attrs: {
             type: "text",
-            name: "name",
+            name: "cod",
             id: "",
             placeholder: "Sua resposta",
           },
@@ -29491,7 +29514,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
         _c("input", {
-          attrs: { type: "text", name: "name", placeholder: "Sua resposta" },
+          attrs: { type: "text", name: "os", placeholder: "Sua resposta" },
         }),
       ]),
     ])
@@ -29546,7 +29569,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
         _c("input", {
-          attrs: { type: "text", name: "name", placeholder: "Sua resposta" },
+          attrs: { type: "text", name: "obs", placeholder: "Sua resposta" },
         }),
       ]),
     ])

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_occupations', function (Blueprint $table) {
+        Schema::create('companys', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active');
-            $table->string('occupation', 255);
+            $table->tinyInteger('active')->default(1);
+            $table->string('company', 255)->default('Padrão');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_occupations');
+        Schema::dropIfExists('companys');
     }
 };

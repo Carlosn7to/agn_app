@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_sectors', function (Blueprint $table) {
+        Schema::create('occupations', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active');
-            $table->string('sector', 255);
+            $table->tinyInteger('active')->default(1);
+            $table->string('occupation', 255)->default('Padrão');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_sectors');
+        Schema::dropIfExists('occupations');
     }
 };

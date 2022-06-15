@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('last_name', 255);
             $table->string('email', 255);
             $table->string('password', 255);
+            $table->string('image', 255)->default('padrão.png');
             $table->unsignedBigInteger('sector_id')->default(1);
             $table->unsignedBigInteger('occupation_id')->default(1);
             $table->unsignedBigInteger('company_id')->default(1);
@@ -30,10 +31,10 @@ return new class extends Migration
 
             // Relacionamento entre chaves
 
-            $table->foreign('sector_id')->references('id')->on('user_sectors');
-            $table->foreign('occupation_id')->references('id')->on('user_occupations');
+            $table->foreign('sector_id')->references('id')->on('sectors');
+            $table->foreign('occupation_id')->references('id')->on('occupations');
             $table->foreign('company_id')->references('id')->on('companys');
-            $table->foreign('privilege_id')->references('id')->on('user_privileges');
+            $table->foreign('privilege_id')->references('id')->on('privileges');
         });
     }
 

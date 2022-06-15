@@ -80,51 +80,51 @@
                         <div class="item-selection-form">
                             <span>CIDADES <b style="color: var(--color-red)">*</b></span>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="1" checked>
+                                <input type="radio" name="city" value="Samambaia" checked>
                                 <label for="city">Samambaia</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="2">
+                                <input type="radio" name="city" value="Recanto das Emas">
                                 <label for="city">Recanto das Emas</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="3">
+                                <input type="radio" name="city" value="Riacho Fundo I">
                                 <label for="city">Riacho Fundo I</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="4">
+                                <input type="radio" name="city" value="Riacho Fundo II">
                                 <label for="city">Riacho Fundo II</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="5">
+                                <input type="radio" name="city" value="Gama">
                                 <label for="city">Gama</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="6">
+                                <input type="radio" name="city" value="Lago Sul">
                                 <label for="city">Lago Sul</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="7">
+                                <input type="radio" name="city" value="Santa Maria">
                                 <label for="city">Santa Maria</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="8">
+                                <input type="radio" name="city" value="Guará">
                                 <label for="city">Guará</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="9">
+                                <input type="radio" name="city" value="Ponte Alta">
                                 <label for="city">Ponte Alta</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="10">
+                                <input type="radio" name="city" value="Jardim Botânico">
                                 <label for="city">Jardim Botânico</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="11">
+                                <input type="radio" name="city" value="Vicente Pires">
                                 <label for="city">Vicente Pires</label>
                             </div>
                             <div class="input-selection-form">
-                                <input type="radio" name="city" value="12" >
+                                <input type="radio" name="city" value="Ceilândia" >
                                 <label for="city">Ceilândia</label>
                             </div>
                         </div>
@@ -149,14 +149,14 @@
                         <div class="item-selection-form">
                             <span>CÓDIGO DO CLIENTE <b style="color: var(--color-red)">*</b></span>
                             <div class="input-selection-form">
-                                <input type="text" name="name" id="" placeholder="Sua resposta">
+                                <input type="text" name="cod" id="" placeholder="Sua resposta">
                             </div>
                         </div>
                         <div class="item-selection-form">
                             <span>O.S <b style="color: var(--color-red)">*</b></span>
                             <span style="font-size: 1.2rem;">Número da ordem de serviço</span>
                             <div class="input-selection-form">
-                                <input type="text" name="name" placeholder="Sua resposta">
+                                <input type="text" name="os" placeholder="Sua resposta">
                             </div>
                         </div>
                         <div class="item-selection-form">
@@ -175,7 +175,7 @@
                         <div class="item-selection-form">
                             <span>Observações <b style="color: var(--color-red)">*</b></span>
                             <div class="input-selection-form">
-                                <input type="text" name="name" placeholder="Sua resposta">
+                                <input type="text" name="obs" placeholder="Sua resposta">
                             </div>
                         </div>
                         <input type="submit" value="Enviar" form="form" >
