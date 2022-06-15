@@ -19,4 +19,11 @@ class FormsController extends Controller
     {
         return dd($request);
     }
+
+    public function index()
+    {
+        $form = Form::all();
+
+        return response($form,200);
+    }
 }

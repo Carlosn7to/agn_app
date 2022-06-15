@@ -8,6 +8,6 @@
     <forms-app-component
     actions_new="{{ route('forms.new') }}"
     token="{{ @csrf_token() }}"
-    get_forms="{{  }}"
+    get_forms="{{ route('api.form.list') }}"
     ></forms-app-component>
 @endsection

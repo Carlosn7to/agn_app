@@ -5734,7 +5734,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Forms",
-  props: ['actions_new', 'token', 'forms'],
+  props: ['actions_new', 'token', 'forms', 'get_forms'],
   methods: {
     formStep: function formStep(status, type_form) {
       if (status === 0) {
@@ -5753,17 +5753,24 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         modal: false,
         type_form: 0
-      }
+      },
+      data: {},
+      icon: "fi fi-rr-"
     };
   },
   components: {},
   computed: {},
-  beforeMount: function beforeMount() {
-    console.log(this.forms);
-  },
+  beforeMount: function beforeMount() {},
   created: function created() {},
   mounted: function mounted() {
-    axios.get('');
+    var _this = this;
+
+    axios.get(this.get_forms).then(function (res) {
+      _this.data = res.data;
+      console.log(_this.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
 });
 
@@ -28995,24 +29002,29 @@ var render = function () {
       _c("div", { staticClass: "container-form" }, [
         _c("h6", [_vm._v("Formulários disponíveis")]),
         _vm._v(" "),
-        _c("div", { staticClass: "items-form" }, [
-          _c(
-            "div",
-            {
-              staticClass: "item-form",
-              on: {
-                click: function ($event) {
-                  return _vm.formStep(1, 1)
+        _c(
+          "div",
+          { staticClass: "items-form" },
+          _vm._l(this.data, function (data) {
+            return _c(
+              "div",
+              {
+                staticClass: "item-form",
+                on: {
+                  click: function ($event) {
+                    return _vm.formStep(1, 1)
+                  },
                 },
               },
-            },
-            [
-              _c("i", { staticClass: "fi fi-rr-home-location-alt" }),
-              _vm._v(" "),
-              _c("span"),
-            ]
-          ),
-        ]),
+              [
+                _c("i", { class: _vm.icon + data.icon_id }),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(data.name))]),
+              ]
+            )
+          }),
+          0
+        ),
       ]),
       _vm._v(" "),
       this.form.modal === true

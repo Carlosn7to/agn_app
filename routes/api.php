@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('formularios', [\App\Http\Controllers\FormsController::class, 'index']);
+Route::get('formularios', [\App\Http\Controllers\FormsController::class, 'index'])->name('api.form.list');

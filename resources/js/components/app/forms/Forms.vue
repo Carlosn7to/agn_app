@@ -3,9 +3,9 @@
         <div class="container-form">
             <h6>Formulários disponíveis</h6>
             <div class="items-form">
-                <div class="item-form" @click="formStep(1, 1)">
-                    <i class="fi fi-rr-home-location-alt"></i>
-                    <span></span>
+                <div class="item-form" @click="formStep(1, 1)" v-for="data in this.data">
+                    <i :class="icon + data.icon_id"></i>
+                    <span>{{ data.name }}</span>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
 <script>
 export default {
     name: "Forms",
-    props: ['actions_new', 'token', 'forms'],
+    props: ['actions_new', 'token', 'forms', 'get_forms'],
     methods: {
         formStep(status, type_form) {
 
@@ -185,20 +185,28 @@ export default {
         return {
             form: {
                 modal: false,
-                type_form: 0
-            }
+                type_form: 0,
+            },
+            data: {},
+            icon: "fi fi-rr-"
         }
     },
     components: {},
     computed: {},
     beforeMount() {
-        console.log(this.forms)
     },
     created() {
     },
     mounted() {
         axios
-            .get('')
+            .get(this.get_forms)
+            .then((res) => {
+                this.data = res.data
+                console.log(this.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
 }
 </script>
