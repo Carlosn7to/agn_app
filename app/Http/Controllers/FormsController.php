@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
+use App\Models\FormQuestion;
 use Illuminate\Http\Request;
 
 class FormsController extends Controller
 {
     public function home()
     {
-        return view('app.forms.home');
+        $form = Form::all();
+
+        return view('app.forms.home', ['forms' => $form]);
     }
 
     public function new(Request $request)

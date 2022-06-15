@@ -5732,33 +5732,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Forms",
-  props: ['actions_new', 'token'],
+  props: ['actions_new', 'token', 'forms'],
   methods: {
     formStep: function formStep(status, type_form) {
       if (status === 0) {
@@ -5782,9 +5758,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {},
   computed: {},
-  beforeMount: function beforeMount() {},
+  beforeMount: function beforeMount() {
+    console.log(this.forms);
+  },
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    axios.get('');
+  }
 });
 
 /***/ }),
@@ -29029,109 +29009,7 @@ var render = function () {
             [
               _c("i", { staticClass: "fi fi-rr-home-location-alt" }),
               _vm._v(" "),
-              _c("span", [_vm._v("Instalação")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "item-form",
-              on: {
-                click: function ($event) {
-                  return _vm.formStep(1, 2)
-                },
-              },
-            },
-            [
-              _c("i", { staticClass: "fi fi-rr-home-location-alt" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("MP e ME")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "item-form",
-              on: {
-                click: function ($event) {
-                  return _vm.formStep(1, 3)
-                },
-              },
-            },
-            [
-              _c("i", { staticClass: "fi fi-rr-tachometer-fast" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Vistoria Técnica")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "item-form",
-              on: {
-                click: function ($event) {
-                  return _vm.formStep(1, 4)
-                },
-              },
-            },
-            [
-              _c("i", { staticClass: "fi fi-rr-home-location-alt" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Mudança de endereço")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "item-form",
-              on: {
-                click: function ($event) {
-                  return _vm.formStep(1, 5)
-                },
-              },
-            },
-            [
-              _c("i", { staticClass: "fi fi-rr-home-location-alt" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Recolhimento de equipamento")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "item-form",
-              on: {
-                click: function ($event) {
-                  return _vm.formStep(1, 6)
-                },
-              },
-            },
-            [
-              _c("i", { staticClass: "fi fi-rr-home-location-alt" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Vistoria de qualidade AGE")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "item-form",
-              on: {
-                click: function ($event) {
-                  return _vm.formStep(1, 7)
-                },
-              },
-            },
-            [
-              _c("i", { staticClass: "fi fi-rr-home-location-alt" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Vistoria de qualidade WT")]),
+              _c("span"),
             ]
           ),
         ]),
@@ -29176,7 +29054,8 @@ var render = function () {
                         attrs: {
                           action: _vm.actions_new,
                           method: "POST",
-                          id: "form",
+                          name: "form",
+                          autocomplete: "off",
                         },
                       },
                       [
@@ -29312,7 +29191,7 @@ var staticRenderFns = [
             "border-bottom": "1px solid #cccccc90",
             "font-size": "1.6rem",
           },
-          attrs: { type: "date", name: "date" },
+          attrs: { type: "date", name: "date", required: "" },
         }),
       ]),
     ])
@@ -29471,6 +29350,7 @@ var staticRenderFns = [
             name: "name",
             id: "",
             placeholder: "Sua resposta",
+            required: "",
           },
         }),
       ]),
@@ -29493,6 +29373,7 @@ var staticRenderFns = [
             name: "cod",
             id: "",
             placeholder: "Sua resposta",
+            required: "",
           },
         }),
       ]),
@@ -29514,7 +29395,12 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
         _c("input", {
-          attrs: { type: "text", name: "os", placeholder: "Sua resposta" },
+          attrs: {
+            type: "text",
+            name: "os",
+            placeholder: "Sua resposta",
+            required: "",
+          },
         }),
       ]),
     ])
@@ -29535,7 +29421,12 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
         _c("input", {
-          attrs: { type: "text", name: "tel", placeholder: "Sua resposta" },
+          attrs: {
+            type: "text",
+            name: "tel",
+            placeholder: "Sua resposta",
+            required: "",
+          },
         }),
       ]),
     ])
@@ -29552,7 +29443,12 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
         _c("input", {
-          attrs: { type: "text", name: "address", placeholder: "Sua resposta" },
+          attrs: {
+            type: "text",
+            name: "address",
+            placeholder: "Sua resposta",
+            required: "",
+          },
         }),
       ]),
     ])
@@ -29562,10 +29458,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "item-selection-form" }, [
-      _c("span", [
-        _vm._v("Observações "),
-        _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
-      ]),
+      _c("span", [_vm._v("Observações")]),
       _vm._v(" "),
       _c("div", { staticClass: "input-selection-form" }, [
         _c("input", {

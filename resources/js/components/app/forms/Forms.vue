@@ -5,31 +5,7 @@
             <div class="items-form">
                 <div class="item-form" @click="formStep(1, 1)">
                     <i class="fi fi-rr-home-location-alt"></i>
-                    <span>Instalação</span>
-                </div>
-                <div class="item-form" @click="formStep(1, 2)">
-                    <i class="fi fi-rr-home-location-alt"></i>
-                    <span>MP e ME</span>
-                </div>
-                <div class="item-form" @click="formStep(1, 3)">
-                    <i class="fi fi-rr-tachometer-fast"></i>
-                    <span>Vistoria Técnica</span>
-                </div>
-                <div class="item-form" @click="formStep(1, 4)">
-                    <i class="fi fi-rr-home-location-alt"></i>
-                    <span>Mudança de endereço</span>
-                </div>
-                <div class="item-form" @click="formStep(1, 5)">
-                    <i class="fi fi-rr-home-location-alt"></i>
-                    <span>Recolhimento de equipamento</span>
-                </div>
-                <div class="item-form" @click="formStep(1, 6)">
-                    <i class="fi fi-rr-home-location-alt"></i>
-                    <span>Vistoria de qualidade AGE</span>
-                </div>
-                <div class="item-form" @click="formStep(1, 7)">
-                    <i class="fi fi-rr-home-location-alt"></i>
-                    <span>Vistoria de qualidade WT</span>
+                    <span></span>
                 </div>
             </div>
         </div>
@@ -41,7 +17,7 @@
                 <div class="selections-form" v-if="this.form.type_form === 1">
                     <h6>Formulário de Instalação</h6>
 
-                    <form :action="actions_new" method="POST" id="form">
+                    <form :action="actions_new" method="POST" name="form" autocomplete="off">
                         <input type="hidden" name="_token" :value="token">
                         <div class="item-selection-form">
                             <span>TIPO <b style="color: var(--color-red)">*</b></span>
@@ -74,7 +50,7 @@
                         <div class="item-selection-form">
                             <span>DATA <b style="color: var(--color-red)">*</b></span>
                             <div class="input-selection-form">
-                                <input type="date" name="date" style="border: none; border-bottom: 1px solid #cccccc90; font-size: 1.6rem">
+                                <input type="date" name="date" style="border: none; border-bottom: 1px solid #cccccc90; font-size: 1.6rem" required>
                             </div>
                         </div>
                         <div class="item-selection-form">
@@ -143,37 +119,37 @@
                         <div class="item-selection-form">
                             <span>NOME DO CLIENTE <b style="color: var(--color-red)">*</b></span>
                             <div class="input-selection-form">
-                                <input type="text" name="name" id="" placeholder="Sua resposta" >
+                                <input type="text" name="name" id="" placeholder="Sua resposta" required>
                             </div>
                         </div>
                         <div class="item-selection-form">
                             <span>CÓDIGO DO CLIENTE <b style="color: var(--color-red)">*</b></span>
                             <div class="input-selection-form">
-                                <input type="text" name="cod" id="" placeholder="Sua resposta">
+                                <input type="text" name="cod" id="" placeholder="Sua resposta" required>
                             </div>
                         </div>
                         <div class="item-selection-form">
                             <span>O.S <b style="color: var(--color-red)">*</b></span>
                             <span style="font-size: 1.2rem;">Número da ordem de serviço</span>
                             <div class="input-selection-form">
-                                <input type="text" name="os" placeholder="Sua resposta">
+                                <input type="text" name="os" placeholder="Sua resposta" required>
                             </div>
                         </div>
                         <div class="item-selection-form">
                             <span>TELEFONE <b style="color: var(--color-red)">*</b></span>
                             <span style="font-size: 1.2rem;">Com (DDD)</span>
                             <div class="input-selection-form">
-                                <input type="text" name="tel" placeholder="Sua resposta">
+                                <input type="text" name="tel" placeholder="Sua resposta" required>
                             </div>
                         </div>
                         <div class="item-selection-form">
                             <span>ENDEREÇO <b style="color: var(--color-red)">*</b></span>
                             <div class="input-selection-form">
-                                <input type="text" name="address" placeholder="Sua resposta">
+                                <input type="text" name="address" placeholder="Sua resposta" required>
                             </div>
                         </div>
                         <div class="item-selection-form">
-                            <span>Observações <b style="color: var(--color-red)">*</b></span>
+                            <span>Observações</span>
                             <div class="input-selection-form">
                                 <input type="text" name="obs" placeholder="Sua resposta">
                             </div>
@@ -189,7 +165,7 @@
 <script>
 export default {
     name: "Forms",
-    props: ['actions_new', 'token'],
+    props: ['actions_new', 'token', 'forms'],
     methods: {
         formStep(status, type_form) {
 
@@ -215,9 +191,15 @@ export default {
     },
     components: {},
     computed: {},
-    beforeMount() {},
-    created() {},
-    mounted() {}
+    beforeMount() {
+        console.log(this.forms)
+    },
+    created() {
+    },
+    mounted() {
+        axios
+            .get('')
+    }
 }
 </script>
 

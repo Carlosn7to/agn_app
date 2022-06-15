@@ -61,5 +61,54 @@ class PatternSeeder extends Seeder
 
         ]);
 
+        DB::table('icons')->insert([
+            'active' => 1,
+            'icon' => 'home-location-alt',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        DB::table('forms')->insert([
+            'active' => 1,
+            'name' => 'Instalação',
+            'icon_id' => 1,
+            'user_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        DB::table('forms_questions')->insert([
+            'active' => 1,
+            'question' => 'Tipo',
+            'force' => 0,
+            'type_input' => 1,
+            'form_id' => 1,
+            'user_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
+        ]);
+
+        DB::table('forms_answers')->insert([
+            'active' => 1,
+            'answer' => 'Instalação',
+            'form_id' => 1,
+            'question_id' => 1,
+            'user_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
+        ]);
+
+        DB::table('forms_answers')->insert([
+            'active' => 1,
+            'answer' => 'Reagendamento - Instalação',
+            'form_id' => 1,
+            'question_id' => 1,
+            'user_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
+        ]);
     }
 }

@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('forms', function (Blueprint $table) {
+        Schema::create('forms_answers', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active')->default(1);
-            $table->string('name');
-            $table->unsignedBigInteger('icon_id')->default(1);
+            $table->tinyInteger('active');
+            $table->string('answer');
+            $table->unsignedBigInteger('form_id');
+            $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
@@ -25,8 +26,9 @@ return new class extends Migration
 
             // Relacionamento entre chaves
 
+            $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('question_id')->references('id')->on('forms_questions');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('icon_id')->references('id')->on('icons');
         });
     }
 
@@ -37,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forms');
+        Schema::dropIfExists('forms_answers');
     }
 };

@@ -12,4 +12,11 @@ class Form extends Model
     use SoftDeletes;
 
     protected $table = 'forms';
+    protected $fillable = ['active', 'name', 'icon_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
+
+    public function questions()
+    {
+        return $this->hasMany(FormQuestion::class, 'form_id');
+    }
+
 }

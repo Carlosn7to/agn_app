@@ -295,6 +295,7 @@ ul {
     align-items: center;
     transition: all .2s ease-in-out;
     text-align: center;
+    padding: 2rem;
 }
 
 .item-form i {

@@ -13,20 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('forms', function (Blueprint $table) {
+        Schema::create('icons', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('active')->default(1);
-            $table->string('name');
-            $table->unsignedBigInteger('icon_id')->default(1);
-            $table->unsignedBigInteger('user_id');
+            $table->string('icon')->default('home-location-alt');
             $table->timestamps();
             $table->softDeletes();
-
-
-            // Relacionamento entre chaves
-
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('icon_id')->references('id')->on('icons');
         });
     }
 
@@ -37,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forms');
+        Schema::dropIfExists('icons');
     }
 };
