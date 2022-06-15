@@ -15,8 +15,16 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('icon');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
+
+
+            // Relacionamento entre chaves
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
