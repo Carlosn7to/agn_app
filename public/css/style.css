@@ -125,7 +125,7 @@ ul {
 }
 
 .container-app {
-    width: 86vw;
+    width: 80vw;
     height: 100%;
     background-color: #F3F3F8;
 }
@@ -135,9 +135,10 @@ ul {
  */
 
 .menu-app {
-    width: 12vw;
+    width: 15vw;
     height: 100vh;
     background-color: #fff;
+    overflow-y: auto;
 }
 
 .border-divisor {
@@ -264,7 +265,7 @@ ul {
     border-radius: 10px;
 }
 
-.container-form h6 {
+.container-form h6, .container-app h6 {
     font-size: 2.4rem;
     color: #646464;
     font-weight: 500;
@@ -277,14 +278,12 @@ ul {
     border-radius: 10px;
     padding: 3vh 1vw;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 13%);
+    grid-template-columns: repeat(auto-fill, 20%);
     grid-template-rows: repeat(auto-fill, 17%);
-    grid-gap: 5rem;
-    justify-content: center;
+    grid-gap: 2rem;
 }
 
 .item-form {
-    width: 100%;
     height: 100%;
     background-color: #fff;
     border-radius: 10px;
@@ -342,7 +341,7 @@ ul {
 }
 
 .fill-form {
-    width: 40vw;
+    width: 50vw;
     height: 95%;
     background-color: #F3F3F8;
     border-radius: 10px;
@@ -423,6 +422,14 @@ ul {
     border-bottom: 2px solid #132e7d;
 }
 
+.selections-form input[type=date] {
+    border: none;
+    border-bottom: 1px solid #cccccc90;
+    font-size: 1.6rem
+}
+
+
+
 .selections-form input[type=submit] {
     border: none;
     background-color: #132e7d;
@@ -438,7 +445,43 @@ ul {
     transition: all ease-in-out .3s;
 }
 
+
 .selections-form input[type=submit]:hover {
     background-color: #0a1b50;
     color: #fff;
+}
+
+/*
+    Gerenciamento de formulários
+ */
+
+.management-form {
+    width: 95%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2vh 2vw;
+}
+
+.management-form table {
+    width: 80%;
+    padding: 10px;
+    border-collapse: collapse;
+}
+
+.management-form table tr th {
+    text-align: left;
+    border-bottom: 1px solid #cccccc50;
+    border-right: 1px solid #cccccc50;
+    height: 10vh;
+    font-size: 1.6rem;
+    color: #646464;
+    padding: 0 2vw;
+}
+
+.management-form table tr td {
+    height: 10vh;
+    padding: 0 2vw;
+    font-size: 1.4rem;
+    color: #646464;
 }

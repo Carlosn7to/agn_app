@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active')->default(1);
+            $table->unsignedBigInteger('status_id')->default(1);
             $table->string('first_name', 255);
             $table->string('last_name', 255);
             $table->string('email', 255);
@@ -35,6 +35,7 @@ return new class extends Migration
             $table->foreign('occupation_id')->references('id')->on('occupations');
             $table->foreign('company_id')->references('id')->on('companys');
             $table->foreign('privilege_id')->references('id')->on('privileges');
+            $table->foreign('status_id')->references('id')->on('status');
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('forms_answers', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active');
+            $table->unsignedBigInteger('status_id');
             $table->string('answer');
             $table->unsignedBigInteger('form_id');
             $table->unsignedBigInteger('question_id');
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->foreign('form_id')->references('id')->on('forms');
             $table->foreign('question_id')->references('id')->on('forms_questions');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('status_id')->references('id')->on('status');
         });
     }
 

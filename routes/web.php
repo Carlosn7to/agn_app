@@ -34,4 +34,9 @@ Route::middleware(\App\Http\Middleware\ValidationMiddleware::class)->prefix('/ap
         });
     });
 
+    Route::prefix('/gerenciamento')->group(function ()
+    {
+        Route::get('/formularios', [\App\Http\Controllers\ManagementController::class,'forms'])->name('app.management.forms');
+    });
+
 });

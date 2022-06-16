@@ -24,6 +24,7 @@ Vue.component('login-component', require('./components/web/Home').default);
 Vue.component('home-app-component', require('./components/app/Home').default);
 Vue.component('menu-app-component', require('./components/app/_components/Menu').default);
 Vue.component('forms-app-component', require('./components/app/forms/Forms').default);
+Vue.component('management-form-app-component', require('./components/app/management/Form').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

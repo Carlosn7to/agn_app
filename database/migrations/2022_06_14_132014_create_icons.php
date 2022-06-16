@@ -15,10 +15,15 @@ return new class extends Migration
     {
         Schema::create('icons', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active')->default(1);
+            $table->unsignedBigInteger('status_id')->default(1);
             $table->string('icon')->default('home-location-alt');
             $table->timestamps();
             $table->softDeletes();
+
+
+            // Relacionamento
+
+            $table->foreign('status_id')->references('id')->on('status');
         });
     }
 

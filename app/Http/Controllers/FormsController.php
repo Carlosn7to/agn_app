@@ -10,9 +10,10 @@ class FormsController extends Controller
 {
     public function home()
     {
-        //$form = Form::with('questions')->with('icons')->with('answers')->first();
 
         return view('app.forms.home');
+
+
 
     }
 
@@ -27,4 +28,16 @@ class FormsController extends Controller
 
         return response($form,200);
     }
+
+    public function questions_index(Request $request, $id)
+    {
+
+        // Trás as perguntas e as respostas que estão disponíveis no formulário
+
+        $questions = FormQuestion::where('form_id', $id)->with('answers')->get();
+
+        return response($questions, 200);
+
+    }
+
 }

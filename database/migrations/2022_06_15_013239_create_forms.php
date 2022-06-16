@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active')->default(1);
+            $table->unsignedBigInteger('status_id')->default(1);
             $table->string('name');
             $table->unsignedBigInteger('icon_id')->default(1);
             $table->unsignedBigInteger('user_id');
@@ -27,6 +27,8 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('icon_id')->references('id')->on('icons');
+            $table->foreign('status_id')->references('id')->on('status');
+
         });
     }
 

@@ -76,6 +76,24 @@
 
                     </div>
                 </div>
+                    <div class="list-menu">
+                        <span>Gerenciamento</span>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a :href="mng_form">
+                                        <i class="fi fi-rr-form"></i>
+                                        <span>Formulários</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                <div class="border-divisor">
+                    <div class="item-divisor">
+
+                    </div>
+                </div>
                 <div class="list-menu">
                     <span>Ajuda</span>
                     <nav>
@@ -106,7 +124,7 @@
 <script>
 export default {
     name: "Menu",
-    props: ['logo_company', 'user_photo', 'page_home', 'page_forms'],
+    props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form'],
     methods: {},
     data () {
         return {}

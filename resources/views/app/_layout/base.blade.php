@@ -19,6 +19,7 @@
             user_photo="{{ asset('images/users/padrao.png') }}"
             page_home="{{ route('app.home') }}"
             page_forms="{{ route('app.forms') }}"
+            mng_form="{{ route('app.management.forms') }}"
         ></menu-app-component>
         @yield('content')
     </div>

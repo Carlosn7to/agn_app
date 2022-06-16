@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sectors', function (Blueprint $table) {
+        Schema::create('status', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('status_id')->default(1);
-            $table->string('sector', 255)->default('Padrão');
+            $table->string('name', 50);
             $table->timestamps();
             $table->softDeletes();
-
-            // Relacionamento
-
-            $table->foreign('status_id')->references('id')->on('status');
         });
     }
 
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sectors');
+        Schema::dropIfExists('status');
     }
 };

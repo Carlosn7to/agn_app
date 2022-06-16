@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('forms_questions', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('active')->default(1);
+            $table->unsignedBigInteger('status_id')->default(1);
             $table->string('question', 255);
-            $table->tinyInteger('force')->default(0);
-            $table->tinyInteger('type_input');
+            $table->tinyInteger('force');
+            $table->string('type');
             $table->unsignedBigInteger('form_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
@@ -29,6 +29,8 @@ return new class extends Migration
 
             $table->foreign('form_id')->references('id')->on('forms');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('status_id')->references('id')->on('status');
+
         });
     }
 
