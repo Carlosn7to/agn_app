@@ -5754,8 +5754,7 @@ __webpack_require__.r(__webpack_exports__);
         modal: false,
         type_form: 0
       },
-      data: {},
-      icon: "fi fi-rr-"
+      data: {}
     };
   },
   components: {},
@@ -5767,7 +5766,6 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get(this.get_forms).then(function (res) {
       _this.data = res.data;
-      console.log(_this.data);
     })["catch"](function (error) {
       console.log(error);
     });
@@ -29009,17 +29007,18 @@ var render = function () {
             return _c(
               "div",
               {
+                key: data.id,
                 staticClass: "item-form",
                 on: {
                   click: function ($event) {
-                    return _vm.formStep(1, 1)
+                    return _vm.formStep(1, data.id)
                   },
                 },
               },
               [
-                _c("i", { class: _vm.icon + data.icon_id }),
+                _c("i", { staticClass: "fi fi-rr-form" }),
                 _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(data.name))]),
+                _c("span", [_vm._v("Formulário de " + _vm._s(data.name))]),
               ]
             )
           }),

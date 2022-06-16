@@ -11,5 +11,10 @@ class Icon extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'forms_icons';
+    protected $table = 'icons';
+
+    public function forms()
+    {
+        return $this->hasOne(Form::class, 'icon_id');
+    }
 }

@@ -12,4 +12,9 @@ class FormAnswer extends Model
     use SoftDeletes;
 
     protected $table = 'forms_answers';
+
+    public function questions()
+    {
+        return $this->belongsTo(FormQuestion::class, 'id');
+    }
 }

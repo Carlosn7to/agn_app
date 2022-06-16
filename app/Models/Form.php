@@ -19,4 +19,10 @@ class Form extends Model
         return $this->hasMany(FormQuestion::class, 'form_id');
     }
 
+    public function icons()
+    {
+        return $this->hasOne(Icon::class, 'id');
+    }
+
+
 }

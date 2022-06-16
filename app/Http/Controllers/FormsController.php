@@ -10,9 +10,10 @@ class FormsController extends Controller
 {
     public function home()
     {
-        $form = Form::all();
+        //$form = Form::with('questions')->with('icons')->with('answers')->first();
 
-        return view('app.forms.home', ['forms' => $form]);
+        return view('app.forms.home');
+
     }
 
     public function new(Request $request)
@@ -22,7 +23,7 @@ class FormsController extends Controller
 
     public function index()
     {
-        $form = Form::all();
+        $form = Form::with('questions')->with('icons')->get();
 
         return response($form,200);
     }

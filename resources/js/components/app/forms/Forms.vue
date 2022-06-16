@@ -3,9 +3,9 @@
         <div class="container-form">
             <h6>Formulários disponíveis</h6>
             <div class="items-form">
-                <div class="item-form" @click="formStep(1, 1)" v-for="data in this.data">
-                    <i :class="icon + data.icon_id"></i>
-                    <span>{{ data.name }}</span>
+                <div class="item-form" @click="formStep(1, data.id)" v-for="data in this.data" :key="data.id">
+                    <i class="fi fi-rr-form"></i>
+                    <span>Formulário de {{ data.name }}</span>
                 </div>
             </div>
         </div>
@@ -188,7 +188,6 @@ export default {
                 type_form: 0,
             },
             data: {},
-            icon: "fi fi-rr-"
         }
     },
     components: {},
@@ -202,7 +201,6 @@ export default {
             .get(this.get_forms)
             .then((res) => {
                 this.data = res.data
-                console.log(this.data)
             })
             .catch((error) => {
                 console.log(error)
