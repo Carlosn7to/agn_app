@@ -8,6 +8,7 @@
     <!--<script src="{{ asset('js/script.js') }}" defer></script> -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     <title>@yield('title')</title>
 </head>

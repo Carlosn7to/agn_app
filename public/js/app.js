@@ -5530,25 +5530,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Menu",
   props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form', 'get_user', 'user_id'],
@@ -5566,10 +5547,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get(this.get_user + '/' + this.user_id).then(function (res) {
       _this.data_user = res.data;
-      console.log(_this.data_user);
-    })["catch"](function (error) {
-      console.log(error);
-    });
+    })["catch"](function (error) {});
   },
   mounted: function mounted() {}
 });
@@ -5649,10 +5627,7 @@ __webpack_require__.r(__webpack_exports__);
         this.form.modal = true;
         axios.get(this.get_questions + '/' + id).then(function (res) {
           _this.form_data = res.data;
-          console.log(res.data);
-        })["catch"](function (error) {
-          console.log(error);
-        });
+        })["catch"](function (error) {});
       }
     }
   },
@@ -5674,9 +5649,7 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get(this.get_forms).then(function (res) {
       _this2.data = res.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
+    })["catch"](function (error) {});
   }
 });
 
@@ -5759,28 +5732,166 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
-  props: ['get_forms'],
+  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions'],
   methods: {
     modal_actions: function modal_actions(on, step, id) {
       if (on === 0) {
         this.modal.status = false;
-      }
+        this.modal.form = false;
+      } else {
+        this.modal.status = true;
+        this.modal.step = step;
+        this.modal.id = id;
 
-      this.modal.status = true;
-      this.modal.step = step;
-      this.modal.id = id;
+        if (step === 4) {
+          this.modal.form.use = true;
+          this.get_form(id);
+        }
+      }
+    },
+    form_action: function form_action(action, id) {
+      var _this = this;
+
+      // Ativar ou inativar o formulário
+      axios.post(this.update_status_form + '/' + action + '/' + id).then(function (res) {
+        _this.modal.status = false;
+        _this.modal.step = 0;
+        _this.modal.id = 0;
+
+        _this.get_all_forms();
+      })["catch"](function (error) {});
+    },
+    get_all_forms: function get_all_forms() {
+      var _this2 = this;
+
+      axios.get(this.get_forms_all).then(function (res) {
+        _this2.data = res.data;
+      })["catch"](function (error) {});
+    },
+    get_form: function get_form(id) {
+      var _this3 = this;
+
+      axios.get(this.get_questions + '/' + id).then(function (res) {
+        _this3.form_data = res.data;
+        console.log(_this3.form_data);
+      })["catch"](function (error) {});
     }
   },
   data: function data() {
     return {
       data: [],
       modal: {
-        status: true,
-        step: 2,
-        id: 0
-      }
+        status: false,
+        step: 0,
+        id: 0,
+        form: {
+          edit: false,
+          "new": false,
+          use: false
+        }
+      },
+      form_data: {}
     };
   },
   components: {},
@@ -5788,14 +5899,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {},
   created: function created() {},
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get(this.get_forms).then(function (res) {
-      _this.data = res.data;
-      console.log(_this.data);
-    })["catch"](function (error) {
-      console.log(error);
-    });
+    this.get_all_forms();
   }
 });
 
@@ -28898,7 +29002,13 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "menu-app" }, [
-    _vm._m(0),
+    _c("header", [
+      _c("div", { staticClass: "logo-company" }, [
+        _c("img", { attrs: { src: _vm.logo_company, alt: "logo da empresa" } }),
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+    ]),
     _vm._v(" "),
     _c("main", [
       _c("div", { staticClass: "lists-menu" }, [
@@ -28961,8 +29071,6 @@ var render = function () {
         ]),
         _vm._v(" "),
         _vm._m(6),
-        _vm._v(" "),
-        _vm._m(7),
       ]),
     ]),
     _vm._v(" "),
@@ -28974,22 +29082,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", [
-      _c("div", { staticClass: "logo-company" }, [
-        _c("img", {
-          attrs: {
-            src: "https://i.ibb.co/rszX1ct/AGE-ID-Logos-RGB-Logo-c-Elemento-04.png",
-            alt: "logo da empresa",
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "border-divisor" }, [
-        _c("div", {
-          staticClass: "item-divisor",
-          staticStyle: { width: "100%" },
-        }),
-      ]),
+    return _c("div", { staticClass: "border-divisor" }, [
+      _c("div", {
+        staticClass: "item-divisor",
+        staticStyle: { width: "100%" },
+      }),
     ])
   },
   function () {
@@ -29052,34 +29149,6 @@ var staticRenderFns = [
       _c("div", { staticClass: "item-divisor" }),
     ])
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "list-menu" }, [
-      _c("span", [_vm._v("Ajuda")]),
-      _vm._v(" "),
-      _c("nav", [
-        _c("ul", [
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fi fi-rr-graduation-cap" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Tutoriais")]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fi fi-rr-paper-plane" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Suporte")]),
-            ]),
-          ]),
-        ]),
-      ]),
-    ])
-  },
 ]
 render._withStripped = true
 
@@ -29140,31 +29209,16 @@ var render = function () {
       this.form.modal === true
         ? _c("div", { staticClass: "modal display-flex" }, [
             _c("div", { staticClass: "fill-form shadow-standard" }, [
-              _c(
-                "div",
-                {
-                  staticStyle: {
-                    width: "100%",
-                    display: "flex",
-                    "flex-direction": "row-reverse",
+              _c("div", { staticClass: "close-btn" }, [
+                _c("i", {
+                  staticClass: "fi fi-rr-cross-small",
+                  on: {
+                    click: function ($event) {
+                      return _vm.formStep(0, 0)
+                    },
                   },
-                },
-                [
-                  _c("i", {
-                    staticClass: "fi fi-rr-cross",
-                    staticStyle: {
-                      "font-size": "2rem",
-                      color: "var(--color-red)",
-                      cursor: "pointer",
-                    },
-                    on: {
-                      click: function ($event) {
-                        return _vm.formStep(0, 0)
-                      },
-                    },
-                  }),
-                ]
-              ),
+                }),
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "selections-form" }, [
                 _c("h6", [_vm._v("Formulário")]),
@@ -29358,17 +29412,42 @@ var render = function () {
                       },
                     }),
                     _vm._v(" "),
+                    form.status_id === 1
+                      ? [
+                          _c("i", {
+                            staticClass: "fi fi-rr-box",
+                            on: {
+                              click: function ($event) {
+                                return _vm.modal_actions(1, 2, form.id)
+                              },
+                            },
+                          }),
+                        ]
+                      : _vm._e(),
+                    _vm._v(" "),
+                    form.status_id === 2
+                      ? [
+                          _c("i", {
+                            staticClass: "fi fi-rr-checkbox",
+                            on: {
+                              click: function ($event) {
+                                return _vm.modal_actions(1, 3, form.id)
+                              },
+                            },
+                          }),
+                        ]
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c("i", {
-                      staticClass: "fi fi-rr-box",
+                      staticClass: "fi fi-rr-redo",
                       on: {
                         click: function ($event) {
-                          return _vm.modal_actions(1, 2, form.id)
+                          return _vm.modal_actions(1, 4, form.id)
                         },
                       },
                     }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fi fi-rr-redo" }),
-                  ]
+                  ],
+                  2
                 ),
               ])
             }),
@@ -29377,17 +29456,291 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      this.modal.status === true
+      this.modal.status === true &&
+      (this.modal.step === 2 || this.modal.step === 3)
         ? _c("div", { staticClass: "modal display-flex" }, [
             this.modal.step === 2
               ? _c("div", { staticClass: "box-changes" }, [
+                  _c("div", { staticClass: "close-btn" }, [
+                    _c("i", {
+                      staticClass: "fi fi-rr-cross-small",
+                      on: {
+                        click: function ($event) {
+                          return _vm.modal_actions(0, 0, 0)
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
                   _vm._m(1),
                   _vm._v(" "),
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _vm._m(3),
+                  _c("div", { staticClass: "alert-box" }, [
+                    _c("div", { staticClass: "alert-msg" }, [
+                      _c("span", [_vm._v("Atenção! Essa ação vai causar:")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            padding: "3vh 0 0 0",
+                            display: "flex",
+                            "flex-direction": "column",
+                            gap: ".5rem",
+                          },
+                        },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "i-gree" }, [
+                            _c(
+                              "button",
+                              {
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.form_action(2, _vm.modal.id)
+                                  },
+                                },
+                              },
+                              [
+                                _c("i", { staticClass: "fi fi-br-trash" }),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v("Sim, arquivar o formulário"),
+                                ]),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
                 ])
               : _vm._e(),
+            _vm._v(" "),
+            this.modal.step === 3
+              ? _c("div", { staticClass: "box-changes" }, [
+                  _c("div", { staticClass: "close-btn" }, [
+                    _c("i", {
+                      staticClass: "fi fi-rr-cross-small",
+                      on: {
+                        click: function ($event) {
+                          return _vm.modal_actions(0, 0, 0)
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "alert-box" }, [
+                    _c("div", { staticClass: "alert-msg" }, [
+                      _c("span", [_vm._v("Atenção! Essa ação vai causar:")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            padding: "3vh 0 0 0",
+                            display: "flex",
+                            "flex-direction": "column",
+                            gap: ".5rem",
+                          },
+                        },
+                        [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _vm._m(7),
+                          _vm._v(" "),
+                          _vm._m(8),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "i-gree" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "sucess-background",
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.form_action(1, _vm.modal.id)
+                                  },
+                                },
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fi fi-rr-shield-check",
+                                }),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v("Sim, ativar o formulário"),
+                                ]),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                ])
+              : _vm._e(),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      this.modal.status === true && this.modal.step === 1
+        ? _c("div", { staticClass: "modal display-flex" }, [
+            _c("div", { staticClass: "fill-form shadow-standard" }, [
+              _c("div", { staticClass: "close-btn" }, [
+                _c("i", {
+                  staticClass: "fi fi-rr-cross-small",
+                  on: {
+                    click: function ($event) {
+                      return _vm.modal_actions(0, 0, 0)
+                    },
+                  },
+                }),
+              ]),
+            ]),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      this.modal.status === true && this.modal.form.use === true
+        ? _c("div", { staticClass: "modal display-flex" }, [
+            _c("div", { staticClass: "fill-form shadow-standard" }, [
+              _c("div", { staticClass: "close-btn" }, [
+                _c("i", {
+                  staticClass: "fi fi-rr-cross-small",
+                  on: {
+                    click: function ($event) {
+                      _vm.modal_actions(0, 0), 0
+                    },
+                  },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "selections-form" }, [
+                _c("h6", [_vm._v("Formulário")]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: {
+                      action: _vm.new_form,
+                      method: "POST",
+                      name: "form",
+                      autocomplete: "off",
+                      id: "form",
+                    },
+                  },
+                  [
+                    _c("input", {
+                      attrs: { type: "hidden", name: "_token" },
+                      domProps: { value: _vm.token },
+                    }),
+                    _vm._v(" "),
+                    _vm._l(_vm.form_data, function (data) {
+                      return [
+                        _c(
+                          "div",
+                          { staticClass: "item-selection-form" },
+                          [
+                            _c("span", [
+                              _vm._v(_vm._s(data.question) + " "),
+                              _c(
+                                "b",
+                                { staticStyle: { color: "var(--color-red)" } },
+                                [_vm._v("*")]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(data.answers, function (an) {
+                              return _c(
+                                "div",
+                                { staticClass: "input-selection-form" },
+                                [
+                                  data.force === 1
+                                    ? [
+                                        data.type === "radio"
+                                          ? [
+                                              _c("input", {
+                                                attrs: {
+                                                  type: data.type,
+                                                  name: data.id,
+                                                  id: an.id,
+                                                  required: "",
+                                                },
+                                                domProps: { value: an.id },
+                                              }),
+                                            ]
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        data.type !== "radio"
+                                          ? [
+                                              _c("input", {
+                                                attrs: {
+                                                  type: data.type,
+                                                  name: data.id,
+                                                  id: an.id,
+                                                  required: "",
+                                                },
+                                              }),
+                                            ]
+                                          : _vm._e(),
+                                      ]
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  data.force === 0
+                                    ? [
+                                        _c("input", {
+                                          attrs: {
+                                            type: data.type,
+                                            name: data.id,
+                                            id: an.id,
+                                          },
+                                          domProps: { value: an.id },
+                                        }),
+                                      ]
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c("label", { attrs: { for: "type" } }, [
+                                    _vm._v(_vm._s(an.answer)),
+                                  ]),
+                                ],
+                                2
+                              )
+                            }),
+                          ],
+                          2
+                        ),
+                      ]
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "submit", value: "Enviar", form: "form" },
+                    }),
+                  ],
+                  2
+                ),
+              ]),
+            ]),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      this.modal.status === true && this.modal.form.new === true
+        ? _c("div", { staticClass: "modal display-flex" }, [
+            _c("div", { staticClass: "fill-form shadow-standard" }, [
+              _c("div", { staticClass: "close-btn" }, [
+                _c("i", {
+                  staticClass: "fi fi-rr-cross-small",
+                  on: {
+                    click: function ($event) {
+                      _vm.modal_actions(0, 0), 0
+                    },
+                  },
+                }),
+              ]),
+            ]),
           ])
         : _vm._e(),
     ]
@@ -29420,15 +29773,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "close-btn" }, [
-      _c("i", { staticClass: "fi fi-rr-cross-small" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "msg-box" }, [
+    return _c("div", { staticClass: "msg-box trigger" }, [
       _c("i", { staticClass: "fi fi-rr-shield-exclamation" }),
       _vm._v(" "),
       _c("p", [_vm._v("Arquivar formulário")]),
@@ -29438,93 +29783,149 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "alert-box" }, [
-      _c("div", { staticClass: "alert-msg" }, [
-        _c("span", [_vm._v("Cuidado! Essa ação vai causar:")]),
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+        }),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticStyle: {
-              padding: "3vh 0 0 0",
-              display: "flex",
-              "flex-direction": "column",
-              gap: ".5rem",
-            },
-          },
-          [
-            _c(
-              "div",
-              {
-                staticStyle: {
-                  display: "flex",
-                  "align-items": "center",
-                  gap: "1rem",
-                },
-              },
-              [
-                _c("i", {
-                  staticClass: "fi fi-rr-checkbox",
-                  staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
-                }),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "\n                                Inacessiblidade dos links compartilhados\n                            "
-                  ),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: {
-                  display: "flex",
-                  "align-items": "center",
-                  gap: "1rem",
-                },
-              },
-              [
-                _c("i", {
-                  staticClass: "fi fi-rr-checkbox",
-                  staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
-                }),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "\n                                Remoção da agenda vinculada\n                            "
-                  ),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticStyle: {
-                  display: "flex",
-                  "align-items": "center",
-                  gap: "1rem",
-                },
-              },
-              [
-                _c("i", {
-                  staticClass: "fi fi-rr-checkbox",
-                  staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
-                }),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "\n                                Impossibilidade de relatórios\n                            "
-                  ),
-                ]),
-              ]
-            ),
-          ]
-        ),
-      ]),
+        _c("p", [
+          _vm._v(
+            "\n                                Inacessiblidade dos links compartilhados\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Remoção da agenda vinculada\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Impossibilidade de relatórios\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "msg-box sucess" }, [
+      _c("i", { staticClass: "fi fi-rr-check" }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Ativar formulário")]),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#4AD09E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Acessiblidade dos links compartilhados\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#4AD09E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Adição da agenda vinculada\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#4AD09E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Possibilidade de relatórios\n                            "
+          ),
+        ]),
+      ]
+    )
   },
 ]
 render._withStripped = true

@@ -6,7 +6,7 @@
 @section('content')
 
     <forms-app-component
-    actions_new="{{ route('forms.new') }}"
+    new_form="{{ route('api.form.new') }}"
     token="{{ @csrf_token() }}"
     get_forms="{{ route('api.form.list') }}"
     get_questions="{{ route('api.questions.list') }}"

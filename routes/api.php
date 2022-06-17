@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('users/{id?}', [\App\Http\Controllers\UserController::class, 'user'])->name('api.user');
 
+Route::post('formularios/update/{action?}/{id?}', [\App\Http\Controllers\FormsController::class, 'update_status'])->name('api.form.update.status');
+Route::post('formularios/new', [\App\Http\Controllers\FormsController::class,'new'])->name('api.form.new');
+Route::get('formularios/all', [\App\Http\Controllers\FormsController::class, 'all_forms'])->name('api.form.all');
+
 Route::get('formularios', [\App\Http\Controllers\FormsController::class, 'index'])->name('api.form.list');
 
 Route::get('formularios/{id?}', [\App\Http\Controllers\FormsController::class, 'questions_index'])->name('api.questions.list');

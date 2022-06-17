@@ -5,7 +5,10 @@
 @section('content')
 
     <management-form-app-component
-        get_forms="{{ route('api.form.list') }}"
+        get_forms_all="{{ route('api.form.all') }}"
+        update_status_form="{{ route('api.form.update.status') }}"
+        actions_new="{{ route('api.form.new') }}"
+        get_questions="{{ route('api.questions.list') }}"
     >
 
     </management-form-app-component>

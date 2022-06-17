@@ -11,8 +11,8 @@
         </div>
         <div class="modal display-flex" v-if="this.form.modal === true">
             <div class="fill-form shadow-standard">
-                <div style="width: 100%; display: flex; flex-direction: row-reverse">
-                    <i class="fi fi-rr-cross" style="font-size: 2rem; color: var(--color-red); cursor: pointer" @click="formStep(0,0)"></i>
+                <div class="close-btn">
+                    <i class="fi fi-rr-cross-small" @click="formStep(0,0)"></i>
                 </div>
                 <div class="selections-form">
                        <h6>Formulário</h6>
@@ -63,10 +63,8 @@ export default {
                     .get(this.get_questions+'/'+id)
                     .then((res) => {
                         this.form_data = res.data
-                        console.log(res.data)
                     })
                     .catch((error) => {
-                        console.log(error)
                     })
 
             }
@@ -95,7 +93,6 @@ export default {
                 this.data = res.data
             })
             .catch((error) => {
-                console.log(error)
             })
     }
 }

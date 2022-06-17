@@ -19,12 +19,12 @@ class FormsController extends Controller
 
     public function new(Request $request)
     {
-        return dd($request);
+        return response('novo');
     }
 
     public function index()
     {
-        $form = Form::with('questions')->with('status')->with('users')->get();
+        $form = Form::where('status_id', 1)->with('questions')->with('status')->with('users')->get();
 
         return response($form, 200);
     }
@@ -38,6 +38,23 @@ class FormsController extends Controller
         $questions = FormQuestion::where('form_id', $id)->with('answers')->get();
 
         return response($questions, 200);
+
+    }
+
+    public function all_forms()
+    {
+        $form = Form::with('questions')->with('status')->with('users')->get();
+
+        return response($form, 200);
+    }
+
+    public function update_status(Request $request, $action, $id)
+    {
+        $form = Form::findOrFail($id);
+
+        $form = $form->update(['status_id' => $action]);
+
+        return "Formulário atualizado com sucesso.";
 
     }
 

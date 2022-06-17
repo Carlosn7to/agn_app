@@ -12,7 +12,7 @@ class Form extends Model
     use SoftDeletes;
 
     protected $table = 'forms';
-    protected $fillable = ['active', 'name', 'icon_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['status_id', 'name', 'icon_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function questions()
     {

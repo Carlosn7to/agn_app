@@ -2,7 +2,7 @@
     <div class="menu-app">
         <header>
             <div class="logo-company">
-                <img src="https://i.ibb.co/rszX1ct/AGE-ID-Logos-RGB-Logo-c-Elemento-04.png" alt="logo da empresa">
+                <img :src="logo_company" alt="logo da empresa">
             </div>
             <div class="border-divisor">
                 <div class="item-divisor" style="width: 100%">
@@ -84,25 +84,6 @@
 
                     </div>
                 </div>
-                <div class="list-menu">
-                    <span>Ajuda</span>
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <i class="fi fi-rr-graduation-cap"></i>
-                                    <span>Tutoriais</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fi fi-rr-paper-plane"></i>
-                                    <span>Suporte</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
         </main>
         <footer>
@@ -130,10 +111,8 @@ export default {
             .get(this.get_user+'/'+this.user_id)
             .then((res) => {
                 this.data_user = res.data
-                console.log(this.data_user)
             })
             .catch((error) => {
-                console.log(error)
             })
     },
     mounted() {
