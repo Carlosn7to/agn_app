@@ -30143,7 +30143,7 @@ var render = function () {
                                                     item > 1
                                                       ? [
                                                           _vm.modal.form.new
-                                                            .count < item
+                                                            .count !== item
                                                             ? [
                                                                 _c(
                                                                   "span",
