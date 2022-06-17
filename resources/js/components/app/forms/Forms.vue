@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-modal" v-if="this.form.modal === true">
+        <div class="modal display-flex" v-if="this.form.modal === true">
             <div class="fill-form shadow-standard">
                 <div style="width: 100%; display: flex; flex-direction: row-reverse">
                     <i class="fi fi-rr-cross" style="font-size: 2rem; color: var(--color-red); cursor: pointer" @click="formStep(0,0)"></i>

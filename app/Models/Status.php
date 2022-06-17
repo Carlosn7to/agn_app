@@ -13,4 +13,10 @@ class Status extends Model
 
     protected $table = 'status';
     protected $fillable = ['name'];
+
+    public function form()
+    {
+        return $this->belongsTo(Form::class, 'id');
+    }
+
 }

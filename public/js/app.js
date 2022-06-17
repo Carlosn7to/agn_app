@@ -5549,27 +5549,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Menu",
-  props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form'],
+  props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form', 'get_user', 'user_id'],
   methods: {},
   data: function data() {
-    return {};
+    return {
+      data_user: []
+    };
   },
   components: {},
   computed: {},
   beforeMount: function beforeMount() {},
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    axios.get(this.get_user + '/' + this.user_id).then(function (res) {
+      _this.data_user = res.data;
+      console.log(_this.data_user);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
   mounted: function mounted() {}
 });
 
@@ -5718,18 +5719,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
-  props: [],
-  methods: {},
+  props: ['get_forms'],
+  methods: {
+    modal_actions: function modal_actions(on, step, id) {
+      if (on === 0) {
+        this.modal.status = false;
+      }
+
+      this.modal.status = true;
+      this.modal.step = step;
+      this.modal.id = id;
+    }
+  },
   data: function data() {
-    return {};
+    return {
+      data: [],
+      modal: {
+        status: true,
+        step: 2,
+        id: 0
+      }
+    };
   },
   components: {},
   computed: {},
   beforeMount: function beforeMount() {},
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get(this.get_forms).then(function (res) {
+      _this.data = res.data;
+      console.log(_this.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
 });
 
 /***/ }),
@@ -28830,27 +28897,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "menu-app shadow-standard" }, [
-    _c("header", [
-      _c("div", { staticClass: "logo-company" }, [
-        _c("img", { attrs: { src: _vm.logo_company, alt: "logo da empresa" } }),
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "data-user-menu" }, [
-        _c("img", {
-          staticClass: "shadow-standard",
-          attrs: { src: _vm.user_photo, alt: "" },
-        }),
-        _vm._v(" "),
-        _c("p", [_vm._v("Carlos Neto")]),
-        _vm._v(" "),
-        _c("span", [_vm._v("Analista de gestão")]),
-      ]),
-    ]),
-    _vm._v(" "),
-    _vm._m(1),
+  return _c("div", { staticClass: "menu-app" }, [
+    _vm._m(0),
     _vm._v(" "),
     _c("main", [
       _c("div", { staticClass: "lists-menu" }, [
@@ -28870,7 +28918,7 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "list-menu" }, [
           _c("span", [_vm._v("Agendamentos")]),
@@ -28885,16 +28933,16 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
               _vm._m(3),
               _vm._v(" "),
               _vm._m(4),
-              _vm._v(" "),
-              _vm._m(5),
             ]),
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(6),
+        _vm._m(5),
         _vm._v(" "),
         _c("div", { staticClass: "list-menu" }, [
           _c("span", [_vm._v("Gerenciamento")]),
@@ -28912,9 +28960,9 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(7),
+        _vm._m(6),
         _vm._v(" "),
-        _vm._m(8),
+        _vm._m(7),
       ]),
     ]),
     _vm._v(" "),
@@ -28926,19 +28974,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "border-divisor" }, [
-      _c("div", {
-        staticClass: "item-divisor",
-        staticStyle: { width: "100%" },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "border-divisor" }, [
-      _c("div", { staticClass: "item-divisor" }),
+    return _c("header", [
+      _c("div", { staticClass: "logo-company" }, [
+        _c("img", {
+          attrs: {
+            src: "https://i.ibb.co/rszX1ct/AGE-ID-Logos-RGB-Logo-c-Elemento-04.png",
+            alt: "logo da empresa",
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "border-divisor" }, [
+        _c("div", {
+          staticClass: "item-divisor",
+          staticStyle: { width: "100%" },
+        }),
+      ]),
     ])
   },
   function () {
@@ -29087,7 +29138,7 @@ var render = function () {
       ]),
       _vm._v(" "),
       this.form.modal === true
-        ? _c("div", { staticClass: "form-modal" }, [
+        ? _c("div", { staticClass: "modal display-flex" }, [
             _c("div", { staticClass: "fill-form shadow-standard" }, [
               _c(
                 "div",
@@ -29248,71 +29299,232 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container-app", staticStyle: { padding: "2vh 2vw" } },
+    [
+      _c("h6", [_vm._v("Gerenciamento de formulários")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "management-form" }, [
+        _c("table", { attrs: { id: "mgn-form" } }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(this.data, function (form) {
+              return _c("tr", { attrs: { id: "tableForms" } }, [
+                _c("td", { staticStyle: { width: "50%" } }, [
+                  _vm._v(_vm._s(form.name)),
+                ]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _c(
+                    "span",
+                    { staticClass: "status", class: form.status.name },
+                    [_vm._v(_vm._s(form.status.name))]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticStyle: { "font-size": "1.4rem", width: "30%" } },
+                  [
+                    _vm._v(
+                      _vm._s(form.users.first_name) +
+                        " " +
+                        _vm._s(form.users.last_name)
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    staticStyle: {
+                      "text-align": "center",
+                      width: "10%",
+                      gap: "1rem",
+                      display: "flex",
+                      "align-items": "center",
+                    },
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fi fi-rr-edit",
+                      on: {
+                        click: function ($event) {
+                          return _vm.modal_actions(1, 1, form.id)
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fi fi-rr-box",
+                      on: {
+                        click: function ($event) {
+                          return _vm.modal_actions(1, 2, form.id)
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fi fi-rr-redo" }),
+                  ]
+                ),
+              ])
+            }),
+            0
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
+      this.modal.status === true
+        ? _c("div", { staticClass: "modal display-flex" }, [
+            this.modal.step === 2
+              ? _c("div", { staticClass: "box-changes" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3),
+                ])
+              : _vm._e(),
+          ])
+        : _vm._e(),
+    ]
+  )
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "container-app", staticStyle: { padding: "2vh 2vw" } },
-      [
-        _c("h6", [_vm._v("Gerenciamento de formulários")]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticStyle: { width: "50%" } }, [_vm._v("Nome")]),
         _vm._v(" "),
-        _c("div", { staticClass: "management-form" }, [
-          _c("table", { attrs: { id: "mgn-form" } }, [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [
-                  _c("input", {
-                    attrs: { type: "checkbox", name: "", id: "" },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Nome do formulário")]),
-                _vm._v(" "),
-                _c("th", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v("Status"),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "th",
-                  {
-                    staticStyle: {
-                      "border-right": "none",
-                      "text-align": "center",
-                    },
-                  },
-                  [_vm._v("Ações")]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [
-                  _c("input", {
-                    attrs: { type: "checkbox", name: "", id: "" },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Instalação")]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _vm._v("Ativo"),
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _c("i", { staticClass: "fi fi-rr-edit" }),
-                ]),
-              ]),
-            ]),
-          ]),
+        _c("th", { staticStyle: { "text-align": "center" } }, [
+          _vm._v("Status"),
         ]),
-      ]
-    )
+        _vm._v(" "),
+        _c("th", [_vm._v("Criador")]),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticStyle: { "border-right": "none", "text-align": "center" } },
+          [_vm._v("Ações")]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "close-btn" }, [
+      _c("i", { staticClass: "fi fi-rr-cross-small" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "msg-box" }, [
+      _c("i", { staticClass: "fi fi-rr-shield-exclamation" }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Arquivar formulário")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "alert-box" }, [
+      _c("div", { staticClass: "alert-msg" }, [
+        _c("span", [_vm._v("Cuidado! Essa ação vai causar:")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticStyle: {
+              padding: "3vh 0 0 0",
+              display: "flex",
+              "flex-direction": "column",
+              gap: ".5rem",
+            },
+          },
+          [
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  display: "flex",
+                  "align-items": "center",
+                  gap: "1rem",
+                },
+              },
+              [
+                _c("i", {
+                  staticClass: "fi fi-rr-checkbox",
+                  staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+                }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                                Inacessiblidade dos links compartilhados\n                            "
+                  ),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  display: "flex",
+                  "align-items": "center",
+                  gap: "1rem",
+                },
+              },
+              [
+                _c("i", {
+                  staticClass: "fi fi-rr-checkbox",
+                  staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+                }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                                Remoção da agenda vinculada\n                            "
+                  ),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  display: "flex",
+                  "align-items": "center",
+                  gap: "1rem",
+                },
+              },
+              [
+                _c("i", {
+                  staticClass: "fi fi-rr-checkbox",
+                  staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+                }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                                Impossibilidade de relatórios\n                            "
+                  ),
+                ]),
+              ]
+            ),
+          ]
+        ),
+      ]),
+    ])
   },
 ]
 render._withStripped = true

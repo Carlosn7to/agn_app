@@ -18,6 +18,7 @@ class ActionsController extends Controller
         if(isset($user->email))
         {
             $_SESSION['email'] = $user->email;
+            $_SESSION['id'] = $user->id;
             return redirect()->route('app.home');
         } else {
             return redirect()->route('web.home');

@@ -16,10 +16,12 @@
     <div class="container-app-main">
         <menu-app-component
             logo_company="{{ asset('images/app/age_colorida.png') }}"
-            user_photo="{{ asset('images/users/padrao.png') }}"
+            user_photo="{{ asset('images/users/') }}"
             page_home="{{ route('app.home') }}"
             page_forms="{{ route('app.forms') }}"
             mng_form="{{ route('app.management.forms') }}"
+            get_user="{{ route('api.user') }}"
+            user_id="{{ $_SESSION['id'] }}"
         ></menu-app-component>
         @yield('content')
     </div>

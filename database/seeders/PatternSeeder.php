@@ -93,6 +93,15 @@ class PatternSeeder extends Seeder
             'updated_at' => Carbon::now()
         ]);
 
+        DB::table('forms')->insert([
+            'status_id' => 1,
+            'name' => 'MDU',
+            'icon_id' => 1,
+            'user_id' => 1,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
         DB::table('forms_questions')->insert([
             'status_id' => 1,
             'question' => 'Tipo',

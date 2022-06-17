@@ -12,4 +12,9 @@ class User extends Model
     use SoftDeletes;
 
     protected $table = "users";
+
+    public function occupations()
+    {
+        return $this->belongsTo(Occupation::class, 'id');
+    }
 }

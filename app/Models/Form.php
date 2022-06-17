@@ -24,5 +24,15 @@ class Form extends Model
         return $this->hasOne(Icon::class, 'id');
     }
 
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 
 }

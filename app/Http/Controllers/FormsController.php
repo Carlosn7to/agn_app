@@ -24,10 +24,11 @@ class FormsController extends Controller
 
     public function index()
     {
-        $form = Form::with('questions')->with('icons')->get();
+        $form = Form::with('questions')->with('status')->with('users')->get();
 
-        return response($form,200);
+        return response($form, 200);
     }
+
 
     public function questions_index(Request $request, $id)
     {

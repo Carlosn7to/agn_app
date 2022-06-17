@@ -1,25 +1,15 @@
 <template>
-    <div class="menu-app shadow-standard">
+    <div class="menu-app">
         <header>
             <div class="logo-company">
-                <img :src="logo_company" alt="logo da empresa">
+                <img src="https://i.ibb.co/rszX1ct/AGE-ID-Logos-RGB-Logo-c-Elemento-04.png" alt="logo da empresa">
             </div>
             <div class="border-divisor">
                 <div class="item-divisor" style="width: 100%">
 
                 </div>
             </div>
-            <div class="data-user-menu">
-                <img :src="user_photo" alt="" class="shadow-standard">
-                    <p>Carlos Neto</p>
-                    <span>Analista de gestão</span>
-            </div>
         </header>
-        <div class="border-divisor">
-            <div class="item-divisor">
-
-            </div>
-        </div>
         <main>
             <div class="lists-menu">
                 <div class="list-menu">
@@ -124,16 +114,31 @@
 <script>
 export default {
     name: "Menu",
-    props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form'],
+    props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form', 'get_user', 'user_id'],
     methods: {},
     data () {
-        return {}
+        return {
+            data_user: []
+        }
     },
     components: {},
     computed: {},
-    beforeMount() {},
-    created() {},
-    mounted() {}
+    beforeMount() {
+    },
+    created() {
+        axios
+            .get(this.get_user+'/'+this.user_id)
+            .then((res) => {
+                this.data_user = res.data
+                console.log(this.data_user)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    },
+    mounted() {
+
+    }
 }
 </script>
 
