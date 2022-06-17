@@ -9,6 +9,7 @@
         update_status_form="{{ route('api.form.update.status') }}"
         actions_new="{{ route('api.form.new') }}"
         get_questions="{{ route('api.questions.list') }}"
+        token="{{ @csrf_token() }}"
     >
 
     </management-form-app-component>

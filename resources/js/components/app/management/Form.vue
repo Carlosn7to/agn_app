@@ -122,7 +122,7 @@
         <div class="modal display-flex" v-if="this.modal.status === true && this.modal.form.use === true">
             <div class="fill-form shadow-standard">
                 <div class="close-btn">
-                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0), 0"></i>
+                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0, 0)"></i>
                 </div>
                 <div class="selections-form">
                     <h6>Formulário</h6>
@@ -152,11 +152,73 @@
                 </div>
             </div>
         </div>
-        <div class="modal display-flex" v-if="this.modal.status === true && this.modal.form.new === true">
-            <div class="fill-form shadow-standard">
+        <div class="modal display-flex" v-if="this.modal.status === false && this.modal.form.new.status === false">
+            <div class="box-changes" style="width: 70%; height: 90%; background-color: #F3F3F8;">
                 <div class="close-btn">
-                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0), 0"></i>
+                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0, 0)"></i>
                 </div>
+                <h6 style="text-align: center;">Novo formulário</h6>
+                <form action="#" style="width: 100%; height: 95%; overflow-y: auto ">
+                    <div class="title-new-form display-flex" style="padding: 2vh 2vw; flex-direction: column; gap: 1rem; ">
+                        <div class="item-selection-form" style="width: 40%">
+                            <div class="input-selection-form" style="margin: 1vh 0 0 0">
+                                <label for="question">Título: </label>
+                                <input type="text" name="title" id="title" style="width: 100%" required>
+                            </div>
+                        </div>
+                        <div class="item-selection-form" style="width: 40%">
+                            <div class="input-selection-form" style="margin: 1vh 0 0 0; flex-direction: column; align-items: initial">
+                                <div class="display-flex">
+                                    <label for="question">Pergunta: </label>
+                                    <input type="text" name="title" id="title" style="width: 100%" required>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 1rem">
+                                    <label for="type_input" style="font-size: 1.4rem">Tipo de resposta:</label>
+                                    <div class="display-flex" style="gap: 1rem; justify-content: left">
+                                        <input type="radio" name="type_input" id="" value="text" checked required @click="add_questions(0)">
+                                        <label for="type_input" style="font-size: 1.4rem">Texto</label>
+                                    </div>
+                                    <div class="display-flex" style="gap: 1rem; justify-content: left">
+                                        <input type="radio" name="type_input" id="" value="date" required @click="add_questions(0)">
+                                        <label for="type_input" style="font-size: 1.4rem">Data</label>
+                                    </div>
+                                    <div class="display-flex" style="gap: 1rem; justify-content: left">
+                                        <input type="radio" name="type_input" id="" value="radio" required @click="add_questions(1)">
+                                        <label for="type_input" style="font-size: 1.4rem">Múltiplas escolhas</label>
+                                    </div>
+                                    <template v-if="this.modal.form.new.questions.status === true">
+                                        <div class="border-divisor">
+                                            <div class="item-divisor">
+
+                                            </div>
+                                        </div>
+                                        <label for="type_input" style="font-size: 1.4rem">Escolhas:</label>
+                                        <template v-for="item in this.modal.form.new.count">
+                                            <div class="display-flex" style="gap: 1rem; justify-content: left">
+                                                <label for="answers" style="font-size: 1.4rem">{{ item }}:</label>
+                                                <input type="text" name="anwers" id="1">
+                                                <template v-if="item === 1">
+                                                    <template v-if="modal.form.new.count === 1">
+                                                        <span class="plus display-flex" @click="add_answers(0)"><i class="fi fi-rr-plus"></i></span>
+                                                    </template>
+                                                    <template v-if="modal.form.new.count > 1">
+                                                        <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
+                                                    </template>
+                                                </template>
+                                                <template v-if="item > 1">
+                                                    <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
+                                                    <template v-if="modal.form.new.count < item">
+                                                        <span class="plus display-flex" @click="add_answers(0)"><i class="fi fi-rr-plus"></i></span>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                        </template>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -166,7 +228,7 @@
 <script>
 export default {
     name: "Form",
-    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions'],
+    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token'],
     methods: {
         modal_actions(on, step, id){
 
@@ -216,10 +278,29 @@ export default {
                 .then((res) => {
                     this.form_data = res.data
 
-                    console.log(this.form_data)
                 })
                 .catch((error) => {
                 })
+        },
+        add_questions(on) {
+
+            if(on === 0) {
+                this.modal.form.new.questions.status = false
+            } else {
+                this.modal.form.new.questions.status = true
+            }
+        },
+        add_answers(n) {
+
+            if(n === 0) {
+                this.modal.form.new.questions.inputs.push({
+                    id: `answer${++this.modal.form.new.count}}`
+                })
+            } else {
+                this.modal.form.new.questions.inputs.pop({
+                    id: `answer${--this.modal.form.new.count}}`
+                })
+            }
         }
     },
     data () {
@@ -231,7 +312,16 @@ export default {
                 id: 0,
                 form: {
                     edit: false,
-                    new: false,
+                    new: {
+                        status: false,
+                        count: 1,
+                        questions: {
+                            inputs: [{
+                                id: 'answer1'
+                            }],
+                            status: false
+                        }
+                    },
                     use: false
                 }
             },

@@ -19,7 +19,7 @@ class FormsController extends Controller
 
     public function new(Request $request)
     {
-        return response('novo');
+        dd($request);
     }
 
     public function index()
@@ -28,7 +28,6 @@ class FormsController extends Controller
 
         return response($form, 200);
     }
-
 
     public function questions_index(Request $request, $id)
     {

@@ -5831,9 +5831,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
-  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions'],
+  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token'],
   methods: {
     modal_actions: function modal_actions(on, step, id) {
       if (on === 0) {
@@ -5874,8 +5936,25 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.get_questions + '/' + id).then(function (res) {
         _this3.form_data = res.data;
-        console.log(_this3.form_data);
       })["catch"](function (error) {});
+    },
+    add_questions: function add_questions(on) {
+      if (on === 0) {
+        this.modal.form["new"].questions.status = false;
+      } else {
+        this.modal.form["new"].questions.status = true;
+      }
+    },
+    add_answers: function add_answers(n) {
+      if (n === 0) {
+        this.modal.form["new"].questions.inputs.push({
+          id: "answer".concat(++this.modal.form["new"].count, "}")
+        });
+      } else {
+        this.modal.form["new"].questions.inputs.pop({
+          id: "answer".concat(--this.modal.form["new"].count, "}")
+        });
+      }
     }
   },
   data: function data() {
@@ -5887,7 +5966,16 @@ __webpack_require__.r(__webpack_exports__);
         id: 0,
         form: {
           edit: false,
-          "new": false,
+          "new": {
+            status: false,
+            count: 1,
+            questions: {
+              inputs: [{
+                id: 'answer1'
+              }],
+              status: false
+            }
+          },
           use: false
         }
       },
@@ -29613,7 +29701,7 @@ var render = function () {
                   staticClass: "fi fi-rr-cross-small",
                   on: {
                     click: function ($event) {
-                      _vm.modal_actions(0, 0), 0
+                      return _vm.modal_actions(0, 0, 0)
                     },
                   },
                 }),
@@ -29727,20 +29815,406 @@ var render = function () {
           ])
         : _vm._e(),
       _vm._v(" "),
-      this.modal.status === true && this.modal.form.new === true
+      this.modal.status === false && this.modal.form.new.status === false
         ? _c("div", { staticClass: "modal display-flex" }, [
-            _c("div", { staticClass: "fill-form shadow-standard" }, [
-              _c("div", { staticClass: "close-btn" }, [
-                _c("i", {
-                  staticClass: "fi fi-rr-cross-small",
-                  on: {
-                    click: function ($event) {
-                      _vm.modal_actions(0, 0), 0
+            _c(
+              "div",
+              {
+                staticClass: "box-changes",
+                staticStyle: {
+                  width: "70%",
+                  height: "90%",
+                  "background-color": "#F3F3F8",
+                },
+              },
+              [
+                _c("div", { staticClass: "close-btn" }, [
+                  _c("i", {
+                    staticClass: "fi fi-rr-cross-small",
+                    on: {
+                      click: function ($event) {
+                        return _vm.modal_actions(0, 0, 0)
+                      },
                     },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("h6", { staticStyle: { "text-align": "center" } }, [
+                  _vm._v("Novo formulário"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    staticStyle: {
+                      width: "100%",
+                      height: "95%",
+                      "overflow-y": "auto",
+                    },
+                    attrs: { action: "#" },
                   },
-                }),
-              ]),
-            ]),
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "title-new-form display-flex",
+                        staticStyle: {
+                          padding: "2vh 2vw",
+                          "flex-direction": "column",
+                          gap: "1rem",
+                        },
+                      },
+                      [
+                        _vm._m(9),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "item-selection-form",
+                            staticStyle: { width: "40%" },
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "input-selection-form",
+                                staticStyle: {
+                                  margin: "1vh 0 0 0",
+                                  "flex-direction": "column",
+                                  "align-items": "initial",
+                                },
+                              },
+                              [
+                                _vm._m(10),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      display: "flex",
+                                      "flex-direction": "column",
+                                      gap: "1rem",
+                                    },
+                                  },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticStyle: { "font-size": "1.4rem" },
+                                        attrs: { for: "type_input" },
+                                      },
+                                      [_vm._v("Tipo de resposta:")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "display-flex",
+                                        staticStyle: {
+                                          gap: "1rem",
+                                          "justify-content": "left",
+                                        },
+                                      },
+                                      [
+                                        _c("input", {
+                                          attrs: {
+                                            type: "radio",
+                                            name: "type_input",
+                                            id: "",
+                                            value: "text",
+                                            checked: "",
+                                            required: "",
+                                          },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.add_questions(0)
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticStyle: {
+                                              "font-size": "1.4rem",
+                                            },
+                                            attrs: { for: "type_input" },
+                                          },
+                                          [_vm._v("Texto")]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "display-flex",
+                                        staticStyle: {
+                                          gap: "1rem",
+                                          "justify-content": "left",
+                                        },
+                                      },
+                                      [
+                                        _c("input", {
+                                          attrs: {
+                                            type: "radio",
+                                            name: "type_input",
+                                            id: "",
+                                            value: "date",
+                                            required: "",
+                                          },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.add_questions(0)
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticStyle: {
+                                              "font-size": "1.4rem",
+                                            },
+                                            attrs: { for: "type_input" },
+                                          },
+                                          [_vm._v("Data")]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "display-flex",
+                                        staticStyle: {
+                                          gap: "1rem",
+                                          "justify-content": "left",
+                                        },
+                                      },
+                                      [
+                                        _c("input", {
+                                          attrs: {
+                                            type: "radio",
+                                            name: "type_input",
+                                            id: "",
+                                            value: "radio",
+                                            required: "",
+                                          },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.add_questions(1)
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticStyle: {
+                                              "font-size": "1.4rem",
+                                            },
+                                            attrs: { for: "type_input" },
+                                          },
+                                          [_vm._v("Múltiplas escolhas")]
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    this.modal.form.new.questions.status ===
+                                    true
+                                      ? [
+                                          _vm._m(11),
+                                          _vm._v(" "),
+                                          _c(
+                                            "label",
+                                            {
+                                              staticStyle: {
+                                                "font-size": "1.4rem",
+                                              },
+                                              attrs: { for: "type_input" },
+                                            },
+                                            [_vm._v("Escolhas:")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._l(
+                                            this.modal.form.new.count,
+                                            function (item) {
+                                              return [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "display-flex",
+                                                    staticStyle: {
+                                                      gap: "1rem",
+                                                      "justify-content": "left",
+                                                    },
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        staticStyle: {
+                                                          "font-size": "1.4rem",
+                                                        },
+                                                        attrs: {
+                                                          for: "answers",
+                                                        },
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(item) + ":"
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      attrs: {
+                                                        type: "text",
+                                                        name: "anwers",
+                                                        id: "1",
+                                                      },
+                                                    }),
+                                                    _vm._v(" "),
+                                                    item === 1
+                                                      ? [
+                                                          _vm.modal.form.new
+                                                            .count === 1
+                                                            ? [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "plus display-flex",
+                                                                    on: {
+                                                                      click:
+                                                                        function (
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.add_answers(
+                                                                            0
+                                                                          )
+                                                                        },
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _c("i", {
+                                                                      staticClass:
+                                                                        "fi fi-rr-plus",
+                                                                    }),
+                                                                  ]
+                                                                ),
+                                                              ]
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _vm.modal.form.new
+                                                            .count > 1
+                                                            ? [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "decrease display-flex",
+                                                                    on: {
+                                                                      click:
+                                                                        function (
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.add_answers(
+                                                                            1
+                                                                          )
+                                                                        },
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _c("i", {
+                                                                      staticClass:
+                                                                        "fi fi-rr-cross",
+                                                                    }),
+                                                                  ]
+                                                                ),
+                                                              ]
+                                                            : _vm._e(),
+                                                        ]
+                                                      : _vm._e(),
+                                                    _vm._v(" "),
+                                                    item > 1
+                                                      ? [
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "decrease display-flex",
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.add_answers(
+                                                                      1
+                                                                    )
+                                                                  },
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("i", {
+                                                                staticClass:
+                                                                  "fi fi-rr-cross",
+                                                              }),
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _vm.modal.form.new
+                                                            .count < item
+                                                            ? [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "plus display-flex",
+                                                                    on: {
+                                                                      click:
+                                                                        function (
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.add_answers(
+                                                                            0
+                                                                          )
+                                                                        },
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _c("i", {
+                                                                      staticClass:
+                                                                        "fi fi-rr-plus",
+                                                                    }),
+                                                                  ]
+                                                                ),
+                                                              ]
+                                                            : _vm._e(),
+                                                        ]
+                                                      : _vm._e(),
+                                                  ],
+                                                  2
+                                                ),
+                                              ]
+                                            }
+                                          ),
+                                        ]
+                                      : _vm._e(),
+                                  ],
+                                  2
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+              ]
+            ),
           ])
         : _vm._e(),
     ]
@@ -29926,6 +30400,53 @@ var staticRenderFns = [
         ]),
       ]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "item-selection-form", staticStyle: { width: "40%" } },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "input-selection-form",
+            staticStyle: { margin: "1vh 0 0 0" },
+          },
+          [
+            _c("label", { attrs: { for: "question" } }, [_vm._v("Título: ")]),
+            _vm._v(" "),
+            _c("input", {
+              staticStyle: { width: "100%" },
+              attrs: { type: "text", name: "title", id: "title", required: "" },
+            }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "display-flex" }, [
+      _c("label", { attrs: { for: "question" } }, [_vm._v("Pergunta: ")]),
+      _vm._v(" "),
+      _c("input", {
+        staticStyle: { width: "100%" },
+        attrs: { type: "text", name: "title", id: "title", required: "" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "border-divisor" }, [
+      _c("div", { staticClass: "item-divisor" }),
+    ])
   },
 ]
 render._withStripped = true
