@@ -5893,6 +5893,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
   props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token'],
@@ -30140,32 +30142,37 @@ var render = function () {
                                                     _vm._v(" "),
                                                     item > 1
                                                       ? [
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticClass:
-                                                                "decrease display-flex",
-                                                              on: {
-                                                                click:
-                                                                  function (
-                                                                    $event
-                                                                  ) {
-                                                                    return _vm.add_answers(
-                                                                      1
-                                                                    )
-                                                                  },
-                                                              },
-                                                            },
-                                                            [
-                                                              _c("i", {
-                                                                staticClass:
-                                                                  "fi fi-rr-cross",
-                                                              }),
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
                                                           _vm.modal.form.new
                                                             .count < item
+                                                            ? [
+                                                                _c(
+                                                                  "span",
+                                                                  {
+                                                                    staticClass:
+                                                                      "decrease display-flex",
+                                                                    on: {
+                                                                      click:
+                                                                        function (
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.add_answers(
+                                                                            1
+                                                                          )
+                                                                        },
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _c("i", {
+                                                                      staticClass:
+                                                                        "fi fi-rr-cross",
+                                                                    }),
+                                                                  ]
+                                                                ),
+                                                              ]
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _vm.modal.form.new
+                                                            .count === item
                                                             ? [
                                                                 _c(
                                                                   "span",

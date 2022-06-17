@@ -206,8 +206,10 @@
                                                     </template>
                                                 </template>
                                                 <template v-if="item > 1">
-                                                    <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
                                                     <template v-if="modal.form.new.count < item">
+                                                        <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
+                                                    </template>
+                                                    <template v-if="modal.form.new.count === item">
                                                         <span class="plus display-flex" @click="add_answers(0)"><i class="fi fi-rr-plus"></i></span>
                                                     </template>
                                                 </template>
