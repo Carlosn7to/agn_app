@@ -681,3 +681,19 @@ ul {
     color: #fff;
     font-size: .8rem;
 }
+
+.new-btn {
+    border: none;
+    background-color: #4daee4;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin: 2vh 0;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.new-btn:hover {
+    background-color: #0a8dd3;
+}

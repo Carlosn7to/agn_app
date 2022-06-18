@@ -5886,15 +5886,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
   props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token'],
@@ -5902,7 +5893,6 @@ __webpack_require__.r(__webpack_exports__);
     modal_actions: function modal_actions(on, step, id) {
       if (on === 0) {
         this.modal.status = false;
-        this.modal.form = false;
       } else {
         this.modal.status = true;
         this.modal.step = step;
@@ -5940,6 +5930,15 @@ __webpack_require__.r(__webpack_exports__);
         _this3.form_data = res.data;
       })["catch"](function (error) {});
     },
+    add_form: function add_form(on) {
+      if (on === 1) {
+        this.modal.status = true;
+        this.modal.form["new"].status = true;
+      } else {
+        this.modal.status = false;
+        this.modal.form["new"].status = false;
+      }
+    },
     add_questions: function add_questions(on) {
       if (on === 0) {
         this.modal.form["new"].questions.status = false;
@@ -5950,11 +5949,11 @@ __webpack_require__.r(__webpack_exports__);
     add_answers: function add_answers(n) {
       if (n === 0) {
         this.modal.form["new"].questions.inputs.push({
-          id: "answer".concat(++this.modal.form["new"].count, "}")
+          id: "answer".concat(++this.modal.form["new"].count)
         });
       } else {
         this.modal.form["new"].questions.inputs.pop({
-          id: "answer".concat(--this.modal.form["new"].count, "}")
+          id: "answer".concat(--this.modal.form["new"].count)
         });
       }
     }
@@ -29449,6 +29448,19 @@ var render = function () {
     [
       _c("h6", [_vm._v("Gerenciamento de formulários")]),
       _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "new-btn",
+          on: {
+            click: function ($event) {
+              return _vm.add_form(1)
+            },
+          },
+        },
+        [_vm._v("Novo formulário")]
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "management-form" }, [
         _c("table", { attrs: { id: "mgn-form" } }, [
           _vm._m(0),
@@ -29817,7 +29829,7 @@ var render = function () {
           ])
         : _vm._e(),
       _vm._v(" "),
-      this.modal.status === false && this.modal.form.new.status === false
+      this.modal.status === true && this.modal.form.new.status === true
         ? _c("div", { staticClass: "modal display-flex" }, [
             _c(
               "div",
@@ -30078,127 +30090,60 @@ var render = function () {
                                                       },
                                                     }),
                                                     _vm._v(" "),
-                                                    item === 1
+                                                    _vm.modal.form.new.count > 1
                                                       ? [
-                                                          _vm.modal.form.new
-                                                            .count === 1
-                                                            ? [
-                                                                _c(
-                                                                  "span",
-                                                                  {
-                                                                    staticClass:
-                                                                      "plus display-flex",
-                                                                    on: {
-                                                                      click:
-                                                                        function (
-                                                                          $event
-                                                                        ) {
-                                                                          return _vm.add_answers(
-                                                                            0
-                                                                          )
-                                                                        },
-                                                                    },
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "decrease display-flex",
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.add_answers(
+                                                                      1
+                                                                    )
                                                                   },
-                                                                  [
-                                                                    _c("i", {
-                                                                      staticClass:
-                                                                        "fi fi-rr-plus",
-                                                                    }),
-                                                                  ]
-                                                                ),
-                                                              ]
-                                                            : _vm._e(),
-                                                          _vm._v(" "),
-                                                          _vm.modal.form.new
-                                                            .count > 1
-                                                            ? [
-                                                                _c(
-                                                                  "span",
-                                                                  {
-                                                                    staticClass:
-                                                                      "decrease display-flex",
-                                                                    on: {
-                                                                      click:
-                                                                        function (
-                                                                          $event
-                                                                        ) {
-                                                                          return _vm.add_answers(
-                                                                            1
-                                                                          )
-                                                                        },
-                                                                    },
-                                                                  },
-                                                                  [
-                                                                    _c("i", {
-                                                                      staticClass:
-                                                                        "fi fi-rr-cross",
-                                                                    }),
-                                                                  ]
-                                                                ),
-                                                              ]
-                                                            : _vm._e(),
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("i", {
+                                                                staticClass:
+                                                                  "fi fi-rr-cross",
+                                                              }),
+                                                            ]
+                                                          ),
                                                         ]
                                                       : _vm._e(),
                                                     _vm._v(" "),
-                                                    item > 1
+                                                    _vm.modal.form.new.count ===
+                                                    item
                                                       ? [
-                                                          _vm.modal.form.new
-                                                            .count !== item
-                                                            ? [
-                                                                _c(
-                                                                  "span",
-                                                                  {
-                                                                    staticClass:
-                                                                      "decrease display-flex",
-                                                                    on: {
-                                                                      click:
-                                                                        function (
-                                                                          $event
-                                                                        ) {
-                                                                          return _vm.add_answers(
-                                                                            1
-                                                                          )
-                                                                        },
-                                                                    },
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticClass:
+                                                                "plus display-flex",
+                                                              on: {
+                                                                click:
+                                                                  function (
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.add_answers(
+                                                                      0
+                                                                    )
                                                                   },
-                                                                  [
-                                                                    _c("i", {
-                                                                      staticClass:
-                                                                        "fi fi-rr-cross",
-                                                                    }),
-                                                                  ]
-                                                                ),
-                                                              ]
-                                                            : _vm._e(),
-                                                          _vm._v(" "),
-                                                          _vm.modal.form.new
-                                                            .count === item
-                                                            ? [
-                                                                _c(
-                                                                  "span",
-                                                                  {
-                                                                    staticClass:
-                                                                      "plus display-flex",
-                                                                    on: {
-                                                                      click:
-                                                                        function (
-                                                                          $event
-                                                                        ) {
-                                                                          return _vm.add_answers(
-                                                                            0
-                                                                          )
-                                                                        },
-                                                                    },
-                                                                  },
-                                                                  [
-                                                                    _c("i", {
-                                                                      staticClass:
-                                                                        "fi fi-rr-plus",
-                                                                    }),
-                                                                  ]
-                                                                ),
-                                                              ]
-                                                            : _vm._e(),
+                                                              },
+                                                            },
+                                                            [
+                                                              _c("i", {
+                                                                staticClass:
+                                                                  "fi fi-rr-plus",
+                                                              }),
+                                                            ]
+                                                          ),
                                                         ]
                                                       : _vm._e(),
                                                   ],

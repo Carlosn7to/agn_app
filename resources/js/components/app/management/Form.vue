@@ -1,6 +1,7 @@
 <template>
     <div class="container-app" style="padding: 2vh 2vw;">
         <h6>Gerenciamento de formulários</h6>
+        <button @click="add_form(1)" class="new-btn">Novo formulário</button>
         <div class="management-form">
             <table id="mgn-form">
                 <thead>
@@ -152,10 +153,10 @@
                 </div>
             </div>
         </div>
-        <div class="modal display-flex" v-if="this.modal.status === false && this.modal.form.new.status === false">
+        <div class="modal display-flex" v-if="this.modal.status === true && this.modal.form.new.status === true">
             <div class="box-changes" style="width: 70%; height: 90%; background-color: #F3F3F8;">
                 <div class="close-btn">
-                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0, 0)"></i>
+                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0,0)"></i>
                 </div>
                 <h6 style="text-align: center;">Novo formulário</h6>
                 <form action="#" style="width: 100%; height: 95%; overflow-y: auto ">
@@ -197,21 +198,11 @@
                                             <div class="display-flex" style="gap: 1rem; justify-content: left">
                                                 <label for="answers" style="font-size: 1.4rem">{{ item }}:</label>
                                                 <input type="text" name="anwers" id="1">
-                                                <template v-if="item === 1">
-                                                    <template v-if="modal.form.new.count === 1">
-                                                        <span class="plus display-flex" @click="add_answers(0)"><i class="fi fi-rr-plus"></i></span>
-                                                    </template>
-                                                    <template v-if="modal.form.new.count > 1">
-                                                        <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
-                                                    </template>
+                                                <template v-if="modal.form.new.count > 1">
+                                                    <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
                                                 </template>
-                                                <template v-if="item > 1">
-                                                    <template v-if="modal.form.new.count !== item">
-                                                        <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
-                                                    </template>
-                                                    <template v-if="modal.form.new.count === item">
-                                                        <span class="plus display-flex" @click="add_answers(0)"><i class="fi fi-rr-plus"></i></span>
-                                                    </template>
+                                                <template v-if="modal.form.new.count === item">
+                                                    <span class="plus display-flex" @click="add_answers(0)"><i class="fi fi-rr-plus"></i></span>
                                                 </template>
                                             </div>
                                         </template>
@@ -236,7 +227,6 @@ export default {
 
             if(on === 0) {
                 this.modal.status = false
-                this.modal.form = false
             } else {
                 this.modal.status = true
                 this.modal.step = step
@@ -284,6 +274,16 @@ export default {
                 .catch((error) => {
                 })
         },
+        add_form(on){
+
+            if(on === 1) {
+                this.modal.status = true
+                this.modal.form.new.status = true
+            } else {
+                this.modal.status = false
+                this.modal.form.new.status = false
+            }
+        },
         add_questions(on) {
 
             if(on === 0) {
@@ -296,11 +296,11 @@ export default {
 
             if(n === 0) {
                 this.modal.form.new.questions.inputs.push({
-                    id: `answer${++this.modal.form.new.count}}`
+                    id: `answer${++this.modal.form.new.count}`
                 })
             } else {
                 this.modal.form.new.questions.inputs.pop({
-                    id: `answer${--this.modal.form.new.count}}`
+                    id: `answer${--this.modal.form.new.count}`
                 })
             }
         }
