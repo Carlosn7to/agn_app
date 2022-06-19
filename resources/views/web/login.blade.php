@@ -7,6 +7,7 @@
     <login-component
         token="{{ @csrf_token() }}"
         action_login="{{ route('action.login') }}"
+        logo_company="{{ asset('images/app/age_colorida.png') }}"
     >
 
     </login-component>

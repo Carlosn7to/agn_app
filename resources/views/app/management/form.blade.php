@@ -7,9 +7,10 @@
     <management-form-app-component
         get_forms_all="{{ route('api.form.all') }}"
         update_status_form="{{ route('api.form.update.status') }}"
-        actions_new="{{ route('api.form.new') }}"
+        form_new="{{ route('api.form.new') }}"
         get_questions="{{ route('api.questions.list') }}"
         token="{{ @csrf_token() }}"
+        user_id="{{ $_SESSION['id'] }}"
     >
 
     </management-form-app-component>

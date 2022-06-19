@@ -4,16 +4,21 @@
 
         </header>
         <main>
-            <div class="card-login-web shadow-standard">
-                <h1>Conecte-se com sua conta.</h1>
+            <div class="card-login-web">
+                <div class="welcome-logo" >
+                    <img :src="logo_company" alt="">
+                </div>
                 <form :action="action_login" method="POST">
                     <input type="hidden" name="_token" :value="token">
-                    <label for="email">E-mail</label><br>
-                    <input type="email" name="email" id="email"><br><br>
-                    <label for="password">Senha</label><br>
-                    <input type="password" name="password" id="password"><br><br>
-                    <input type="submit" value="Entrar">
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="password" name="password" id="password" placeholder="Senha">
+                    <input type="submit" value="ENTRAR">
                 </form>
+                <div class="border-divisor">
+                    <div class="item-divisor" style="width: 100%;">
+
+                    </div>
+                </div>
             </div>
         </main>
         <footer>
@@ -25,7 +30,7 @@
 <script>
 export default {
     name: "Home",
-    props: ['token', 'action_login'],
+    props: ['token', 'action_login', 'logo_company'],
     methods: {},
     data () {
         return {}

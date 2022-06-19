@@ -12,7 +12,7 @@ class Form extends Model
     use SoftDeletes;
 
     protected $table = 'forms';
-    protected $fillable = ['status_id', 'name', 'icon_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['status_id', 'name','description', 'icon_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function questions()
     {
@@ -31,7 +31,7 @@ class Form extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id')->select('id', 'email', 'first_name', 'last_name');
     }
 
 

@@ -19,7 +19,13 @@ class FormsController extends Controller
 
     public function new(Request $request)
     {
-        dd($request);
+
+
+        Form::create($request->all());
+
+        return response("formulário criado com sucesso!");
+
+
     }
 
     public function index()

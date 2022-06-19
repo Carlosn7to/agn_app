@@ -14,18 +14,19 @@
                 </thead>
                 <tbody>
                     <tr v-for="form in this.data" id="tableForms">
-                        <td style="width: 50%">{{ form.name }}</td>
-                        <td style="text-align: center"><span class="status" :class="form.status.name">{{ form.status.name }}</span></td>
-                        <td style="font-size: 1.4rem; width: 30%">{{ form.users.first_name }} {{ form.users.last_name }}</td>
+                        <td style="width: 50%">{{ string_sanitaze(form.name) }}</td>
+                        <td style="text-align: center"><span class="status" :class="form.status.name">{{ string_sanitaze(form.status.name) }}</span></td>
+                        <td style="font-size: 1.4rem; width: 30%">{{ form.users.first_name }} {{ string_sanitaze(form.users.last_name) }}</td>
                         <td style="text-align: center; width: 10%; gap: 1rem; display: flex; align-items: center;">
-                            <i class="fi fi-rr-edit" @click="modal_actions(1, 1, form.id)"></i>
+                            <i class="fi fi-rr-edit" @click="modal_actions(1, 1, form.id, form.name)"></i>
                             <template v-if="form.status_id === 1">
-                                <i class="fi fi-rr-box" @click="modal_actions(1, 2, form.id)"></i>
+                                <i class="fi fi-rr-box" @click="modal_actions(1, 2, form.id, form.name)"></i>
+                                <i class="fi fi-rr-redo" @click="modal_actions(1, 4, form.id, form.name)"></i>
                             </template>
                             <template v-if="form.status_id === 2">
-                                <i class="fi fi-rr-checkbox" @click="modal_actions(1, 3, form.id)"></i>
+                                <i class="fi fi-rr-checkbox" @click="modal_actions(1, 3, form.id, form.name)"></i>
                             </template>
-                            <i class="fi fi-rr-redo" @click="modal_actions(1, 4, form.id)"></i>
+
                         </td>
                     </tr>
                 </tbody>
@@ -113,20 +114,13 @@
                 </div>
             </div>
         </div>
-        <div class="modal display-flex" v-if="this.modal.status === true && this.modal.step === 1">
-            <div class="fill-form shadow-standard">
-                <div class="close-btn">
-                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0, 0)"></i>
-                </div>
-            </div>
-        </div>
-        <div class="modal display-flex" v-if="this.modal.status === true && this.modal.form.use === true">
+        <div class="modal display-flex" v-if="this.modal.status === true && this.modal.form.use.status === true">
             <div class="fill-form shadow-standard">
                 <div class="close-btn">
                     <i class="fi fi-rr-cross-small" @click="modal_actions(0,0, 0)"></i>
                 </div>
                 <div class="selections-form">
-                    <h6>Formulário</h6>
+                    <h6>Formulário de {{ this.modal.form.use.name }}</h6>
                     <form :action="new_form" method="POST" name="form" autocomplete="off" id="form">
                         <input type="hidden" name="_token" :value="token">
                         <template v-for="data in form_data">
@@ -154,90 +148,164 @@
             </div>
         </div>
         <div class="modal display-flex" v-if="this.modal.status === true && this.modal.form.new.status === true">
-            <div class="box-changes" style="width: 70%; height: 90%; background-color: #F3F3F8;">
+            <div class="box-changes new-form">
                 <div class="close-btn">
                     <i class="fi fi-rr-cross-small" @click="modal_actions(0,0,0)"></i>
                 </div>
-                <h6 style="text-align: center;">Novo formulário</h6>
-                <form action="#" style="width: 100%; height: 95%; overflow-y: auto ">
-                    <div class="title-new-form display-flex" style="padding: 2vh 2vw; flex-direction: column; gap: 1rem; ">
-                        <div class="item-selection-form" style="width: 40%">
-                            <div class="input-selection-form" style="margin: 1vh 0 0 0">
-                                <label for="question">Título: </label>
-                                <input type="text" name="title" id="title" style="width: 100%" required>
-                            </div>
+                <h6>Novo formulário</h6>
+                <div class="fields-form-new">
+                    <form method="post" @submit.prevent="post_form()">
+                        <input type="hidden" name="user_id" id="user_id" :value="user_id">
+                        <input type="hidden" name="token" :value="token">
+                        <div class="field-form-new" :class="{ field_active : this.class.form.id === 1 }" @focusin="classActive(1)" @focusout="classActive(0)">
+                            <label for="title" :class="{ active_label :this.class.form.id === 1}">Nome <b style="color: var(--color-red)">*</b></label>
+                            <input type="text" name="name" id="name" required v-model="forms.new.inputs.name">
                         </div>
-                        <div class="item-selection-form" style="width: 40%">
-                            <div class="input-selection-form" style="margin: 1vh 0 0 0; flex-direction: column; align-items: initial">
-                                <div class="display-flex">
-                                    <label for="question">Pergunta: </label>
-                                    <input type="text" name="title" id="title" style="width: 100%" required>
-                                </div>
-                                <div style="display: flex; flex-direction: column; gap: 1rem">
-                                    <label for="type_input" style="font-size: 1.4rem">Tipo de resposta:</label>
-                                    <div class="display-flex" style="gap: 1rem; justify-content: left">
-                                        <input type="radio" name="type_input" id="" value="text" checked required @click="add_questions(0)">
-                                        <label for="type_input" style="font-size: 1.4rem">Texto</label>
-                                    </div>
-                                    <div class="display-flex" style="gap: 1rem; justify-content: left">
-                                        <input type="radio" name="type_input" id="" value="date" required @click="add_questions(0)">
-                                        <label for="type_input" style="font-size: 1.4rem">Data</label>
-                                    </div>
-                                    <div class="display-flex" style="gap: 1rem; justify-content: left">
-                                        <input type="radio" name="type_input" id="" value="radio" required @click="add_questions(1)">
-                                        <label for="type_input" style="font-size: 1.4rem">Múltiplas escolhas</label>
-                                    </div>
-                                    <template v-if="this.modal.form.new.questions.status === true">
-                                        <div class="border-divisor">
-                                            <div class="item-divisor">
-
-                                            </div>
-                                        </div>
-                                        <label for="type_input" style="font-size: 1.4rem">Escolhas:</label>
-                                        <template v-for="item in this.modal.form.new.count">
-                                            <div class="display-flex" style="gap: 1rem; justify-content: left">
-                                                <label for="answers" style="font-size: 1.4rem">{{ item }}:</label>
-                                                <input type="text" name="anwers" id="1">
-                                                <template v-if="modal.form.new.count > 1">
-                                                    <span class="decrease display-flex" @click="add_answers(1)"><i class="fi fi-rr-cross"></i></span>
-                                                </template>
-                                                <template v-if="modal.form.new.count === item">
-                                                    <span class="plus display-flex" @click="add_answers(0)"><i class="fi fi-rr-plus"></i></span>
-                                                </template>
-                                            </div>
+                        <div class="field-form-new" :class="{ field_active : this.class.form.id === 2 }" @focusin="classActive(2)" @focusout="classActive(0)">
+                            <label for="description" :class="{ active_label :this.class.form.id === 2}">Descrição</label>
+                            <input type="text" name="description" id="description">
+                        </div>
+                        <input type="submit" value="Cadastrar">
+                    </form>
+                </div>
+            </div>
+    </div>
+        <div class="modal display-flex" v-if="this.modal.status === true && this.modal.form.edit.status === true">
+            <div class="box-changes edit-form">
+                <div class="close-btn">
+                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0,0)"></i>
+                </div>
+                <h6>Editar formulário</h6>
+                <div class="container-edit-form">
+                    <div class="fields-edit-form animation-opacity" v-if="this.modal.form.edit.step === 1">
+                        <h6>Formulário de {{ string_sanitaze(modal.form.edit.name) }}</h6>
+                        <template v-for="data in form_data">
+                            <div class="field-edit-form">
+                                   <span>{{ string_sanitaze(data.question) }} <b style="color: var(--color-red)">*</b></span>
+                                <div class="input-selection-form" v-for="an in data.answers">
+                                    <template v-if="data.force === 1">
+                                        <template v-if="data.type === 'radio'">
+                                            <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" disabled>
                                         </template>
+                                        <template v-if="data.type !== 'radio'">
+                                            <input :type="data.type" :name="data.id" :id="an.id" disabled>
+                                        </template>
+                                    </template>
+                                    <template v-if="data.force === 0">
+                                        <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" disabled>
+                                    </template>
+                                    <template v-if="data.type === 'radio'">
+                                        <label for="type">{{ string_sanitaze(an.answer) }}</label>
+                                    </template>
+                                    <template v-if="data.type !== 'radio'">
+                                        <label for="type">{{ an.answer }}</label>
                                     </template>
                                 </div>
                             </div>
+                        </template>
+                    </div>
+                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 2">
+                        <div class="animation-opacity">
+                            <div class="field-option-form">
+                                Nome antigo: {{ string_sanitaze(modal.form.edit.name) }}
+                            </div>
                         </div>
                     </div>
-                </form>
+                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 3">
+                        <div class="animation-opacity">
+                            Estou editando os setores
+                        </div>
+                    </div>
+                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 4">
+                        <div class="animation-opacity">
+                            Estou adicionando uma nova pergunta
+                        </div>
+                    </div>
+                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 5">
+                        <div class="animation-opacity">
+                            Estou editando uma pergunta
+                        </div>
+                    </div>
+                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 6">
+                        <div class="animation-opacity">
+                            Estou excluindo uma pergunta
+                        </div>
+                    </div>
+                    <div class="options-edit-form">
+                        <h6>Menu de edição</h6>
+                        <div class="border-divisor">
+                            <div class="item-divisor" style="width: 60%">
+
+                            </div>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li @click="modal_form_edit(1)">
+                                    <i class="fi fi-rr-form"></i>
+                                    <span>Formulário</span>
+                                </li>
+                                <li @click="modal_form_edit(2)">
+                                    <i class="fi fi-rr-edit"></i>
+                                    <span>Título</span>
+                                </li>
+                                <li @click="modal_form_edit(3)">
+                                    <i class="fi fi-rr-users-alt"></i>
+                                    <span>Setores</span>
+                                </li>
+                                <li @click="modal_form_edit(4)">
+                                    <i class="fi fi-rr-apps-add"></i>
+                                    <span>Nova pergunta</span>
+                                </li>
+                                <li @click="modal_form_edit(5)">
+                                    <i class="fi fi-rr-apps-sort"></i>
+                                    <span>Editar pergunta</span>
+                                </li>
+                                <li @click="modal_form_edit(6)">
+                                    <i class="fi fi-rr-apps-delete"></i>
+                                    <span>Excluir perguntas</span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
-
-    </div>
 </template>
 
 <script>
 export default {
     name: "Form",
-    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token'],
+    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id'],
     methods: {
-        modal_actions(on, step, id){
+        modal_actions(on, step, id, form_name){
 
             if(on === 0) {
                 this.modal.status = false
+                this.modal.form.new.status = false
+                this.modal.form.use.status = false
+                this.modal.form.edit.status = false
             } else {
                 this.modal.status = true
                 this.modal.step = step
                 this.modal.id = id
 
+                if(step === 1) {
+                    this.modal.form.edit.status = true
+                    this.modal.form.edit.name = form_name
+                    this.get_form(id)
+                }
+
                 if(step === 4) {
-                    this.modal.form.use = true
+                    this.modal.form.use.status = true
+                    this.modal.form.use.name = form_name
                     this.get_form(id)
                 }
             }
 
+        },
+        modal_form_edit(step){
+            this.modal.form.edit.step = step
         },
         form_action(action, id) {
                 // Ativar ou inativar o formulário
@@ -269,7 +337,6 @@ export default {
                 .get(this.get_questions+'/'+id)
                 .then((res) => {
                     this.form_data = res.data
-
                 })
                 .catch((error) => {
                 })
@@ -303,6 +370,43 @@ export default {
                     id: `answer${--this.modal.form.new.count}`
                 })
             }
+        },
+        classActive(n) {
+            this.class.form.id = n
+        },
+        post_form(){
+
+            axios
+                ({
+                    method: 'post',
+                    url: this.form_new,
+                    data: {
+                        token: this.token,
+                        user_id: this.user_id,
+                        name: this.forms.new.inputs.name,
+                        description: this.forms.new.inputs.description
+                    }
+                })
+                .then((res) => {
+                    this.get_all_forms()
+                    this.modal.status = false
+                    this.modal.form.new.status = false
+                    this.forms.new.inputs.name = ''
+                    this.forms.new.inputs.description = ''
+                })
+                .catch((error) => {
+                })
+        },
+        string_sanitaze(string) {
+
+            var text = string.toLowerCase()
+            var words = text.split(" ")
+
+            words =  words.map((word) => {
+                            return word[0].toUpperCase() + word.substring(1);
+                        }).join(" ");
+
+            return words
         }
     },
     data () {
@@ -313,7 +417,11 @@ export default {
                 step: 0,
                 id: 0,
                 form: {
-                    edit: false,
+                    edit: {
+                        status: false,
+                        name: '',
+                        step: 1
+                    },
                     new: {
                         status: false,
                         count: 1,
@@ -324,16 +432,37 @@ export default {
                             status: false
                         }
                     },
-                    use: false
+                    use: {
+                        status: false,
+                        name: ''
+                    }
                 }
             },
-            form_data: {}
+            form_data: {},
+            class: {
+                form: {
+                    active: false,
+                    id: 0
+                }
+            },
+            forms: {
+                new: {
+                    inputs: [{
+                        token: '',
+                        user_id: 0,
+                        name: '',
+                        description: ''
+                    }]
+                }
+            },
+            teste: 'Eu gosto de ProgramAR'
         }
     },
     components: {},
     computed: {},
     beforeMount() {},
-    created() {},
+    created() {
+    },
     mounted() {
         this.get_all_forms()
     }

@@ -29,6 +29,12 @@ class PatternSeeder extends Seeder
             'updated_at' => Carbon::now()
         ]);
 
+        DB::table('status')->insert([
+            'name' => "Pendente",
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
         DB::table('occupations')->insert([
             'status_id' => 1,
             'occupation' => 'Padrão',
@@ -74,35 +80,28 @@ class PatternSeeder extends Seeder
 
         ]);
 
-        DB::table('icons')->insert([
-            'status_id' => 1,
-            'icon' => 'home-location-alt',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
-
         DB::table('forms')->insert([
             'status_id' => 1,
             'name' => 'Instalação',
-            'icon_id' => 1,
+            'description' => 'Descrição aleatórioa',
             'user_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
         DB::table('forms')->insert([
-            'status_id' => 1,
+            'status_id' => 2,
             'name' => 'Mudança de ponto',
-            'icon_id' => 1,
+            'description' => 'Descrição aleatórioa',
             'user_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
         DB::table('forms')->insert([
-            'status_id' => 1,
+            'status_id' => 3,
             'name' => 'MDU',
-            'icon_id' => 1,
+            'description' => 'Descrição aleatórioa',
             'user_id' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

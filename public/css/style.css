@@ -61,9 +61,9 @@ ul {
 
 /*   PLACEHOLDER   */
 ::-webkit-input-placeholder {
-    color: #33333380;
-    font-weight: 500;
-    font-size: 1.6rem;
+    color: #33333360;
+    font-weight: 700;
+    font-size: 1.4rem;
 }
 
 /*
@@ -101,8 +101,7 @@ ul {
 .container-main-web header {
     width: 100%;
     height: 10%;
-    border-bottom: 1px solid #cccccc99;
-    background-color: #fff;
+    background-color:#F3F3F8D;
 }
 
 .container-main-web main {
@@ -111,20 +110,81 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #F3F3F8;
 }
 
 .card-login-web {
-    width: 17vw;
-    height: 45vh;
+    width: 15vw;
     background-color: #fff;
+    border: 2px solid #cccccc80;
+    padding: 5vh 2vw;
+    border-radius: 10px;
+}
+
+.card-login-web form {
+    margin: 5vh 0 5vh 0;
+    padding: 0 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.card-login-web form input {
+    border: none;
+    border-bottom: 2px solid #cccccc40;
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 5px 5px;
+    transition: all ease-in-out .2s;
+    color: #132E7D;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.card-login-web form input:focus {
+    border-bottom-color: #132E7D;
+}
+
+.card-login-web form input[type=submit] {
+    background-color: #fff;
+    color: #FA8A0C;
     border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #FA8A0C;
+    padding: 10px;
+    transition: all ease-in-out .2s;
+}
+
+.card-login-web input[type=submit]:hover {
+    background-color: #FA8A0C;
+    color: #fff;
+}
+
+.welcome-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center
+}
+
+.welcome-logo h6 {
+    color: #444;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.welcome-logo img {
+    width: 7vw;
+    height: auto;
 }
 
 .container-main-web footer {
     width: 100%;
     height: 10%;
-    border-top: 1px solid #cccccc99;
-    background-color: #fff;
+    background-color: #F3F3F8;
 
 }
 
@@ -542,6 +602,9 @@ ul {
     background-color: #4AD09E;
 }
 
+.Pendente {
+    background-color: #62798A;
+}
 
 .Inativo {
     background-color: #FE7B82;
@@ -554,7 +617,6 @@ ul {
     border-radius: 10px;
     animation: expand .3s;
     overflow-y: auto;
-    padding: 0 0 4vh 0;
 }
 
 .close-btn {
@@ -565,6 +627,9 @@ ul {
     color: #777;
     padding: 10px;
     height: 5%;
+}
+
+.close-btn i {
     cursor: pointer;
 }
 
@@ -604,6 +669,7 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 6vh 0;
+    height: 70%;
 }
 
 .alert-msg {
@@ -696,4 +762,215 @@ ul {
 
 .new-btn:hover {
     background-color: #0a8dd3;
+}
+
+.new-form {
+    width: 30vw;
+    height: 45vh;
+    background-color: #F3F3F8;
+}
+
+.new-form h6 {
+    text-align: center;
+    font-size: 2.8rem;
+}
+
+.fields-form-new {
+    padding: 5vh 5vw;
+}
+
+.fields-form-new form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.fields-form-new form input[type=submit] {
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #4daee4;
+    cursor: pointer;
+    color: #fff;
+    transition: all ease-in-out .2s;
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.fields-form-new form input[type=submit]:hover {
+    background-color: #0a8dd3;
+    background-color: #0a8dd3;
+}
+
+.field-form-new {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 15px 10px;
+}
+
+.fields-form-new label {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.active_label {
+    color: #132e7d !important;
+    transition: all ease-in-out .1s !important;
+
+}
+
+.field-form-new input[type=text] {
+    font-size: 1.4rem;
+    border: none;
+    border-bottom: 2px solid #cccccc90;
+    padding: 2px 2px;
+    transition: all ease-in-out .2s;
+    background-color: transparent;
+}
+
+.field-form-new input[type=text]:focus {
+    border-bottom: 2px solid #132e7d;
+}
+
+.field_active {
+    background-color: #fff;
+    border-radius: 5px;
+    transition: all ease-in-out .2s;
+}
+
+.input-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-checkbox label{
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.edit-form {
+    width: 50vw;
+    height: 90vh;
+    background-color: #F3F3F8;
+    overflow: hidden;
+}
+
+.edit-form h6 {
+    text-align: center;
+}
+
+.container-edit-form {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    padding: 0 2vw;
+}
+
+.fields-edit-form {
+    border-right: 2px solid #cccccc50;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    height: 70vh;
+    overflow-y: auto;
+    padding: 2vh 0;
+}
+
+.fields-edit-form h6 {
+    font-size: 1.6rem;
+}
+
+.field-edit-form {
+    width: 75%;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 2vh 1vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field-edit-form span {
+    font-size: 1.8rem;
+}
+
+.field-edit-form input[type=date] {
+    border: none;
+    border-bottom: 1px solid #cccccc90;
+}
+
+.field-edit-form label {
+    font-size: 1.2rem;
+}
+
+.animation-opacity {
+    animation: opacity .3s forwards;
+}
+
+@keyframes opacity {
+    from {
+        opacity: .2;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.options-edit-form {
+    width: 25%;
+    background-color: #fff;
+    border: 2px solid #cccccc90;
+    border-radius: 10px;
+    height: 50vh;
+}
+
+.options-edit-form h6 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.options-edit-form nav {
+    margin: 2vh 0;
+}
+
+.options-edit-form ul li {
+    padding: 0 1vw;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+    color: #555;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.options-edit-form nav ul li:hover {
+    background-color: #cccccc30;
+}
+
+.options-edit-form nav ul li:hover> span {
+    color: #132e7d;
+}
+
+.options-edit-form nav ul li:hover> i {
+    color: #f08d28;
+}
+
+.options-edit-form i {
+    font-size: 1.6rem;
+}
+
+.options-edit-form ul li span {
+    padding: 0 0 .3vh 0;
 }

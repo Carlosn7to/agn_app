@@ -15,6 +15,6 @@ class Occupation extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'occupation_id');
+        return $this->belongsTo(User::class, 'occupation_id')->select('id', 'email', 'first_name', 'last_name');
     }
 }
