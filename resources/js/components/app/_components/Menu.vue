@@ -40,24 +40,6 @@
                                     <span>Novo agendamento</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fi fi-rr-search-alt"></i>
-                                    <span>Meus agendamentos</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fi fi-rr-calendar"></i>
-                                    <span>Agenda geral</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fi fi-rr-dashboard"></i>
-                                    <span>Plano de capacidade</span>
-                                </a>
-                            </li>
                         </ul>
                     </nav>
                 </div>

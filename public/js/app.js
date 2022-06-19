@@ -5512,24 +5512,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Menu",
   props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form', 'get_user', 'user_id'],
@@ -29260,17 +29242,11 @@ var render = function () {
                   _c("span", [_vm._v("Novo agendamento")]),
                 ]),
               ]),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _vm._m(4),
             ]),
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(5),
+        _vm._m(2),
         _vm._v(" "),
         _c("div", { staticClass: "list-menu" }, [
           _c("span", [_vm._v("Gerenciamento")]),
@@ -29288,7 +29264,7 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _vm._m(6),
+        _vm._m(3),
       ]),
     ]),
     _vm._v(" "),
@@ -29313,42 +29289,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "border-divisor" }, [
       _c("div", { staticClass: "item-divisor" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fi fi-rr-search-alt" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Meus agendamentos")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fi fi-rr-calendar" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Agenda geral")]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fi fi-rr-dashboard" }),
-        _vm._v(" "),
-        _c("span", [_vm._v("Plano de capacidade")]),
-      ]),
     ])
   },
   function () {
