@@ -5898,34 +5898,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
-  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id'],
+  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers'],
   methods: {
     modal_actions: function modal_actions(on, step, id, form_name) {
       if (on === 0) {
@@ -5940,8 +5915,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (step === 1) {
           this.modal.form.edit.status = true;
-          this.modal.form.edit.name = form_name;
-          this.get_form(id);
+          this.form_questions_answers(id);
         }
 
         if (step === 4) {
@@ -6038,6 +6012,24 @@ __webpack_require__.r(__webpack_exports__);
         return word[0].toUpperCase() + word.substring(1);
       }).join(" ");
       return words;
+    },
+    form_questions_answers: function form_questions_answers(id) {
+      var _this5 = this;
+
+      axios({
+        method: 'post',
+        url: this.get_form_questions_answers,
+        data: {
+          token: this.token,
+          hash: 'd41d8cd98f00b204e9800998ecf8427e',
+          user: 'system',
+          password: 'jF7s3o1oecRka2&ru^ovt',
+          form_id: id
+        }
+      }).then(function (res) {
+        _this5.forms.edit.data = res.data;
+        console.log(res.data);
+      })["catch"](function (error) {});
     }
   },
   data: function data() {
@@ -6084,6 +6076,9 @@ __webpack_require__.r(__webpack_exports__);
             name: '',
             description: ''
           }]
+        },
+        edit: {
+          data: {}
         }
       },
       teste: 'Eu gosto de ProgramAR'
@@ -30066,121 +30061,111 @@ var render = function () {
                       "div",
                       { staticClass: "fields-edit-form animation-opacity" },
                       [
-                        _c("h6", [
-                          _vm._v(
-                            "Formulário de " +
-                              _vm._s(
-                                _vm.string_sanitaze(_vm.modal.form.edit.name)
-                              )
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.form_data, function (data) {
+                        _vm._l(_vm.forms.edit.data, function (form) {
                           return [
-                            _c(
-                              "div",
-                              { staticClass: "field-edit-form" },
-                              [
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(_vm.string_sanitaze(data.question)) +
-                                      " "
-                                  ),
-                                  _c(
-                                    "b",
-                                    {
-                                      staticStyle: {
-                                        color: "var(--color-red)",
-                                      },
-                                    },
-                                    [_vm._v("*")]
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _vm._l(data.answers, function (an) {
-                                  return _c(
-                                    "div",
-                                    { staticClass: "input-selection-form" },
-                                    [
-                                      data.force === 1
-                                        ? [
-                                            data.type === "radio"
-                                              ? [
-                                                  _c("input", {
-                                                    attrs: {
-                                                      type: data.type,
-                                                      name: data.id,
-                                                      id: an.id,
-                                                      disabled: "",
-                                                    },
-                                                    domProps: { value: an.id },
-                                                  }),
-                                                ]
-                                              : _vm._e(),
-                                            _vm._v(" "),
-                                            data.type !== "radio"
-                                              ? [
-                                                  _c("input", {
-                                                    attrs: {
-                                                      type: data.type,
-                                                      name: data.id,
-                                                      id: an.id,
-                                                      disabled: "",
-                                                    },
-                                                  }),
-                                                ]
-                                              : _vm._e(),
-                                          ]
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      data.force === 0
-                                        ? [
-                                            _c("input", {
-                                              attrs: {
-                                                type: data.type,
-                                                name: data.id,
-                                                id: an.id,
-                                                disabled: "",
-                                              },
-                                              domProps: { value: an.id },
-                                            }),
-                                          ]
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      data.type === "radio"
-                                        ? [
-                                            _c(
-                                              "label",
-                                              { attrs: { for: "type" } },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(
-                                                    _vm.string_sanitaze(
-                                                      an.answer
-                                                    )
-                                                  )
+                            _c("h6", [
+                              _vm._v("Formulário de " + _vm._s(form.name)),
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(form.questions_answers, function (data) {
+                              return [
+                                _c(
+                                  "div",
+                                  { staticClass: "field-edit-form" },
+                                  [
+                                    _c("span", [
+                                      _vm._v(_vm._s(data.question) + " "),
+                                      _c(
+                                        "b",
+                                        {
+                                          staticStyle: {
+                                            color: "var(--color-red)",
+                                          },
+                                        },
+                                        [_vm._v("*")]
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._l(data.answers, function (an) {
+                                      return _c(
+                                        "div",
+                                        { staticClass: "input-selection-form" },
+                                        [
+                                          data.force === 1
+                                            ? [
+                                                data.type === "radio"
+                                                  ? [
+                                                      _c("input", {
+                                                        attrs: {
+                                                          type: data.type,
+                                                          name: data.id,
+                                                          id: an.id,
+                                                          disabled: "",
+                                                        },
+                                                        domProps: {
+                                                          value: an.id,
+                                                        },
+                                                      }),
+                                                    ]
+                                                  : _vm._e(),
+                                                _vm._v(" "),
+                                                data.type !== "radio"
+                                                  ? [
+                                                      _c("input", {
+                                                        attrs: {
+                                                          type: data.type,
+                                                          name: data.id,
+                                                          id: an.id,
+                                                          disabled: "",
+                                                        },
+                                                      }),
+                                                    ]
+                                                  : _vm._e(),
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          data.force === 0
+                                            ? [
+                                                _c("input", {
+                                                  attrs: {
+                                                    type: data.type,
+                                                    name: data.id,
+                                                    id: an.id,
+                                                    disabled: "",
+                                                  },
+                                                  domProps: { value: an.id },
+                                                }),
+                                              ]
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          data.type === "radio"
+                                            ? [
+                                                _c(
+                                                  "label",
+                                                  { attrs: { for: "type" } },
+                                                  [_vm._v(_vm._s(an.answer))]
                                                 ),
                                               ]
-                                            ),
-                                          ]
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      data.type !== "radio"
-                                        ? [
-                                            _c(
-                                              "label",
-                                              { attrs: { for: "type" } },
-                                              [_vm._v(_vm._s(an.answer))]
-                                            ),
-                                          ]
-                                        : _vm._e(),
-                                    ],
-                                    2
-                                  )
-                                }),
-                              ],
-                              2
-                            ),
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          data.type !== "radio"
+                                            ? [
+                                                _c(
+                                                  "label",
+                                                  { attrs: { for: "type" } },
+                                                  [_vm._v(_vm._s(an.answer))]
+                                                ),
+                                              ]
+                                            : _vm._e(),
+                                        ],
+                                        2
+                                      )
+                                    }),
+                                  ],
+                                  2
+                                ),
+                              ]
+                            }),
                           ]
                         }),
                       ],
@@ -30190,17 +30175,24 @@ var render = function () {
                 _vm._v(" "),
                 this.modal.form.edit.step === 2
                   ? _c("div", { staticClass: "fields-edit-form" }, [
-                      _c("div", { staticClass: "animation-opacity" }, [
-                        _c("div", { staticClass: "field-option-form" }, [
-                          _vm._v(
-                            "\n                            Nome antigo: " +
-                              _vm._s(
-                                _vm.string_sanitaze(_vm.modal.form.edit.name)
-                              ) +
-                              "\n                        "
-                          ),
-                        ]),
-                      ]),
+                      _c(
+                        "div",
+                        { staticClass: "animation-opacity" },
+                        _vm._l(_vm.forms.edit.data, function (form) {
+                          return _c(
+                            "div",
+                            { staticClass: "field-option-form" },
+                            [
+                              _vm._v(
+                                "\n                            Nome antigo: " +
+                                  _vm._s(_vm.string_sanitaze(form.name)) +
+                                  "\n                        "
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -30209,36 +30201,6 @@ var render = function () {
                       _c("div", { staticClass: "animation-opacity" }, [
                         _vm._v(
                           "\n                        Estou editando os setores\n                    "
-                        ),
-                      ]),
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                this.modal.form.edit.step === 4
-                  ? _c("div", { staticClass: "fields-edit-form" }, [
-                      _c("div", { staticClass: "animation-opacity" }, [
-                        _vm._v(
-                          "\n                        Estou adicionando uma nova pergunta\n                    "
-                        ),
-                      ]),
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                this.modal.form.edit.step === 5
-                  ? _c("div", { staticClass: "fields-edit-form" }, [
-                      _c("div", { staticClass: "animation-opacity" }, [
-                        _vm._v(
-                          "\n                        Estou editando uma pergunta\n                    "
-                        ),
-                      ]),
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                this.modal.form.edit.step === 6
-                  ? _c("div", { staticClass: "fields-edit-form" }, [
-                      _c("div", { staticClass: "animation-opacity" }, [
-                        _vm._v(
-                          "\n                        Estou excluindo uma pergunta\n                    "
                         ),
                       ]),
                     ])
@@ -30263,7 +30225,7 @@ var render = function () {
                         [
                           _c("i", { staticClass: "fi fi-rr-form" }),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Formulário")]),
+                          _c("span", [_vm._v("Visualizar formulário")]),
                         ]
                       ),
                       _vm._v(" "),
@@ -30277,9 +30239,9 @@ var render = function () {
                           },
                         },
                         [
-                          _c("i", { staticClass: "fi fi-rr-edit" }),
+                          _c("i", { staticClass: "fi fi-rr-settings" }),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Título")]),
+                          _c("span", [_vm._v("Configurações gerais")]),
                         ]
                       ),
                       _vm._v(" "),
@@ -30293,57 +30255,9 @@ var render = function () {
                           },
                         },
                         [
-                          _c("i", { staticClass: "fi fi-rr-users-alt" }),
+                          _c("i", { staticClass: "fi fi-rr-settings-sliders" }),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Setores")]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          on: {
-                            click: function ($event) {
-                              return _vm.modal_form_edit(4)
-                            },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "fi fi-rr-apps-add" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Nova pergunta")]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          on: {
-                            click: function ($event) {
-                              return _vm.modal_form_edit(5)
-                            },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "fi fi-rr-apps-sort" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Editar pergunta")]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          on: {
-                            click: function ($event) {
-                              return _vm.modal_form_edit(6)
-                            },
-                          },
-                        },
-                        [
-                          _c("i", { staticClass: "fi fi-rr-apps-delete" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Excluir perguntas")]),
+                          _c("span", [_vm._v("Configurar perguntas")]),
                         ]
                       ),
                     ]),
@@ -30589,6 +30503,7 @@ var render = function () {
               name: "email",
               id: "email",
               placeholder: "Email",
+              required: "",
             },
           }),
           _vm._v(" "),
@@ -30598,6 +30513,7 @@ var render = function () {
               name: "password",
               id: "password",
               placeholder: "Senha",
+              required: "",
             },
           }),
           _vm._v(" "),

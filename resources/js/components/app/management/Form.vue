@@ -178,57 +178,44 @@
                 <h6>Editar formulário</h6>
                 <div class="container-edit-form">
                     <div class="fields-edit-form animation-opacity" v-if="this.modal.form.edit.step === 1">
-                        <h6>Formulário de {{ string_sanitaze(modal.form.edit.name) }}</h6>
-                        <template v-for="data in form_data">
-                            <div class="field-edit-form">
-                                   <span>{{ string_sanitaze(data.question) }} <b style="color: var(--color-red)">*</b></span>
-                                <div class="input-selection-form" v-for="an in data.answers">
-                                    <template v-if="data.force === 1">
-                                        <template v-if="data.type === 'radio'">
+                        <template v-for="form in forms.edit.data">
+                        <h6>Formulário de {{ form.name }}</h6>
+                            <template v-for="data in form.questions_answers">
+                                <div class="field-edit-form">
+                                       <span>{{ data.question }} <b style="color: var(--color-red)">*</b></span>
+                                    <div class="input-selection-form" v-for="an in data.answers">
+                                        <template v-if="data.force === 1">
+                                            <template v-if="data.type === 'radio'">
+                                                <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" disabled>
+                                            </template>
+                                            <template v-if="data.type !== 'radio'">
+                                                <input :type="data.type" :name="data.id" :id="an.id" disabled>
+                                            </template>
+                                        </template>
+                                        <template v-if="data.force === 0">
                                             <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" disabled>
                                         </template>
-                                        <template v-if="data.type !== 'radio'">
-                                            <input :type="data.type" :name="data.id" :id="an.id" disabled>
+                                        <template v-if="data.type === 'radio'">
+                                            <label for="type">{{ an.answer }}</label>
                                         </template>
-                                    </template>
-                                    <template v-if="data.force === 0">
-                                        <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" disabled>
-                                    </template>
-                                    <template v-if="data.type === 'radio'">
-                                        <label for="type">{{ string_sanitaze(an.answer) }}</label>
-                                    </template>
-                                    <template v-if="data.type !== 'radio'">
-                                        <label for="type">{{ an.answer }}</label>
-                                    </template>
+                                        <template v-if="data.type !== 'radio'">
+                                            <label for="type">{{ an.answer }}</label>
+                                        </template>
+                                    </div>
                                 </div>
-                            </div>
+                            </template>
                         </template>
                     </div>
                     <div class="fields-edit-form" v-if="this.modal.form.edit.step === 2">
                         <div class="animation-opacity">
-                            <div class="field-option-form">
-                                Nome antigo: {{ string_sanitaze(modal.form.edit.name) }}
+                            <div class="field-option-form" v-for="form in forms.edit.data">
+                                Nome antigo: {{ string_sanitaze(form.name) }}
                             </div>
                         </div>
                     </div>
                     <div class="fields-edit-form" v-if="this.modal.form.edit.step === 3">
                         <div class="animation-opacity">
                             Estou editando os setores
-                        </div>
-                    </div>
-                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 4">
-                        <div class="animation-opacity">
-                            Estou adicionando uma nova pergunta
-                        </div>
-                    </div>
-                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 5">
-                        <div class="animation-opacity">
-                            Estou editando uma pergunta
-                        </div>
-                    </div>
-                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 6">
-                        <div class="animation-opacity">
-                            Estou excluindo uma pergunta
                         </div>
                     </div>
                     <div class="options-edit-form">
@@ -242,27 +229,15 @@
                             <ul>
                                 <li @click="modal_form_edit(1)">
                                     <i class="fi fi-rr-form"></i>
-                                    <span>Formulário</span>
+                                    <span>Visualizar formulário</span>
                                 </li>
                                 <li @click="modal_form_edit(2)">
-                                    <i class="fi fi-rr-edit"></i>
-                                    <span>Título</span>
+                                    <i class="fi fi-rr-settings"></i>
+                                <span>Configurações gerais</span>
                                 </li>
                                 <li @click="modal_form_edit(3)">
-                                    <i class="fi fi-rr-users-alt"></i>
-                                    <span>Setores</span>
-                                </li>
-                                <li @click="modal_form_edit(4)">
-                                    <i class="fi fi-rr-apps-add"></i>
-                                    <span>Nova pergunta</span>
-                                </li>
-                                <li @click="modal_form_edit(5)">
-                                    <i class="fi fi-rr-apps-sort"></i>
-                                    <span>Editar pergunta</span>
-                                </li>
-                                <li @click="modal_form_edit(6)">
-                                    <i class="fi fi-rr-apps-delete"></i>
-                                    <span>Excluir perguntas</span>
+                                    <i class="fi fi-rr-settings-sliders"></i>
+                                    <span>Configurar perguntas</span>
                                 </li>
                             </ul>
                         </nav>
@@ -276,7 +251,7 @@
 <script>
 export default {
     name: "Form",
-    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id'],
+    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers'],
     methods: {
         modal_actions(on, step, id, form_name){
 
@@ -292,8 +267,7 @@ export default {
 
                 if(step === 1) {
                     this.modal.form.edit.status = true
-                    this.modal.form.edit.name = form_name
-                    this.get_form(id)
+                    this.form_questions_answers(id)
                 }
 
                 if(step === 4) {
@@ -407,6 +381,27 @@ export default {
                         }).join(" ");
 
             return words
+        },
+        form_questions_answers(id){
+
+            axios
+            ({
+                method: 'post',
+                url: this.get_form_questions_answers,
+                data: {
+                    token: this.token,
+                    hash: 'd41d8cd98f00b204e9800998ecf8427e',
+                    user: 'system',
+                    password: 'jF7s3o1oecRka2&ru^ovt',
+                    form_id: id,
+                }
+            })
+                .then((res) => {
+                    this.forms.edit.data = res.data
+                    console.log(res.data)
+                })
+                .catch((error) => {
+                })
         }
     },
     data () {
@@ -453,6 +448,9 @@ export default {
                         name: '',
                         description: ''
                     }]
+                },
+                edit: {
+                    data: {}
                 }
             },
             teste: 'Eu gosto de ProgramAR'

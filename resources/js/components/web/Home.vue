@@ -10,8 +10,8 @@
                 </div>
                 <form :action="action_login" method="POST">
                     <input type="hidden" name="_token" :value="token">
-                    <input type="email" name="email" id="email" placeholder="Email">
-                    <input type="password" name="password" id="password" placeholder="Senha">
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="password" name="password" id="password" placeholder="Senha" required>
                     <input type="submit" value="ENTRAR">
                 </form>
                 <div class="border-divisor">

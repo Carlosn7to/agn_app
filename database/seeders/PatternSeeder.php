@@ -35,6 +35,16 @@ class PatternSeeder extends Seeder
             'updated_at' => Carbon::now()
         ]);
 
+        DB::table('hash_apis')->insert([
+            'id' => 1,
+            'status_id' => 1,
+            'hash' => 'd41d8cd98f00b204e9800998ecf8427e',
+            'user'=> 'system',
+            'password' => bcrypt('jF7s3o1oecRka2&ru^ovt'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
         DB::table('occupations')->insert([
             'status_id' => 1,
             'occupation' => 'Padrão',

@@ -24,6 +24,12 @@ Route::post('formularios/update/{action?}/{id?}', [\App\Http\Controllers\FormsCo
 Route::post('formularios/new', [\App\Http\Controllers\FormsController::class,'new'])->name('api.form.new');
 Route::get('formularios/all', [\App\Http\Controllers\FormsController::class, 'all_forms'])->name('api.form.all');
 
+Route::middleware(\App\Http\Middleware\VerifyHash::class)->prefix('formularios')->group(function() {
+
+    Route::post('perguntas/escolhas', [\App\Http\Controllers\FormsController::class, 'get_form_questions_answers'])->name('api.form.questions.answers');
+
+});
+
 Route::get('formularios', [\App\Http\Controllers\FormsController::class, 'index'])->name('api.form.list');
 
 Route::get('formularios/{id?}', [\App\Http\Controllers\FormsController::class, 'questions_index'])->name('api.questions.list');

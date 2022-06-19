@@ -11,6 +11,7 @@
         get_questions="{{ route('api.questions.list') }}"
         token="{{ @csrf_token() }}"
         user_id="{{ $_SESSION['id'] }}"
+        get_form_questions_answers="{{ route('api.form.questions.answers') }}"
     >
 
     </management-form-app-component>

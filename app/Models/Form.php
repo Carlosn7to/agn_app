@@ -19,6 +19,12 @@ class Form extends Model
         return $this->hasMany(FormQuestion::class, 'form_id');
     }
 
+    public function questions_answers()
+    {
+        return $this->hasMany(FormQuestion::class, 'form_id')->with('answers');
+    }
+
+
     public function icons()
     {
         return $this->hasOne(Icon::class, 'id');

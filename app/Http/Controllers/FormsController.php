@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Form;
 use App\Models\FormQuestion;
+use App\Models\HashApi;
 use Illuminate\Http\Request;
 
 class FormsController extends Controller
@@ -60,6 +61,15 @@ class FormsController extends Controller
         $form = $form->update(['status_id' => $action]);
 
         return "Formulário atualizado com sucesso.";
+
+    }
+
+    public function get_form_questions_answers(Request $request)
+    {
+
+       $form = Form::where('id', $request->input('form_id'))->with('questions_answers')->get();
+
+       return response($form, 200);
 
     }
 
