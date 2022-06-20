@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('forms_answers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('status_id');
-            $table->string('answer');
+            $table->string('answer')->default(' ')->nullable();
             $table->unsignedBigInteger('form_id');
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('user_id');

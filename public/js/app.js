@@ -5613,6 +5613,7 @@ __webpack_require__.r(__webpack_exports__);
       if (status === 1) {
         this.form.modal = true;
         axios.get(this.get_questions + '/' + id).then(function (res) {
+          console.log(res.data);
           _this.form_data = res.data;
         })["catch"](function (error) {});
       }
@@ -6154,9 +6155,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
-  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status', 'edit_question'],
+  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status', 'edit_question', 'delete_answer'],
   methods: {
     modal_actions: function modal_actions(on, step, id, form_name) {
       if (on === 0) {
@@ -6189,9 +6215,15 @@ __webpack_require__.r(__webpack_exports__);
       this.modal.form.edit.step = step;
       this.form_questions_answers(this.modal.form.edit.form_id);
       this.modal.form.edit.id = id;
+      this.modal.form.edit.chooses = 1;
 
       if (action === 1) {
         this.questions_answers(id);
+      }
+
+      if (step === 2) {
+        this.modal.form.edit.step = 7;
+        this.modal.form.edit.chooses = 2;
       }
     },
     form_action: function form_action(action, id) {
@@ -6222,7 +6254,6 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.get_forms_all).then(function (res) {
         _this2.data = res.data;
-        console.log(res.data);
       })["catch"](function (error) {});
     },
     get_form: function get_form(id) {
@@ -6267,8 +6298,6 @@ __webpack_require__.r(__webpack_exports__);
           description: this.forms["new"].inputs.description
         }
       }).then(function (res) {
-        console.log(res);
-
         _this4.get_all_forms();
 
         _this4.modal.status = false;
@@ -6336,18 +6365,16 @@ __webpack_require__.r(__webpack_exports__);
           force: this.forms["new"].questions.inputs.force,
           type: this.forms["new"].questions.inputs.type,
           form_id: id,
-          user_id: this.user_id
+          user_id: this.user_id,
+          type_answer: this.forms["new"].questions.inputs.radio_answer
         }
       }).then(function (res) {
         _this7.form_questions_answers(id);
 
         _this7.modal.form.edit.step = 1;
-        _this7.forms["new"].questions.inputs.force = 0, _this7.forms["new"].questions.inputs.type = '', _this7.forms["new"].questions.inputs.question = '';
       })["catch"](function (error) {});
     },
-    alertar: function alertar(n) {
-      console.log(n);
-    },
+    alertar: function alertar(n) {},
     edit_name_form: function edit_name_form(id) {
       var _this8 = this;
 
@@ -6405,9 +6432,31 @@ __webpack_require__.r(__webpack_exports__);
           type: this.forms.edit.questions.inputs.type
         }
       }).then(function (res) {
+        console.log(res.data);
+
         _this10.questions_answers(id);
 
         _this10.modal.form.edit.step = 7;
+      })["catch"](function (error) {});
+    },
+    delete_answers: function delete_answers(id, status, id_form, id_question) {
+      var _this11 = this;
+
+      axios({
+        method: 'post',
+        url: this.delete_answer,
+        data: {
+          token: this.token,
+          hash: this.access.hash,
+          user: this.access.user,
+          password: this.access.password,
+          answer_id: id,
+          status: status
+        }
+      }).then(function (res) {
+        _this11.questions_answers(id_question);
+
+        _this11.modal.form.edit.step = 7;
       })["catch"](function (error) {});
     }
   },
@@ -6424,7 +6473,8 @@ __webpack_require__.r(__webpack_exports__);
             name: '',
             id: 0,
             form_id: 0,
-            step: 1
+            step: 1,
+            chooses: 1
           },
           new_question: {
             status: false,
@@ -6466,6 +6516,7 @@ __webpack_require__.r(__webpack_exports__);
               status_id: 1,
               force: 0,
               type: '',
+              radio_answer: '',
               form_id: 0,
               user_id: this.user_id
             }]
@@ -30974,6 +31025,7 @@ var render = function () {
                                                     type: "radio",
                                                     name: "type",
                                                     value: "text",
+                                                    id: "text",
                                                     required: "",
                                                   },
                                                   domProps: {
@@ -31002,7 +31054,7 @@ var render = function () {
                                                 _vm._v(" "),
                                                 _c(
                                                   "label",
-                                                  { attrs: { for: "type" } },
+                                                  { attrs: { for: "text" } },
                                                   [_vm._v("Texto")]
                                                 ),
                                               ]
@@ -31031,6 +31083,7 @@ var render = function () {
                                                     type: "radio",
                                                     name: "type",
                                                     value: "date",
+                                                    id: "date",
                                                     required: "",
                                                   },
                                                   domProps: {
@@ -31059,12 +31112,139 @@ var render = function () {
                                                 _vm._v(" "),
                                                 _c(
                                                   "label",
-                                                  { attrs: { for: "type" } },
+                                                  { attrs: { for: "date" } },
                                                   [_vm._v("Data")]
                                                 ),
                                               ]
                                             ),
-                                          ]
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "radio-new-question",
+                                              },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.forms.new.questions
+                                                          .inputs.type,
+                                                      expression:
+                                                        "forms.new.questions.inputs.type",
+                                                    },
+                                                  ],
+                                                  attrs: {
+                                                    type: "radio",
+                                                    name: "type",
+                                                    value: "radio",
+                                                    id: "radio",
+                                                    required: "",
+                                                  },
+                                                  domProps: {
+                                                    checked: _vm._q(
+                                                      _vm.forms.new.questions
+                                                        .inputs.type,
+                                                      "radio"
+                                                    ),
+                                                  },
+                                                  on: {
+                                                    click: function ($event) {
+                                                      return _vm.add_questions(
+                                                        1
+                                                      )
+                                                    },
+                                                    change: function ($event) {
+                                                      return _vm.$set(
+                                                        _vm.forms.new.questions
+                                                          .inputs,
+                                                        "type",
+                                                        "radio"
+                                                      )
+                                                    },
+                                                  },
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  { attrs: { for: "radio" } },
+                                                  [_vm._v("Múltiplas escolhas")]
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm.forms.new.questions.inputs
+                                              .type === "radio"
+                                              ? [
+                                                  _vm._m(15, true),
+                                                  _vm._v(" "),
+                                                  _c("div", [
+                                                    _c(
+                                                      "label",
+                                                      {
+                                                        attrs: { for: "type" },
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Escolha inicial: "
+                                                        ),
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value:
+                                                            _vm.forms.new
+                                                              .questions.inputs
+                                                              .radio_answer,
+                                                          expression:
+                                                            "forms.new.questions.inputs.radio_answer",
+                                                        },
+                                                      ],
+                                                      staticStyle: {
+                                                        width: "50%",
+                                                      },
+                                                      attrs: {
+                                                        type: "text",
+                                                        name: "radio_answer",
+                                                        required: "",
+                                                      },
+                                                      domProps: {
+                                                        value:
+                                                          _vm.forms.new
+                                                            .questions.inputs
+                                                            .radio_answer,
+                                                      },
+                                                      on: {
+                                                        input: function (
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.$set(
+                                                            _vm.forms.new
+                                                              .questions.inputs,
+                                                            "radio_answer",
+                                                            $event.target.value
+                                                          )
+                                                        },
+                                                      },
+                                                    }),
+                                                  ]),
+                                                ]
+                                              : _vm._e(),
+                                          ],
+                                          2
                                         ),
                                       ]
                                     ),
@@ -31320,377 +31500,568 @@ var render = function () {
                   : _vm._e(),
                 _vm._v(" "),
                 this.modal.form.edit.step === 7
-                  ? _c("div", { staticClass: "fields-edit-form" }, [
-                      _c("div", { staticClass: "back-next" }, [
-                        _c("i", {
-                          staticClass: "fi fi-rr-arrow-small-left",
-                          on: {
-                            click: function ($event) {
-                              return _vm.modal_form_edit(6)
-                            },
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Editar campos")]),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "field-edit-form animation-left" },
-                        [
-                          _vm.forms.edit.questions.data.force === 1
-                            ? [
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.forms.edit.questions.data.question
-                                    ) + " "
-                                  ),
-                                  _c(
-                                    "b",
-                                    {
-                                      staticStyle: {
-                                        color: "var(--color-red)",
-                                      },
-                                    },
-                                    [_vm._v("*")]
-                                  ),
-                                ]),
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.forms.edit.questions.data.force === 0
-                            ? [
-                                _c("span", [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.forms.edit.questions.data.question
-                                    )
-                                  ),
-                                ]),
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._l(
-                            _vm.forms.edit.questions.data.answers,
-                            function (an) {
-                              return _c(
-                                "div",
-                                { staticClass: "input-selection-form" },
-                                [
-                                  _vm.forms.edit.questions.data.type === "radio"
-                                    ? [
-                                        _c("input", {
-                                          attrs: {
-                                            type: _vm.forms.edit.questions.data
-                                              .type,
-                                            name: _vm.forms.edit.questions.data
-                                              .id,
-                                            id: an.id,
-                                            disabled: "",
-                                          },
-                                          domProps: { value: an.id },
-                                        }),
-                                      ]
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.forms.edit.questions.data.type !== "radio"
-                                    ? [
-                                        _c("input", {
-                                          attrs: {
-                                            type: _vm.forms.edit.questions.data
-                                              .type,
-                                            name: _vm.forms.edit.questions.data
-                                              .id,
-                                            id: an.id,
-                                            disabled: "",
-                                          },
-                                        }),
-                                      ]
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.forms.edit.questions.data.force === 0
-                                    ? [
-                                        _c("input", {
-                                          attrs: {
-                                            type: _vm.forms.edit.questions.data
-                                              .type,
-                                            name: _vm.forms.edit.questions.data
-                                              .id,
-                                            id: an.id,
-                                            disabled: "",
-                                          },
-                                          domProps: { value: an.id },
-                                        }),
-                                      ]
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.forms.edit.questions.data.type === "radio"
-                                    ? [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "type" } },
-                                          [_vm._v(_vm._s(an.answer))]
-                                        ),
-                                      ]
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.forms.edit.questions.data.type !== "radio"
-                                    ? [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "type" } },
-                                          [_vm._v(_vm._s(an.answer))]
-                                        ),
-                                      ]
-                                    : _vm._e(),
-                                ],
-                                2
-                              )
-                            }
-                          ),
-                        ],
-                        2
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "options-main-edit inputs-li animation-left",
-                        },
-                        [
-                          _c(
-                            "form",
-                            {
-                              attrs: { action: "#", id: "edit_question" },
-                              on: {
-                                submit: function ($event) {
-                                  $event.preventDefault()
-                                  return _vm.edit_data_questions(
-                                    _vm.forms.edit.questions.data.id
-                                  )
-                                },
+                  ? _c(
+                      "div",
+                      { staticClass: "fields-edit-form" },
+                      [
+                        _c("div", { staticClass: "back-next" }, [
+                          _c("i", {
+                            staticClass: "fi fi-rr-arrow-small-left",
+                            on: {
+                              click: function ($event) {
+                                return _vm.modal_form_edit(6)
                               },
                             },
-                            [
-                              _c("nav", [
-                                _c(
-                                  "ul",
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Editar campos")]),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "field-edit-form animation-left",
+                            staticStyle: {
+                              "max-height": "14vh",
+                              "overflow-y": "auto",
+                            },
+                          },
+                          [
+                            _vm.forms.edit.questions.data.force === 1
+                              ? [
+                                  _c("span", [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.forms.edit.questions.data.question
+                                      ) + " "
+                                    ),
+                                    _c(
+                                      "b",
+                                      {
+                                        staticStyle: {
+                                          color: "var(--color-red)",
+                                        },
+                                      },
+                                      [_vm._v("*")]
+                                    ),
+                                  ]),
+                                ]
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.forms.edit.questions.data.force === 0
+                              ? [
+                                  _c("span", [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.forms.edit.questions.data.question
+                                      )
+                                    ),
+                                  ]),
+                                ]
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.forms.edit.questions.data.answers,
+                              function (an) {
+                                return _c(
+                                  "div",
+                                  { staticClass: "input-selection-form" },
                                   [
-                                    _c(
-                                      "li",
-                                      {
-                                        staticStyle: {
-                                          "justify-content": "left",
-                                        },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.alertar(1)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _vm._m(15),
-                                        _vm._v(" "),
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value:
-                                                _vm.forms.edit.questions.inputs
-                                                  .question,
-                                              expression:
-                                                "forms.edit.questions.inputs.question",
+                                    _vm.forms.edit.questions.data.type ===
+                                    "radio"
+                                      ? [
+                                          _c("input", {
+                                            attrs: {
+                                              type: _vm.forms.edit.questions
+                                                .data.type,
+                                              name: _vm.forms.edit.questions
+                                                .data.id,
+                                              id: an.id,
+                                              disabled: "",
                                             },
-                                          ],
-                                          attrs: {
-                                            type: "text",
-                                            name: "question",
-                                            id: "question",
-                                            required: "",
-                                          },
-                                          domProps: {
-                                            value:
-                                              _vm.forms.edit.questions.inputs
-                                                .question,
-                                          },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                _vm.forms.edit.questions.inputs,
-                                                "question",
-                                                $event.target.value
-                                              )
-                                            },
-                                          },
-                                        }),
-                                      ]
-                                    ),
+                                            domProps: { value: an.id },
+                                          }),
+                                        ]
+                                      : _vm._e(),
                                     _vm._v(" "),
-                                    _c(
-                                      "li",
-                                      {
-                                        staticStyle: {
-                                          "justify-content": "left",
-                                          "flex-direction": "column",
-                                          "align-items": "initial",
-                                          padding: "5px 20px",
-                                          gap: ".5rem",
-                                        },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.alertar(1)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _vm._m(16),
-                                        _vm._v(" "),
-                                        _c("div", [
+                                    _vm.forms.edit.questions.data.type !==
+                                    "radio"
+                                      ? [
                                           _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.forms.edit.questions
-                                                    .inputs.type,
-                                                expression:
-                                                  "forms.edit.questions.inputs.type",
-                                              },
-                                            ],
                                             attrs: {
-                                              type: "radio",
-                                              name: "type",
-                                              id: "text",
-                                              value: "text",
-                                              required: "",
-                                            },
-                                            domProps: {
-                                              checked: _vm._q(
-                                                _vm.forms.edit.questions.inputs
-                                                  .type,
-                                                "text"
-                                              ),
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                return _vm.$set(
-                                                  _vm.forms.edit.questions
-                                                    .inputs,
-                                                  "type",
-                                                  "text"
-                                                )
-                                              },
+                                              type: _vm.forms.edit.questions
+                                                .data.type,
+                                              name: _vm.forms.edit.questions
+                                                .data.id,
+                                              id: an.id,
+                                              disabled: "",
                                             },
                                           }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "text" } },
-                                            [_vm._v("Texto")]
-                                          ),
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("div", [
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.forms.edit.questions.data.force === 0
+                                      ? [
                                           _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.forms.edit.questions
-                                                    .inputs.type,
-                                                expression:
-                                                  "forms.edit.questions.inputs.type",
-                                              },
-                                            ],
                                             attrs: {
-                                              type: "radio",
-                                              name: "type",
-                                              id: "date",
-                                              value: "date",
+                                              type: _vm.forms.edit.questions
+                                                .data.type,
+                                              name: _vm.forms.edit.questions
+                                                .data.id,
+                                              id: an.id,
+                                              disabled: "",
                                             },
-                                            domProps: {
-                                              checked: _vm._q(
-                                                _vm.forms.edit.questions.inputs
-                                                  .type,
-                                                "date"
-                                              ),
-                                            },
-                                            on: {
-                                              change: function ($event) {
-                                                return _vm.$set(
-                                                  _vm.forms.edit.questions
-                                                    .inputs,
-                                                  "type",
-                                                  "date"
-                                                )
-                                              },
-                                            },
+                                            domProps: { value: an.id },
                                           }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "label",
-                                            { attrs: { for: "date" } },
-                                            [_vm._v("Data")]
-                                          ),
-                                        ]),
-                                      ]
-                                    ),
+                                        ]
+                                      : _vm._e(),
                                     _vm._v(" "),
                                     _vm.forms.edit.questions.data.type ===
                                     "radio"
                                       ? [
                                           _c(
-                                            "li",
-                                            {
-                                              staticStyle: {
-                                                cursor: "pointer",
-                                              },
-                                              on: {
-                                                click: function ($event) {
-                                                  return _vm.alertar(1)
-                                                },
-                                              },
-                                            },
-                                            [
-                                              _c("span", [
-                                                _vm._v("Adicionar escolhas"),
-                                              ]),
-                                            ]
+                                            "label",
+                                            { attrs: { for: "type" } },
+                                            [_vm._v(_vm._s(an.answer))]
+                                          ),
+                                        ]
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.forms.edit.questions.data.type !==
+                                    "radio"
+                                      ? [
+                                          _c(
+                                            "label",
+                                            { attrs: { for: "type" } },
+                                            [_vm._v(_vm._s(an.answer))]
                                           ),
                                         ]
                                       : _vm._e(),
                                   ],
                                   2
+                                )
+                              }
+                            ),
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _vm.modal.form.edit.chooses === 1
+                          ? [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "options-main-edit inputs-li animation-left",
+                                },
+                                [
+                                  _c(
+                                    "form",
+                                    {
+                                      attrs: {
+                                        action: "#",
+                                        id: "edit_question",
+                                      },
+                                      on: {
+                                        submit: function ($event) {
+                                          $event.preventDefault()
+                                          return _vm.edit_data_questions(
+                                            _vm.forms.edit.questions.data.id
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("nav", [
+                                        _c(
+                                          "ul",
+                                          [
+                                            _c(
+                                              "li",
+                                              {
+                                                staticStyle: {
+                                                  "justify-content": "left",
+                                                },
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.alertar(1)
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _vm._m(16),
+                                                _vm._v(" "),
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.forms.edit.questions
+                                                          .inputs.question,
+                                                      expression:
+                                                        "forms.edit.questions.inputs.question",
+                                                    },
+                                                  ],
+                                                  attrs: {
+                                                    type: "text",
+                                                    name: "question",
+                                                    id: "question",
+                                                    required: "",
+                                                  },
+                                                  domProps: {
+                                                    value:
+                                                      _vm.forms.edit.questions
+                                                        .inputs.question,
+                                                  },
+                                                  on: {
+                                                    input: function ($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.forms.edit.questions
+                                                          .inputs,
+                                                        "question",
+                                                        $event.target.value
+                                                      )
+                                                    },
+                                                  },
+                                                }),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm.forms.edit.questions.data
+                                              .type !== "radio"
+                                              ? [
+                                                  _c(
+                                                    "li",
+                                                    {
+                                                      staticStyle: {
+                                                        "justify-content":
+                                                          "left",
+                                                        "flex-direction":
+                                                          "column",
+                                                        "align-items":
+                                                          "initial",
+                                                        padding: "5px 20px",
+                                                        gap: ".5rem",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.alertar(1)
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._m(17),
+                                                      _vm._v(" "),
+                                                      _c("div", [
+                                                        _c("input", {
+                                                          directives: [
+                                                            {
+                                                              name: "model",
+                                                              rawName:
+                                                                "v-model",
+                                                              value:
+                                                                _vm.forms.edit
+                                                                  .questions
+                                                                  .inputs.type,
+                                                              expression:
+                                                                "forms.edit.questions.inputs.type",
+                                                            },
+                                                          ],
+                                                          attrs: {
+                                                            type: "radio",
+                                                            name: "type",
+                                                            id: "text",
+                                                            value: "text",
+                                                            required: "",
+                                                          },
+                                                          domProps: {
+                                                            checked: _vm._q(
+                                                              _vm.forms.edit
+                                                                .questions
+                                                                .inputs.type,
+                                                              "text"
+                                                            ),
+                                                          },
+                                                          on: {
+                                                            change: function (
+                                                              $event
+                                                            ) {
+                                                              return _vm.$set(
+                                                                _vm.forms.edit
+                                                                  .questions
+                                                                  .inputs,
+                                                                "type",
+                                                                "text"
+                                                              )
+                                                            },
+                                                          },
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            attrs: {
+                                                              for: "text",
+                                                            },
+                                                          },
+                                                          [_vm._v("Texto")]
+                                                        ),
+                                                      ]),
+                                                      _vm._v(" "),
+                                                      _c("div", [
+                                                        _c("input", {
+                                                          directives: [
+                                                            {
+                                                              name: "model",
+                                                              rawName:
+                                                                "v-model",
+                                                              value:
+                                                                _vm.forms.edit
+                                                                  .questions
+                                                                  .inputs.type,
+                                                              expression:
+                                                                "forms.edit.questions.inputs.type",
+                                                            },
+                                                          ],
+                                                          attrs: {
+                                                            type: "radio",
+                                                            name: "type",
+                                                            id: "date",
+                                                            value: "date",
+                                                          },
+                                                          domProps: {
+                                                            checked: _vm._q(
+                                                              _vm.forms.edit
+                                                                .questions
+                                                                .inputs.type,
+                                                              "date"
+                                                            ),
+                                                          },
+                                                          on: {
+                                                            change: function (
+                                                              $event
+                                                            ) {
+                                                              return _vm.$set(
+                                                                _vm.forms.edit
+                                                                  .questions
+                                                                  .inputs,
+                                                                "type",
+                                                                "date"
+                                                              )
+                                                            },
+                                                          },
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            attrs: {
+                                                              for: "date",
+                                                            },
+                                                          },
+                                                          [_vm._v("Data")]
+                                                        ),
+                                                      ]),
+                                                    ]
+                                                  ),
+                                                ]
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            _vm.forms.edit.questions.data
+                                              .type === "radio"
+                                              ? [
+                                                  _c(
+                                                    "li",
+                                                    {
+                                                      staticStyle: {
+                                                        "justify-content":
+                                                          "left",
+                                                        "flex-direction":
+                                                          "column",
+                                                        "align-items":
+                                                          "initial",
+                                                        padding: "5px 20px",
+                                                        gap: ".5rem",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.alertar(1)
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _vm._m(18),
+                                                      _vm._v(" "),
+                                                      _c("div", [
+                                                        _c("input", {
+                                                          directives: [
+                                                            {
+                                                              name: "model",
+                                                              rawName:
+                                                                "v-model",
+                                                              value:
+                                                                _vm.forms.edit
+                                                                  .questions
+                                                                  .inputs.type,
+                                                              expression:
+                                                                "forms.edit.questions.inputs.type",
+                                                            },
+                                                          ],
+                                                          attrs: {
+                                                            type: "radio",
+                                                            name: "radio",
+                                                            id: "radio",
+                                                            value: "radio",
+                                                            required: "",
+                                                          },
+                                                          domProps: {
+                                                            checked: _vm._q(
+                                                              _vm.forms.edit
+                                                                .questions
+                                                                .inputs.type,
+                                                              "radio"
+                                                            ),
+                                                          },
+                                                          on: {
+                                                            change: function (
+                                                              $event
+                                                            ) {
+                                                              return _vm.$set(
+                                                                _vm.forms.edit
+                                                                  .questions
+                                                                  .inputs,
+                                                                "type",
+                                                                "radio"
+                                                              )
+                                                            },
+                                                          },
+                                                        }),
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "label",
+                                                          {
+                                                            attrs: {
+                                                              for: "radio",
+                                                            },
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "Múltiplas escolhas"
+                                                            ),
+                                                          ]
+                                                        ),
+                                                      ]),
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "li",
+                                                    {
+                                                      staticStyle: {
+                                                        cursor: "pointer",
+                                                      },
+                                                      on: {
+                                                        click: function (
+                                                          $event
+                                                        ) {
+                                                          return _vm.modal_form_edit(
+                                                            2
+                                                          )
+                                                        },
+                                                      },
+                                                    },
+                                                    [
+                                                      _c("span", [
+                                                        _vm._v(
+                                                          "Editar escolhas"
+                                                        ),
+                                                      ]),
+                                                    ]
+                                                  ),
+                                                ]
+                                              : _vm._e(),
+                                          ],
+                                          2
+                                        ),
+                                      ]),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "btn-submit",
+                                attrs: {
+                                  type: "submit",
+                                  value: "Alterar campo",
+                                  form: "edit_question",
+                                },
+                              }),
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.modal.form.edit.chooses === 2
+                          ? [
+                              _c("div", { staticClass: "new-chooses" }, [
+                                _c("h6", [_vm._v("Remover campos")]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "chooses" },
+                                  _vm._l(
+                                    _vm.forms.edit.questions.data.answers,
+                                    function (an) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          staticClass: "choose",
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.delete_answers(
+                                                an.id,
+                                                2,
+                                                an.form_id,
+                                                an.question_id
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _c("span", [
+                                            _vm._v(_vm._s(an.answer)),
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("i", {
+                                            staticClass: "fi fi-rr-cross-small",
+                                          }),
+                                        ]
+                                      )
+                                    }
+                                  ),
+                                  0
                                 ),
                               ]),
                             ]
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "btn-submit",
-                        attrs: {
-                          type: "submit",
-                          value: "Atualizar campo",
-                          form: "edit_question",
-                        },
-                      }),
-                    ])
+                          : _vm._e(),
+                      ],
+                      2
+                    )
                   : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "options-edit-form" }, [
                   _c("h6", [_vm._v("Menu de edição")]),
                   _vm._v(" "),
-                  _vm._m(17),
+                  _vm._m(19),
                   _vm._v(" "),
                   _c("nav", [
                     _c("ul", [
@@ -31779,7 +32150,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _vm._m(18),
+              _vm._m(20),
               _vm._v(" "),
               _c("div", { staticClass: "alert-box" }, [
                 _c("div", { staticClass: "alert-msg" }, [
@@ -31796,9 +32167,9 @@ var render = function () {
                       },
                     },
                     [
-                      _vm._m(19),
+                      _vm._m(21),
                       _vm._v(" "),
-                      _vm._m(20),
+                      _vm._m(22),
                       _vm._v(" "),
                       _c("div", { staticClass: "i-gree" }, [
                         _c(
@@ -32112,8 +32483,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "border-divisor" }, [
+      _c("div", { staticClass: "item-divisor" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("span", [
       _c("b", [_vm._v("Título do campo: ")]),
+      _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _vm._v("Tipo "),
       _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v("*")]),
     ])
   },

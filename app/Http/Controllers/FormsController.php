@@ -40,6 +40,8 @@ class FormsController extends Controller
 
     public function add_form_questions_answers(Request $request)
     {
+
+
         $question = FormQuestion::create([
                         'status_id' => $request->input('status_id'),
                         'question' => $request->input('question'),
@@ -59,12 +61,9 @@ class FormsController extends Controller
                 $form = $form->update(['status_id' => 1]);
             }
 
-
-            if($request->input('type') !== 'radio'){
-
                 FormAnswer::create([
                     'status_id' => $request->input('status_id'),
-                    'answer' => '',
+                    'answer' => $request->input('type_answer'),
                     'form_id' => $request->input('form_id'),
                     'question_id' => $question->id,
                     'user_id' => $request->input('user_id'),
@@ -72,11 +71,6 @@ class FormsController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
-            } else {
-
-                return response('Adicione algumas escolhas');
-
-            }
         }
 
 
@@ -96,7 +90,7 @@ class FormsController extends Controller
 
         // Trás as perguntas e as respostas que estão disponíveis no formulário
 
-        $questions = FormQuestion::where('form_id', $id)->with('answers')->get();
+        $questions = FormQuestion::where('form_id', $id)->where('status_id', 1)->with('answers')->get();
 
         return response($questions, 200);
 
@@ -125,17 +119,23 @@ class FormsController extends Controller
 
         $question = FormQuestion::findOrFail($request->input('question_id'));
 
-        if($request->input('type') === 'radio'){
-
-        } else {
-
-            $question = $question->update([
-                'question' => $request->input('question'),
-                'type' => $request->input('type')
-            ]);
-        };
+        $question = $question->update([
+            'question' => $request->input('question'),
+            'type' => $request->input('type')
+        ]);
 
         return response('Atualizado');
+    }
+
+    public function delete_answer(Request $request)
+    {
+        $answer = FormAnswer::findOrFail($request->input('answer_id'));
+
+        $answer = $answer->update([
+            'status_id' => $request->input('status')
+        ]);
+
+        return response('Escolha deletada');
     }
 
     public function all_forms()

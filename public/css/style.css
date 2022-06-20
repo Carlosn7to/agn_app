@@ -1181,3 +1181,49 @@ ul {
 .inputs-li input[type=text]:focus {
     border-bottom: 2px solid #132e7d;
 }
+
+.new-chooses {
+    width: 70%;
+    height: 10vh;
+    border-radius: 10px;
+    padding: 0 1vw;
+}
+
+.new-chooses label {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.chooses {
+    display: flex;
+    gap: 1rem;
+}
+
+.chooses span {
+    padding: 0 0 .4vh 0;
+    color: #646464;
+}
+
+.chooses i {
+    font-size: 1.4rem;
+    color: var(--color-red);
+}
+
+.choose {
+    padding: 5px 10px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #fff;
+    transition: all ease-in-out .2s;
+    cursor: pointer;
+}
+
+.choose:hover {
+    border: 2px solid #cccccc90;
+}

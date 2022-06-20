@@ -16,7 +16,7 @@ class Form extends Model
 
     public function questions()
     {
-        return $this->hasMany(FormQuestion::class, 'form_id');
+        return $this->hasMany(FormQuestion::class, 'form_id')->where('status_id', 2);
     }
 
     public function questions_answers()
@@ -37,7 +37,7 @@ class Form extends Model
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'user_id')->select('id', 'email', 'first_name', 'last_name');
+        return $this->belongsTo(User::class, 'user_id')->select('id', 'email', 'first_name', 'last_name')->where('status_id', 1);
     }
 
 

@@ -17,6 +17,8 @@
         get_question_answers="{{ route('api.questions.answers') }}"
         edit_question_status="{{ route('api.questions.edit.status') }}"
         edit_question="{{ route('api.questions.edit') }}"
+        delete_answer="{{ route('api.answers.delete') }}"
+
     >
 
     </management-form-app-component>

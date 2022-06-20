@@ -34,6 +34,11 @@ Route::middleware(\App\Http\Middleware\VerifyHash::class)->prefix('formularios')
         Route::post('/', [\App\Http\Controllers\FormsController::class, 'get_questions_answers'])->name('api.questions.answers');
         Route::post('/edit/status', [\App\Http\Controllers\FormsController::class, 'edit_question_status'])->name('api.questions.edit.status');
         Route::post('/edit', [\App\Http\Controllers\FormsController::class, 'edit_question'])->name('api.questions.edit');
+
+        Route::prefix('escolhas')->group(function()
+        {
+            Route::post('/delete', [\App\Http\Controllers\FormsController::class, 'delete_answer'])->name('api.answers.delete');
+        });
     });
 });
 

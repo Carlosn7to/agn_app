@@ -21,6 +21,6 @@ class FormQuestion extends Model
 
     public function answers()
     {
-        return $this->hasMany(FormAnswer::class, 'question_id');
+        return $this->hasMany(FormAnswer::class, 'question_id')->where('status_id', 1);
     }
 }

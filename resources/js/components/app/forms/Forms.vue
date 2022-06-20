@@ -67,6 +67,7 @@ export default {
                 axios
                     .get(this.get_questions+'/'+id)
                     .then((res) => {
+                        console.log(res.data)
                         this.form_data = res.data
                     })
                     .catch((error) => {
