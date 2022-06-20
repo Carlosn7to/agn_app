@@ -91,11 +91,11 @@ ul {
 
 .modal-edit-question {
     background-color: rgba(58, 64, 76, 0.9);
-    width: 50vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
-    top: 5vh;
-    left: 25vw;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,8 +125,8 @@ ul {
 }
 
 .card-login-web {
-    width: 15vw;
-    height: 45vh;
+    min-width: 15vw;
+    min-height: 45vh;
     background-color: #fff;
     border: 2px solid #cccccc80;
     padding: 5vh 2vw;
@@ -778,8 +778,6 @@ ul {
 }
 
 .new-form {
-    width: 30vw;
-    height: 45vh;
     background-color: #F3F3F8;
     overflow: hidden;
 }
@@ -873,7 +871,7 @@ ul {
 }
 
 .edit-form {
-    width: 50vw;
+    width: 70vw;
     height: 90vh;
     background-color: #F3F3F8;
     overflow: hidden;
@@ -988,7 +986,7 @@ ul {
 
 .options-edit-form ul li {
     padding: 0 1vw;
-    height: 4vh;
+    height: 7vh;
     display: flex;
     align-items: center;
     gap: 1rem;
