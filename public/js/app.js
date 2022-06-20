@@ -6369,9 +6369,12 @@ __webpack_require__.r(__webpack_exports__);
           type_answer: this.forms["new"].questions.inputs.radio_answer
         }
       }).then(function (res) {
+        console.log(res.data);
+
         _this7.form_questions_answers(id);
 
         _this7.modal.form.edit.step = 1;
+        _this7.forms["new"].questions.inputs.radio_answer = '';
       })["catch"](function (error) {});
     },
     alertar: function alertar(n) {},

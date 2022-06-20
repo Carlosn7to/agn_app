@@ -41,17 +41,16 @@ class FormsController extends Controller
     public function add_form_questions_answers(Request $request)
     {
 
-
         $question = FormQuestion::create([
-                        'status_id' => $request->input('status_id'),
-                        'question' => $request->input('question'),
-                        'force' => $request->input('force'),
-                        'type' => $request->input('type'),
-                        'form_id' => $request->input('form_id'),
-                        'user_id' => $request->input('user_id'),
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now()
-                    ]);
+            'status_id' => $request->input('status_id'),
+            'question' => $request->input('question'),
+            'force' => $request->input('force'),
+            'type' => $request->input('type'),
+            'form_id' => $request->input('form_id'),
+            'user_id' => $request->input('user_id'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
 
         if($question->question) {
 
@@ -61,15 +60,33 @@ class FormsController extends Controller
                 $form = $form->update(['status_id' => 1]);
             }
 
-                FormAnswer::create([
+            if($request->input('type') === 'radio'){
+                $formAnswer =   FormAnswer::create([
+                                    'status_id' => $request->input('status_id'),
+                                    'answer' => $request->input('type_answer'),
+                                    'form_id' => $request->input('form_id'),
+                                    'question_id' => $question->id,
+                                    'user_id' => $request->input('user_id'),
+                                    'created_at' => Carbon::now(),
+                                    'updated_at' => Carbon::now()
+                ]);
+
+                return response($formAnswer);
+
+            } else {
+
+                $formAnswer =   FormAnswer::create([
                     'status_id' => $request->input('status_id'),
-                    'answer' => $request->input('type_answer'),
+                    'answer' => '',
                     'form_id' => $request->input('form_id'),
                     'question_id' => $question->id,
                     'user_id' => $request->input('user_id'),
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
+
+                return response($formAnswer);
+            }
 
         }
 

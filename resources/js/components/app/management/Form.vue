@@ -739,8 +739,10 @@ export default {
                 }
             })
                 .then((res) => {
+                    console.log(res.data)
                     this.form_questions_answers(id)
                     this.modal.form.edit.step = 1
+                    this.forms.new.questions.inputs.radio_answer = ''
                 })
                 .catch((error) => {
                 })
