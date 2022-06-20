@@ -15,6 +15,8 @@
         edit_form="{{ route('api.form.edit') }}"
         new_question="{{ route('api.form.add.questions') }}"
         get_question_answers="{{ route('api.questions.answers') }}"
+        edit_question_status="{{ route('api.questions.edit.status') }}"
+        edit_question="{{ route('api.questions.edit') }}"
     >
 
     </management-form-app-component>

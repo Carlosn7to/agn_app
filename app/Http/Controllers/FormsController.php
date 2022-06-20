@@ -111,6 +111,33 @@ class FormsController extends Controller
         return response($question_answers);
     }
 
+    public function edit_question_status(Request $request)
+    {
+        $question = FormQuestion::findOrFail($request->input('question_id'));
+
+        $question = $question->update(['status_id' => $request->input('status')]);
+
+        return response('Ok');
+    }
+
+    public function edit_question(Request $request)
+    {
+
+        $question = FormQuestion::findOrFail($request->input('question_id'));
+
+        if($request->input('type') === 'radio'){
+
+        } else {
+
+            $question = $question->update([
+                'question' => $request->input('question'),
+                'type' => $request->input('type')
+            ]);
+        };
+
+        return response('Atualizado');
+    }
+
     public function all_forms()
     {
         $form = Form::with('questions')->with('status')->with('users')->orderBy('id', 'desc')->get();

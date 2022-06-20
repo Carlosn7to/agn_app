@@ -92,6 +92,34 @@
     })
     }
     },
+
+    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 2">
+        <h6>Configurações gerais</h6>
+        <div class="options-main-edit animation-left">
+            <nav>
+                <ul>
+                    <li @click="modal_form_edit(3)">
+                        <span>Editar título</span>
+                        <i class="fi fi-rr-angle-right"></i>
+                    </li>
+                    <li>
+                        <span>Editar permissões de visualização</span>
+                        <i class="fi fi-rr-angle-right"></i>
+                    </li>
+                    <li @click="modal_form_edit(5)">
+                        <span>Adicionar perguntas</span>
+                        <i class="fi fi-rr-angle-right"></i>
+                    </li>
+                    <li @click="modal_form_edit(6)">
+                        <span>Editar perguntas</span>
+                        <i class="fi fi-rr-angle-right"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
 </template>
 
 <script>

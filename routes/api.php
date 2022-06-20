@@ -26,10 +26,15 @@ Route::middleware(\App\Http\Middleware\VerifyHash::class)->prefix('formularios')
 
     Route::post('perguntas/escolhas', [\App\Http\Controllers\FormsController::class, 'get_form_questions_answers'])->name('api.form.questions.answers');
     Route::post('/editar', [\App\Http\Controllers\FormsController::class, 'edit_form'])->name('api.form.edit');
-    Route::post('/perguntas', [\App\Http\Controllers\FormsController::class, 'get_questions_answers'])->name('api.questions.answers');
     Route::post('/new', [\App\Http\Controllers\FormsController::class,'new'])->name('api.form.new');
     Route::post('update/', [\App\Http\Controllers\FormsController::class, 'update_status_form'])->name('api.form.update.status');
 
+    Route::prefix('perguntas')->group(function ()
+    {
+        Route::post('/', [\App\Http\Controllers\FormsController::class, 'get_questions_answers'])->name('api.questions.answers');
+        Route::post('/edit/status', [\App\Http\Controllers\FormsController::class, 'edit_question_status'])->name('api.questions.edit.status');
+        Route::post('/edit', [\App\Http\Controllers\FormsController::class, 'edit_question'])->name('api.questions.edit');
+    });
 });
 
 Route::post('formularios/adicionar/perguntas', [\App\Http\Controllers\FormsController::class, 'add_form_questions_answers'] )->name('api.form.add.questions');
