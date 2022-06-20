@@ -232,8 +232,8 @@
                                         <span>Adicionar perguntas</span>
                                         <i class="fi fi-rr-angle-right"></i>
                                     </li>
-                                    <li style="border: none">
-                                        <span>Arquivar perguntas</span>
+                                    <li @click="modal_form_edit(6)">
+                                        <span>Editar perguntas</span>
                                         <i class="fi fi-rr-angle-right"></i>
                                     </li>
                                 </ul>
@@ -312,6 +312,77 @@
                         </div>
                         <input class="btn-submit animation-left" type="submit" value="Adicionar pergunta" form="form_question">
                     </div>
+                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 6">
+                        <div class="back-next">
+                            <i class="fi fi-rr-arrow-small-left" @click="modal_form_edit(2)"></i>
+                            <span>Editar campos</span>
+                        </div>
+                        <div class="options-main-edit animation-left">
+                            <nav v-if="this.modal.form.edit.step === 6">
+                                <ul>
+                                    <template v-for="form in forms.edit.data">
+                                        <template v-for="questions in form.questions_answers">
+                                            <li @click="questions_answers(questions.id)">
+                                                <span>{{ string_sanitaze(questions.question) }}</span>
+                                                <i class="fi fi-rr-angle-right"></i>
+                                            </li>
+                                        </template>
+                                    </template>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="fields-edit-form" v-if="this.modal.form.edit.step === 7">
+                        <div class="back-next">
+                            <i class="fi fi-rr-arrow-small-left" @click="modal_form_edit(6)"></i>
+                            <span>Editar campos</span>
+                        </div>
+                        <div class="options-main-edit animation-left">
+                            <nav v-if="this.modal.form.edit.step === 7">
+                                <ul>
+                                    <li @click="alertar(1)">
+                                        <span>Título</span>
+                                        <i class="fi fi-rr-angle-right"></i>
+                                    </li>
+                                    <li @click="alertar(1)">
+                                        <span>Tipo</span>
+                                        <i class="fi fi-rr-angle-right"></i>
+                                    </li>
+                                    <template v-if="this.forms.edit.questions.data.type === 'radio'">
+                                        <li @click="alertar(1)">
+                                            <span>Respostas pré-definidas</span>
+                                            <i class="fi fi-rr-angle-right"></i>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="field-edit-form animation-left">
+                            <template v-if="this.forms.edit.questions.data.force === 1">
+                                <span>{{ this.forms.edit.questions.data.question }} <b style="color: var(--color-red)">*</b></span>
+                            </template>
+                            <template v-if="this.forms.edit.questions.data.force === 0">
+                                <span>{{ this.forms.edit.questions.data.question }}</span>
+                            </template>
+                            <div class="input-selection-form" v-for="an in this.forms.edit.questions.data.answers">
+                                <template v-if="forms.edit.questions.data.type === 'radio'">
+                                    <input :type="forms.edit.questions.data.type" :name="forms.edit.questions.data.id" :value="an.id" :id="an.id" disabled>
+                                </template>
+                                <template v-if="forms.edit.questions.data.type !== 'radio'">
+                                    <input :type="forms.edit.questions.data.type" :name="forms.edit.questions.data.id" :id="an.id" disabled>
+                                </template>
+                                <template v-if="forms.edit.questions.data.force === 0">
+                                    <input :type="forms.edit.questions.data.type" :name="forms.edit.questions.data.id" :value="an.id" :id="an.id" disabled>
+                                </template>
+                                <template v-if="forms.edit.questions.data.type === 'radio'">
+                                    <label for="type">{{ an.answer }}</label>
+                                </template>
+                                <template v-if="forms.edit.questions.data.type !== 'radio'">
+                                    <label for="type">{{ an.answer }}</label>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
                     <div class="options-edit-form">
                         <h6>Menu de edição</h6>
                         <div class="border-divisor">
@@ -341,7 +412,7 @@
 <script>
 export default {
     name: "Form",
-    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question'],
+    props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers'],
     methods: {
         modal_actions(on, step, id, form_name){
             if(on === 0) {
@@ -350,6 +421,7 @@ export default {
                 this.modal.form.new.status = false
                 this.modal.form.edit.status = false
                 this.modal.step = step
+                this.modal.form.edit.step = 1
                 this.get_all_forms()
             } else {
                 this.modal.status = true
@@ -461,7 +533,6 @@ export default {
             return words
         },
         form_questions_answers(id){
-
             axios
             ({
                 method: 'post',
@@ -479,6 +550,29 @@ export default {
                 })
                 .catch((error) => {
                 })
+        },
+        questions_answers(id){
+
+            axios
+            ({
+                method: 'post',
+                url: this.get_question_answers,
+                data: {
+                    token: this.token,
+                    hash: 'd41d8cd98f00b204e9800998ecf8427e',
+                    user: 'system',
+                    password: 'jF7s3o1oecRka2&ru^ovt',
+                    question_id: id,
+                }
+            })
+                .then((res) => {
+                    this.modal.form.edit.step = 7
+                    console.log(res.data)
+                    this.forms.edit.questions.data = res.data
+                })
+                .catch((error) => {
+                })
+
         },
         new_questions_answers(id){
             axios
@@ -510,8 +604,8 @@ export default {
                 .catch((error) => {
                 })
         },
-        alertar(){
-            alert('enviou')
+        alertar(n){
+            console.log(n)
         },
         edit_name_form(id){
             axios
@@ -600,7 +694,10 @@ export default {
                     data: {},
                     inputs: [{
                         name: ''
-                    }]
+                    }],
+                    questions: {
+                        data: {}
+                    }
                 }
             },
         }

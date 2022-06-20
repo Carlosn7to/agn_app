@@ -28,6 +28,8 @@ Route::middleware(\App\Http\Middleware\VerifyHash::class)->prefix('formularios')
 
     Route::post('perguntas/escolhas', [\App\Http\Controllers\FormsController::class, 'get_form_questions_answers'])->name('api.form.questions.answers');
     Route::post('/editar', [\App\Http\Controllers\FormsController::class, 'edit_form'])->name('api.form.edit');
+    Route::post('/perguntas', [\App\Http\Controllers\FormsController::class, 'get_questions_answers'])->name('api.questions.answers');
+
 });
 
 Route::post('formularios/adicionar/perguntas', [\App\Http\Controllers\FormsController::class, 'add_form_questions_answers'] )->name('api.form.add.questions');

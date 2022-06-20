@@ -93,6 +93,15 @@ class FormsController extends Controller
 
     }
 
+    public function get_questions_answers(Request $request)
+    {
+
+        $question_answers = FormQuestion::where('id', $request->input('question_id'))->with('answers')->first();
+
+
+        return response($question_answers);
+    }
+
     public function all_forms()
     {
         $form = Form::with('questions')->with('status')->with('users')->get();

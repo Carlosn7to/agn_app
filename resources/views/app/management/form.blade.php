@@ -14,6 +14,7 @@
         get_form_questions_answers="{{ route('api.form.questions.answers') }}"
         edit_form="{{ route('api.form.edit') }}"
         new_question="{{ route('api.form.add.questions') }}"
+        get_question_answers="{{ route('api.questions.answers') }}"
     >
 
     </management-form-app-component>
