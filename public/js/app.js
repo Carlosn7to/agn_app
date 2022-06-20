@@ -30246,6 +30246,7 @@ var render = function () {
                             name: "name",
                             id: "name",
                             required: "",
+                            autocomplete: "off",
                           },
                           domProps: { value: _vm.forms.new.inputs.name },
                           on: {
@@ -30293,6 +30294,7 @@ var render = function () {
                             type: "text",
                             name: "description",
                             id: "description",
+                            autocomplete: "off",
                           },
                         }),
                       ]

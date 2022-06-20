@@ -163,11 +163,11 @@
                         <input type="hidden" name="token" :value="token">
                         <div class="field-form-new" :class="{ field_active : this.class.form.id === 1 }" @focusin="classActive(1)" @focusout="classActive(0)">
                             <label for="title" :class="{ active_label :this.class.form.id === 1}">Nome <b style="color: var(--color-red)">*</b></label>
-                            <input type="text" name="name" id="name" required v-model="forms.new.inputs.name">
+                            <input type="text" name="name" id="name" required v-model="forms.new.inputs.name" autocomplete="off">
                         </div>
                         <div class="field-form-new" :class="{ field_active : this.class.form.id === 2 }" @focusin="classActive(2)" @focusout="classActive(0)">
                             <label for="description" :class="{ active_label :this.class.form.id === 2}">Descrição</label>
-                            <input type="text" name="description" id="description">
+                            <input type="text" name="description" id="description" autocomplete="off">
                         </div>
                         <input type="submit" value="Cadastrar">
                     </form>
