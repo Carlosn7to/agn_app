@@ -20,7 +20,12 @@
                         <input type="hidden" name="_token" :value="token">
                         <template v-for="data in form_data">
                         <div class="item-selection-form">
-                            <span>{{ data.question }} <b style="color: var(--color-red)">*</b></span>
+                            <template v-if="data.force === 1">
+                                <span>{{ data.question }} <b style="color: var(--color-red)">*</b></span>
+                            </template>
+                            <template v-if="data.force === 0">
+                                <span>{{ data.question }}</span>
+                            </template>
                             <div class="input-selection-form" v-for="an in data.answers">
                                 <template v-if="data.force === 1">
                                     <template v-if="data.type === 'radio'">

@@ -77,6 +77,21 @@
         </div>
     </div>
 
+    add_answers(n) {
+
+    if(n === 0) {
+    this.forms.new.answers.inputs.push({
+    id: key,
+    name: `answer${++this.forms.new.answers.count}`,
+    value: ''
+    })
+    } else {
+    this.forms.new.answers.inputs.pop({
+    name: `answer${--this.forms.new.answers.count}`,
+    value: ''
+    })
+    }
+    },
 </template>
 
 <script>

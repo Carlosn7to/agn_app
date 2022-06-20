@@ -12,6 +12,8 @@
         token="{{ @csrf_token() }}"
         user_id="{{ $_SESSION['id'] }}"
         get_form_questions_answers="{{ route('api.form.questions.answers') }}"
+        edit_form="{{ route('api.form.edit') }}"
+        new_question="{{ route('api.form.add.questions') }}"
     >
 
     </management-form-app-component>

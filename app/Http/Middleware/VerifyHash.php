@@ -31,12 +31,12 @@ class VerifyHash
                 return $next($request);
 
             } else {
-                return response('Senha incorreta!');
+                return response('Data invalid[2]!');
             };
 
         };
 
-        return response('Erro 1');
+        return response('Data invalid[1]!');
 
     }
 };

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Form;
+use App\Models\FormAnswer;
 use App\Models\FormQuestion;
 use App\Models\HashApi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FormsController extends Controller
@@ -20,13 +22,46 @@ class FormsController extends Controller
 
     public function new(Request $request)
     {
-
-
         Form::create($request->all());
 
         return response("formulário criado com sucesso!");
 
 
+    }
+
+    public function add_form_questions_answers(Request $request)
+    {
+        $question = FormQuestion::create([
+                        'status_id' => $request->input('status_id'),
+                        'question' => $request->input('question'),
+                        'force' => $request->input('force'),
+                        'type' => $request->input('type'),
+                        'form_id' => $request->input('form_id'),
+                        'user_id' => $request->input('user_id'),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+
+
+        if($request->input('type') !== 'radio'){
+
+            FormAnswer::create([
+                'status_id' => $request->input('status_id'),
+                'answer' => '',
+                'form_id' => $request->input('form_id'),
+                'question_id' => $question->id,
+                'user_id' => $request->input('user_id'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+
+        } else {
+
+            return response('Adicione algumas escolhas');
+
+        }
+
+        return response("Pergunta criada com sucesso!");
     }
 
     public function index()
@@ -59,6 +94,16 @@ class FormsController extends Controller
         $form = Form::findOrFail($id);
 
         $form = $form->update(['status_id' => $action]);
+
+        return "Formulário atualizado com sucesso.";
+
+    }
+
+    public function edit_form(Request $request)
+    {
+        $form = Form::findOrFail($request->input('form_id'));
+
+        $form = $form->update(['name' => $request->input('name')]);
 
         return "Formulário atualizado com sucesso.";
 
