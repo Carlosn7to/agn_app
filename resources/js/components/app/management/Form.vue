@@ -26,12 +26,15 @@
                             <template v-if="form.status_id === 2">
                                 <i class="fi fi-rr-checkbox" @click="modal_actions(1, 3, form.id, form.name)"></i>
                             </template>
+                            <template v-if="form.status_id === 3">
+                                <i class="fi fi-rr-trash" @click="modal_actions(1, 5, form.id, form.name)"></i>
+                            </template>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="modal display-flex" v-if="this.modal.status === true && (this.modal.step === 2 || this.modal.step === 3)">
+        <div class="modal display-flex" v-if="this.modal.status === true && (this.modal.step === 2 || this.modal.step === 3 || this.modal.step === 5)">
             <div class="box-changes" v-if="this.modal.step === 2">
                 <div class="close-btn">
                     <i class="fi fi-rr-cross-small" @click="modal_actions(0,0, 0)"></i>
@@ -106,6 +109,46 @@
                                 <button class="sucess-background" @click="form_action(1, modal.id)">
                                     <i class="fi fi-rr-shield-check"></i>
                                     <span>Sim, ativar o formulário</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-changes" v-if="this.modal.step === 5">
+                <div class="close-btn">
+                    <i class="fi fi-rr-cross-small" @click="modal_actions(0,0, 0)"></i>
+                </div>
+                <div class="msg-box trigger">
+                    <i class="fi fi-rr-shield-exclamation"></i>
+                    <p>Deletar formulário</p>
+                </div>
+                <div class="alert-box">
+                    <div class="alert-msg">
+                        <span>Atenção! Essa ação vai causar:</span>
+                        <div style="padding: 3vh 0 0 0; display: flex; flex-direction: column; gap: .5rem">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <i class="fi fi-rr-checkbox" style="font-size: 1.8rem; color: #EC344E"></i>
+                                <p>
+                                    Inacessiblidade dos links compartilhados
+                                </p>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem">
+                                <i class="fi fi-rr-checkbox" style="font-size: 1.8rem; color: #EC344E"></i>
+                                <p>
+                                    Remoção da agenda vinculada
+                                </p>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem">
+                                <i class="fi fi-rr-checkbox" style="font-size: 1.8rem; color: #EC344E"></i>
+                                <p>
+                                    Impossibilidade de relatórios
+                                </p>
+                            </div>
+                            <div class="i-gree">
+                                <button @click="form_action(4 ,modal.id)">
+                                    <i class="fi fi-br-trash"></i>
+                                    <span>Sim, deletar o formulário</span>
                                 </button>
                             </div>
                         </div>
@@ -446,17 +489,28 @@ export default {
         form_action(action, id) {
                 // Ativar ou inativar o formulário
 
-                axios
-                    .post(this.update_status_form+'/'+action+'/'+id)
-                    .then((res) => {
-                        this.modal.status = false
-                        this.modal.step = 0
-                        this.modal.id = 0
+            axios
+            ({
+                method: 'post',
+                url: this.update_status_form,
+                data: {
+                    token: this.token,
+                    hash: this.access.hash,
+                    user: this.access.user,
+                    password: this.access.password,
+                    action: action,
+                    form_id: id,
+                }
+            })
+                .then((res) => {
+                    this.modal.status = false
+                    this.modal.step = 0
+                    this.modal.id = 0
 
-                        this.get_all_forms()
-                    })
-                    .catch((error) => {
-                    })
+                    this.get_all_forms()
+                })
+                .catch((error) => {
+                })
 
         },
         get_all_forms(){
@@ -464,6 +518,7 @@ export default {
                 .get(this.get_forms_all)
                 .then((res) => {
                     this.data = res.data
+                    console.log(res.data)
                 })
                 .catch((error) => {
                 })
@@ -506,12 +561,16 @@ export default {
                     url: this.form_new,
                     data: {
                         token: this.token,
+                        hash: 'd41d8cd98f00b204e9800998ecf8427e',
+                        user: 'system',
+                        password: 'jF7s3o1oecRka2&ru^ovt',
                         user_id: this.user_id,
                         name: this.forms.new.inputs.name,
                         description: this.forms.new.inputs.description
                     }
                 })
                 .then((res) => {
+                    console.log(res)
                     this.get_all_forms()
                     this.modal.status = false
                     this.modal.form.new.status = false
@@ -700,6 +759,11 @@ export default {
                     }
                 }
             },
+            access: {
+                hash: 'd41d8cd98f00b204e9800998ecf8427e',
+                user: 'system',
+                password: 'jF7s3o1oecRka2&ru^ovt',
+            }
         }
     },
     components: {},

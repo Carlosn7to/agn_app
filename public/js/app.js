@@ -6064,6 +6064,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
   props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers'],
@@ -6101,7 +6144,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // Ativar ou inativar o formulário
-      axios.post(this.update_status_form + '/' + action + '/' + id).then(function (res) {
+      axios({
+        method: 'post',
+        url: this.update_status_form,
+        data: {
+          token: this.token,
+          hash: this.access.hash,
+          user: this.access.user,
+          password: this.access.password,
+          action: action,
+          form_id: id
+        }
+      }).then(function (res) {
         _this.modal.status = false;
         _this.modal.step = 0;
         _this.modal.id = 0;
@@ -6114,6 +6168,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.get_forms_all).then(function (res) {
         _this2.data = res.data;
+        console.log(res.data);
       })["catch"](function (error) {});
     },
     get_form: function get_form(id) {
@@ -6150,11 +6205,16 @@ __webpack_require__.r(__webpack_exports__);
         url: this.form_new,
         data: {
           token: this.token,
+          hash: 'd41d8cd98f00b204e9800998ecf8427e',
+          user: 'system',
+          password: 'jF7s3o1oecRka2&ru^ovt',
           user_id: this.user_id,
           name: this.forms["new"].inputs.name,
           description: this.forms["new"].inputs.description
         }
       }).then(function (res) {
+        console.log(res);
+
         _this4.get_all_forms();
 
         _this4.modal.status = false;
@@ -6326,6 +6386,11 @@ __webpack_require__.r(__webpack_exports__);
             data: {}
           }
         }
+      },
+      access: {
+        hash: 'd41d8cd98f00b204e9800998ecf8427e',
+        user: 'system',
+        password: 'jF7s3o1oecRka2&ru^ovt'
       }
     };
   },
@@ -29884,6 +29949,24 @@ var render = function () {
                           }),
                         ]
                       : _vm._e(),
+                    _vm._v(" "),
+                    form.status_id === 3
+                      ? [
+                          _c("i", {
+                            staticClass: "fi fi-rr-trash",
+                            on: {
+                              click: function ($event) {
+                                return _vm.modal_actions(
+                                  1,
+                                  5,
+                                  form.id,
+                                  form.name
+                                )
+                              },
+                            },
+                          }),
+                        ]
+                      : _vm._e(),
                   ],
                   2
                 ),
@@ -29895,7 +29978,7 @@ var render = function () {
       ]),
       _vm._v(" "),
       this.modal.status === true &&
-      (this.modal.step === 2 || this.modal.step === 3)
+      (this.modal.step === 2 || this.modal.step === 3 || this.modal.step === 5)
         ? _c("div", { staticClass: "modal display-flex" }, [
             this.modal.step === 2
               ? _c("div", { staticClass: "box-changes" }, [
@@ -30013,6 +30096,68 @@ var render = function () {
                                 _vm._v(" "),
                                 _c("span", [
                                   _vm._v("Sim, ativar o formulário"),
+                                ]),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            this.modal.step === 5
+              ? _c("div", { staticClass: "box-changes" }, [
+                  _c("div", { staticClass: "close-btn" }, [
+                    _c("i", {
+                      staticClass: "fi fi-rr-cross-small",
+                      on: {
+                        click: function ($event) {
+                          return _vm.modal_actions(0, 0, 0)
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "alert-box" }, [
+                    _c("div", { staticClass: "alert-msg" }, [
+                      _c("span", [_vm._v("Atenção! Essa ação vai causar:")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            padding: "3vh 0 0 0",
+                            display: "flex",
+                            "flex-direction": "column",
+                            gap: ".5rem",
+                          },
+                        },
+                        [
+                          _vm._m(10),
+                          _vm._v(" "),
+                          _vm._m(11),
+                          _vm._v(" "),
+                          _vm._m(12),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "i-gree" }, [
+                            _c(
+                              "button",
+                              {
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.form_action(4, _vm.modal.id)
+                                  },
+                                },
+                              },
+                              [
+                                _c("i", { staticClass: "fi fi-br-trash" }),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v("Sim, deletar o formulário"),
                                 ]),
                               ]
                             ),
@@ -30490,7 +30635,7 @@ var render = function () {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm._m(9),
+                              _vm._m(13),
                               _vm._v(" "),
                               _c(
                                 "li",
@@ -31392,7 +31537,7 @@ var render = function () {
                 _c("div", { staticClass: "options-edit-form" }, [
                   _c("h6", [_vm._v("Menu de edição")]),
                   _vm._v(" "),
-                  _vm._m(10),
+                  _vm._m(14),
                   _vm._v(" "),
                   _c("nav", [
                     _c("ul", [
@@ -31613,6 +31758,85 @@ var staticRenderFns = [
         _c("p", [
           _vm._v(
             "\n                                Possibilidade de relatórios\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "msg-box trigger" }, [
+      _c("i", { staticClass: "fi fi-rr-shield-exclamation" }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Deletar formulário")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Inacessiblidade dos links compartilhados\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Remoção da agenda vinculada\n                            "
+          ),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { display: "flex", "align-items": "center", gap: "1rem" },
+      },
+      [
+        _c("i", {
+          staticClass: "fi fi-rr-checkbox",
+          staticStyle: { "font-size": "1.8rem", color: "#EC344E" },
+        }),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "\n                                Impossibilidade de relatórios\n                            "
           ),
         ]),
       ]

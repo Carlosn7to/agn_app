@@ -13,16 +13,25 @@ class FormsController extends Controller
 {
     public function home()
     {
-
         return view('app.forms.home');
-
-
-
     }
 
     public function new(Request $request)
     {
-        Form::create($request->all());
+        $form = Form::where('name', $request->input('name'))->where('status_id', '<>' ,2)->first();
+
+        if(isset($form->name)) {
+            return response(['message' => 'Formulário já existe!', 'type' => 'trigger']);
+        } else {
+            Form::create([
+                'status_id' => 3,
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'user_id' => $request->input('user_id'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        };
 
         return response("formulário criado com sucesso!");
 
@@ -104,16 +113,22 @@ class FormsController extends Controller
 
     public function all_forms()
     {
-        $form = Form::with('questions')->with('status')->with('users')->get();
+        $form = Form::with('questions')->with('status')->with('users')->orderBy('id', 'desc')->get();
 
         return response($form, 200);
     }
 
-    public function update_status(Request $request, $action, $id)
+    public function update_status_form(Request $request)
     {
-        $form = Form::findOrFail($id);
+        $form = Form::findOrFail($request->input('form_id'));
 
-        $form = $form->update(['status_id' => $action]);
+        if($request->input('action') === 4) {
+            $form->delete();
+
+            return response("Formulário deletado com sucesso");
+        };
+
+        $form = $form->update(['status_id' => $request->input('action')]);
 
         return "Formulário atualizado com sucesso.";
 
