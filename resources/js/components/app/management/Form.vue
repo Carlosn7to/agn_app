@@ -26,7 +26,6 @@
                             <template v-if="form.status_id === 2">
                                 <i class="fi fi-rr-checkbox" @click="modal_actions(1, 3, form.id, form.name)"></i>
                             </template>
-
                         </td>
                     </tr>
                 </tbody>
@@ -348,7 +347,9 @@ export default {
             if(on === 0) {
                 this.modal.status = false
                 this.modal.form.use.status = false
+                this.modal.form.new.status = false
                 this.modal.form.edit.status = false
+                this.modal.step = step
                 this.get_all_forms()
             } else {
                 this.modal.status = true

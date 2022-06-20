@@ -5993,7 +5993,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
   props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question'],
@@ -6002,7 +6001,9 @@ __webpack_require__.r(__webpack_exports__);
       if (on === 0) {
         this.modal.status = false;
         this.modal.form.use.status = false;
+        this.modal.form["new"].status = false;
         this.modal.form.edit.status = false;
+        this.modal.step = step;
         this.get_all_forms();
       } else {
         this.modal.status = true;

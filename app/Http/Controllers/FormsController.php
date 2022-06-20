@@ -42,26 +42,37 @@ class FormsController extends Controller
                         'updated_at' => Carbon::now()
                     ]);
 
+        if($question->question) {
 
-        if($request->input('type') !== 'radio'){
+            $form = Form::where('id', $question->form_id)->where('status_id', 3)->first();
 
-            FormAnswer::create([
-                'status_id' => $request->input('status_id'),
-                'answer' => '',
-                'form_id' => $request->input('form_id'),
-                'question_id' => $question->id,
-                'user_id' => $request->input('user_id'),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]);
+            if(isset($form->name)) {
+                $form = $form->update(['status_id' => 1]);
+            }
 
-        } else {
 
-            return response('Adicione algumas escolhas');
+            if($request->input('type') !== 'radio'){
 
+                FormAnswer::create([
+                    'status_id' => $request->input('status_id'),
+                    'answer' => '',
+                    'form_id' => $request->input('form_id'),
+                    'question_id' => $question->id,
+                    'user_id' => $request->input('user_id'),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
+            } else {
+
+                return response('Adicione algumas escolhas');
+
+            }
         }
 
-        return response("Pergunta criada com sucesso!");
+
+
+        return response("Adicionado com sucesso!");
     }
 
     public function index()
