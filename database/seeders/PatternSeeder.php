@@ -96,6 +96,12 @@ class PatternSeeder extends Seeder
 
         ]);
 
+        DB::table('forms')->insert([
+            'status_id' => 1,
+            'name' => 'Mudança de endereço',
+            'user_id' => 1
+        ]);
+
 
     }
 }
