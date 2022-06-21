@@ -6178,11 +6178,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
-  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status', 'edit_question', 'delete_answer'],
+  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status', 'edit_question', 'delete_answer', 'new_answer_radio'],
   methods: {
     modal_actions: function modal_actions(on, step, id, form_name) {
       if (on === 0) {
@@ -6221,7 +6219,12 @@ __webpack_require__.r(__webpack_exports__);
         this.questions_answers(id);
       }
 
-      if (step === 2) {
+      if (action === 2) {
+        this.modal.form.edit.step = 7;
+        this.questions_answers(id);
+      }
+
+      if (action === 4) {
         this.modal.form.edit.step = 7;
         this.modal.form.edit.chooses = 2;
       }
@@ -6345,8 +6348,8 @@ __webpack_require__.r(__webpack_exports__);
           question_id: id
         }
       }).then(function (res) {
-        _this6.modal.form.edit.step = 7;
         _this6.forms.edit.questions.data = res.data;
+        _this6.modal.form.edit.id = id;
       })["catch"](function (error) {});
     },
     new_questions_answers: function new_questions_answers(id) {
@@ -6366,18 +6369,27 @@ __webpack_require__.r(__webpack_exports__);
           type: this.forms["new"].questions.inputs.type,
           form_id: id,
           user_id: this.user_id,
-          type_answer: this.forms["new"].questions.inputs.radio_answer
+          data_answer: this.forms["new"].questions.inputs.radio_answer
         }
       }).then(function (res) {
-        console.log(res.data);
-
         _this7.form_questions_answers(id);
 
-        _this7.modal.form.edit.step = 1;
+        _this7.modal.form.edit.id = res.data;
+
+        if (_this7.forms["new"].questions.inputs.type === 'radio') {
+          _this7.modal_form_edit(7, 4, _this7.modal.form.edit.id);
+
+          _this7.questions_answers(_this7.modal.form.edit.id);
+        } else {
+          _this7.modal.form.edit.step = 1;
+        }
+
         _this7.forms["new"].questions.inputs.radio_answer = '';
       })["catch"](function (error) {});
     },
-    alertar: function alertar(n) {},
+    alertar: function alertar(n) {
+      alert(n);
+    },
     edit_name_form: function edit_name_form(id) {
       var _this8 = this;
 
@@ -6435,8 +6447,6 @@ __webpack_require__.r(__webpack_exports__);
           type: this.forms.edit.questions.inputs.type
         }
       }).then(function (res) {
-        console.log(res.data);
-
         _this10.questions_answers(id);
 
         _this10.modal.form.edit.step = 7;
@@ -6461,6 +6471,29 @@ __webpack_require__.r(__webpack_exports__);
 
         _this11.modal.form.edit.step = 7;
       })["catch"](function (error) {});
+    },
+    add_answer_radio: function add_answer_radio(id, id_form) {
+      var _this12 = this;
+
+      axios({
+        method: 'post',
+        url: this.new_answer_radio,
+        data: {
+          token: this.token,
+          hash: this.access.hash,
+          user: this.access.user,
+          password: this.access.password,
+          status_id: 1,
+          form_id: id_form,
+          question_id: id,
+          user_id: this.user_id,
+          answer: this.forms["new"].questions.inputs.radio_answer
+        }
+      }).then(function (res) {
+        _this12.questions_answers(res.data);
+
+        _this12.modal.form.edit.step = 7;
+      })["catch"](function (error) {});
     }
   },
   data: function data() {
@@ -6477,7 +6510,8 @@ __webpack_require__.r(__webpack_exports__);
             id: 0,
             form_id: 0,
             step: 1,
-            chooses: 1
+            chooses: 1,
+            oldId: 0
           },
           new_question: {
             status: false,
@@ -30778,7 +30812,7 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "options-main-edit animation-left" },
+                        { staticClass: "options-main-edit animation-down" },
                         [
                           _c(
                             "nav",
@@ -30882,7 +30916,7 @@ var render = function () {
                       ),
                       _vm._v(" "),
                       _c("input", {
-                        staticClass: "btn-submit animation-left",
+                        staticClass: "btn-submit animation-down",
                         attrs: {
                           type: "submit",
                           value: "Alterar",
@@ -30909,7 +30943,7 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "options-main-edit animation-left" },
+                        { staticClass: "options-main-edit animation-down" },
                         [
                           _c(
                             "nav",
@@ -31178,76 +31212,7 @@ var render = function () {
                                                 ),
                                               ]
                                             ),
-                                            _vm._v(" "),
-                                            _vm.forms.new.questions.inputs
-                                              .type === "radio"
-                                              ? [
-                                                  _vm._m(15, true),
-                                                  _vm._v(" "),
-                                                  _c("div", [
-                                                    _c(
-                                                      "label",
-                                                      {
-                                                        attrs: { for: "type" },
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "Escolha inicial: "
-                                                        ),
-                                                      ]
-                                                    ),
-                                                    _vm._v(" "),
-                                                    _c("input", {
-                                                      directives: [
-                                                        {
-                                                          name: "model",
-                                                          rawName: "v-model",
-                                                          value:
-                                                            _vm.forms.new
-                                                              .questions.inputs
-                                                              .radio_answer,
-                                                          expression:
-                                                            "forms.new.questions.inputs.radio_answer",
-                                                        },
-                                                      ],
-                                                      staticStyle: {
-                                                        width: "50%",
-                                                      },
-                                                      attrs: {
-                                                        type: "text",
-                                                        name: "radio_answer",
-                                                        required: "",
-                                                      },
-                                                      domProps: {
-                                                        value:
-                                                          _vm.forms.new
-                                                            .questions.inputs
-                                                            .radio_answer,
-                                                      },
-                                                      on: {
-                                                        input: function (
-                                                          $event
-                                                        ) {
-                                                          if (
-                                                            $event.target
-                                                              .composing
-                                                          ) {
-                                                            return
-                                                          }
-                                                          _vm.$set(
-                                                            _vm.forms.new
-                                                              .questions.inputs,
-                                                            "radio_answer",
-                                                            $event.target.value
-                                                          )
-                                                        },
-                                                      },
-                                                    }),
-                                                  ]),
-                                                ]
-                                              : _vm._e(),
-                                          ],
-                                          2
+                                          ]
                                         ),
                                       ]
                                     ),
@@ -31392,7 +31357,7 @@ var render = function () {
                       ),
                       _vm._v(" "),
                       _c("input", {
-                        staticClass: "btn-submit animation-left",
+                        staticClass: "btn-submit animation-down",
                         attrs: {
                           type: "submit",
                           value: "Adicionar campo",
@@ -31419,7 +31384,7 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "div",
-                        { staticClass: "options-main-edit animation-left" },
+                        { staticClass: "options-main-edit animation-down" },
                         [
                           this.modal.form.edit.step === 6
                             ? _c("nav", [
@@ -31461,7 +31426,7 @@ var render = function () {
                                                           ) {
                                                             return _vm.modal_form_edit(
                                                               7,
-                                                              1,
+                                                              2,
                                                               questions.id
                                                             )
                                                           },
@@ -31477,7 +31442,7 @@ var render = function () {
                                                           ) {
                                                             return _vm.modal_form_edit(
                                                               8,
-                                                              2,
+                                                              1,
                                                               questions.id
                                                             )
                                                           },
@@ -31523,7 +31488,7 @@ var render = function () {
                         _c(
                           "div",
                           {
-                            staticClass: "field-edit-form animation-left",
+                            staticClass: "field-edit-form animation-down",
                             staticStyle: {
                               "max-height": "14vh",
                               "overflow-y": "auto",
@@ -31655,7 +31620,7 @@ var render = function () {
                                 "div",
                                 {
                                   staticClass:
-                                    "options-main-edit inputs-li animation-left",
+                                    "options-main-edit inputs-li animation-down",
                                 },
                                 [
                                   _c(
@@ -31685,14 +31650,9 @@ var render = function () {
                                                 staticStyle: {
                                                   "justify-content": "left",
                                                 },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.alertar(1)
-                                                  },
-                                                },
                                               },
                                               [
-                                                _vm._m(16),
+                                                _vm._m(15),
                                                 _vm._v(" "),
                                                 _c("input", {
                                                   directives: [
@@ -31752,16 +31712,9 @@ var render = function () {
                                                         padding: "5px 20px",
                                                         gap: ".5rem",
                                                       },
-                                                      on: {
-                                                        click: function (
-                                                          $event
-                                                        ) {
-                                                          return _vm.alertar(1)
-                                                        },
-                                                      },
                                                     },
                                                     [
-                                                      _vm._m(17),
+                                                      _vm._m(16),
                                                       _vm._v(" "),
                                                       _c("div", [
                                                         _c("input", {
@@ -31894,16 +31847,9 @@ var render = function () {
                                                         padding: "5px 20px",
                                                         gap: ".5rem",
                                                       },
-                                                      on: {
-                                                        click: function (
-                                                          $event
-                                                        ) {
-                                                          return _vm.alertar(1)
-                                                        },
-                                                      },
                                                     },
                                                     [
-                                                      _vm._m(18),
+                                                      _vm._m(17),
                                                       _vm._v(" "),
                                                       _c("div", [
                                                         _c("input", {
@@ -31978,7 +31924,10 @@ var render = function () {
                                                           $event
                                                         ) {
                                                           return _vm.modal_form_edit(
-                                                            2
+                                                            7,
+                                                            4,
+                                                            _vm.modal.form.edit
+                                                              .id
                                                           )
                                                         },
                                                       },
@@ -32016,7 +31965,79 @@ var render = function () {
                         _vm.modal.form.edit.chooses === 2
                           ? [
                               _c("div", { staticClass: "new-chooses" }, [
-                                _c("h6", [_vm._v("Remover campos")]),
+                                _c("div", { staticClass: "chooses" }, [
+                                  _c("div", { staticClass: "choose" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.forms.new.questions.inputs
+                                              .radio_answer,
+                                          expression:
+                                            "forms.new.questions.inputs.radio_answer",
+                                        },
+                                      ],
+                                      attrs: {
+                                        type: "text",
+                                        name: "answer",
+                                        id: "answer",
+                                      },
+                                      domProps: {
+                                        value:
+                                          _vm.forms.new.questions.inputs
+                                            .radio_answer,
+                                      },
+                                      on: {
+                                        input: function ($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.forms.new.questions.inputs,
+                                            "radio_answer",
+                                            $event.target.value
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "choose",
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.add_answer_radio(
+                                            _vm.modal.form.edit.id,
+                                            1
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fi fi-rr-add",
+                                        staticStyle: { color: "#132e7d" },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticStyle: {
+                                            "font-size": "1.2rem",
+                                            color: "#646464",
+                                          },
+                                        },
+                                        [_vm._v("Adicionar")]
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("h6", [_vm._v("Campos")]),
                                 _vm._v(" "),
                                 _c(
                                   "div",
@@ -32064,7 +32085,7 @@ var render = function () {
                 _c("div", { staticClass: "options-edit-form" }, [
                   _c("h6", [_vm._v("Menu de edição")]),
                   _vm._v(" "),
-                  _vm._m(19),
+                  _vm._m(18),
                   _vm._v(" "),
                   _c("nav", [
                     _c("ul", [
@@ -32153,7 +32174,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _vm._m(20),
+              _vm._m(19),
               _vm._v(" "),
               _c("div", { staticClass: "alert-box" }, [
                 _c("div", { staticClass: "alert-msg" }, [
@@ -32170,9 +32191,9 @@ var render = function () {
                       },
                     },
                     [
-                      _vm._m(21),
+                      _vm._m(20),
                       _vm._v(" "),
-                      _vm._m(22),
+                      _vm._m(21),
                       _vm._v(" "),
                       _c("div", { staticClass: "i-gree" }, [
                         _c(
@@ -32480,14 +32501,6 @@ var staticRenderFns = [
         _vm._v("Título do campo"),
       ]),
       _c("b", { staticStyle: { color: "var(--color-red)" } }, [_vm._v(" *")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "border-divisor" }, [
-      _c("div", { staticClass: "item-divisor" }),
     ])
   },
   function () {

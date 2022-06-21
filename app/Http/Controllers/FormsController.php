@@ -61,17 +61,9 @@ class FormsController extends Controller
             }
 
             if($request->input('type') === 'radio'){
-                $formAnswer =   FormAnswer::create([
-                                    'status_id' => $request->input('status_id'),
-                                    'answer' => $request->input('type_answer'),
-                                    'form_id' => $request->input('form_id'),
-                                    'question_id' => $question->id,
-                                    'user_id' => $request->input('user_id'),
-                                    'created_at' => Carbon::now(),
-                                    'updated_at' => Carbon::now()
-                ]);
 
-                return response($formAnswer);
+                return response()->json($question->id);
+
 
             } else {
 
@@ -89,7 +81,6 @@ class FormsController extends Controller
             }
 
         }
-
 
 
         return response("Adicionado com sucesso!");
@@ -195,6 +186,20 @@ class FormsController extends Controller
 
        return response($form, 200);
 
+    }
+
+    public function new_answer(Request $request)
+    {
+
+        $request = $request->only('status_id', 'answer', 'form_id', 'question_id', 'user_id');
+
+
+        $answer = FormAnswer::create($request);
+
+        return response()->json($answer->question_id);
+
+
+        return response()->json('nova escolha radio');
     }
 
 }

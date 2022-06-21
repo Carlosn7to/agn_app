@@ -38,6 +38,7 @@ Route::middleware(\App\Http\Middleware\VerifyHash::class)->prefix('formularios')
         Route::prefix('escolhas')->group(function()
         {
             Route::post('/delete', [\App\Http\Controllers\FormsController::class, 'delete_answer'])->name('api.answers.delete');
+            Route::post('/new', [\App\Http\Controllers\FormsController::class, 'new_answer'])->name('api.answer.new');
         });
     });
 });

@@ -1061,18 +1061,18 @@ ul {
 }
 
 
-.animation-left {
-    animation: left .3s forwards;
+.animation-down {
+    animation: down .3s forwards;
 }
 
-@keyframes left {
+@keyframes down {
     from {
         opacity: .2;
-        transform: translateX(100px);
+        transform: translateY(-100px);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
     }
 }
 
@@ -1197,6 +1197,7 @@ ul {
 .chooses {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .chooses span {
@@ -1226,4 +1227,18 @@ ul {
 
 .choose:hover {
     border: 2px solid #cccccc90;
+}
+
+.choose input[type=text] {
+    font-size: 1.4rem;
+    border: none;
+    border-bottom: 2px solid #cccccc90;
+    padding: 2px 2px;
+    transition: all ease-in-out .2s;
+    background-color: transparent;
+}
+
+.choose input[type=text]:focus {
+    border-bottom: 2px solid #132e7d;
+
 }

@@ -264,7 +264,7 @@
                             <i class="fi fi-rr-arrow-small-left" @click="modal_form_edit(1)"></i>
                             <span>Editar título</span>
                         </div>
-                        <div class="options-main-edit animation-left">
+                        <div class="options-main-edit animation-down">
                             <nav>
                                 <ul v-for="form in forms.edit.data" class="field-copy">
                                     <li style="cursor: initial">
@@ -280,14 +280,14 @@
                                 </ul>
                             </nav>
                         </div>
-                        <input class="btn-submit animation-left" type="submit" value="Alterar" form="form_title">
+                        <input class="btn-submit animation-down" type="submit" value="Alterar" form="form_title">
                     </div>
                     <div class="fields-edit-form" v-if="this.modal.form.edit.step === 5">
                         <div class="back-next">
                             <i class="fi fi-rr-arrow-small-left" @click="modal_form_edit(1)"></i>
                             <span>Adicionar campos</span>
                         </div>
-                        <div class="options-main-edit animation-left">
+                        <div class="options-main-edit animation-down">
                             <nav>
                                 <ul v-for="form in forms.edit.data" class="field-copy">
                                     <form method="POST" id="form_question" @submit.prevent="new_questions_answers(form.id)">
@@ -310,17 +310,6 @@
                                                     <input type="radio" name="type" value="radio" id="radio" required v-model="forms.new.questions.inputs.type" @click="add_questions(1)">
                                                     <label for="radio">Múltiplas escolhas</label>
                                                 </div>
-                                                <template v-if="forms.new.questions.inputs.type === 'radio'">
-                                                    <div class="border-divisor">
-                                                        <div class="item-divisor">
-
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <label for="type">Escolha inicial: </label>
-                                                        <input type="text" name="radio_answer" required v-model="forms.new.questions.inputs.radio_answer" style="width: 50%">
-                                                    </div>
-                                                </template>
                                             </div>
                                         </div>
                                         <div class="field-new-question" style="flex-direction: column; justify-content: left; align-items: initial">
@@ -340,14 +329,14 @@
                                 </ul>
                             </nav>
                         </div>
-                        <input class="btn-submit animation-left" type="submit" value="Adicionar campo" form="form_question">
+                        <input class="btn-submit animation-down" type="submit" value="Adicionar campo" form="form_question">
                     </div>
                     <div class="fields-edit-form" v-if="this.modal.form.edit.step === 6">
                         <div class="back-next">
                             <i class="fi fi-rr-arrow-small-left" @click="modal_form_edit(1)"></i>
                             <span>Editar campos</span>
                         </div>
-                        <div class="options-main-edit animation-left">
+                        <div class="options-main-edit animation-down">
                             <nav v-if="this.modal.form.edit.step === 6">
                                 <ul>
                                     <template v-for="form in forms.edit.data">
@@ -355,8 +344,8 @@
                                             <li>
                                                 <span>{{ string_sanitaze(questions.question) }}</span>
                                                 <div class="btn-actions">
-                                                    <i class="fi fi-rr-edit" @click="modal_form_edit(7, 1, questions.id)"></i>
-                                                    <i class="fi fi-rr-trash" @click="modal_form_edit(8, 2, questions.id)"></i>
+                                                    <i class="fi fi-rr-edit" @click="modal_form_edit(7, 2, questions.id)"></i>
+                                                    <i class="fi fi-rr-trash" @click="modal_form_edit(8, 1, questions.id)"></i>
                                                 </div>
                                             </li>
                                         </template>
@@ -370,7 +359,7 @@
                             <i class="fi fi-rr-arrow-small-left" @click="modal_form_edit(6)"></i>
                             <span>Editar campos</span>
                         </div>
-                        <div class="field-edit-form animation-left" style="max-height: 14vh; overflow-y: auto;">
+                        <div class="field-edit-form animation-down" style="max-height: 14vh; overflow-y: auto;">
                             <template v-if="forms.edit.questions.data.force === 1">
                                 <span>{{ forms.edit.questions.data.question }} <b style="color: var(--color-red)">*</b></span>
                             </template>
@@ -396,16 +385,16 @@
                             </div>
                         </div>
                         <template v-if="modal.form.edit.chooses === 1">
-                            <div class="options-main-edit inputs-li animation-left">
+                            <div class="options-main-edit inputs-li animation-down">
                                 <form action="#" id="edit_question" @submit.prevent="edit_data_questions(forms.edit.questions.data.id)">
                                     <nav>
                                         <ul>
-                                            <li @click="alertar(1)" style="justify-content: left">
+                                            <li style="justify-content: left">
                                                 <span><b>Título do campo: </b><b style="color: var(--color-red)">*</b></span>
                                                 <input type="text" name="question" id="question" required v-model="forms.edit.questions.inputs.question">
                                             </li>
                                             <template v-if="forms.edit.questions.data.type !== 'radio'">
-                                                <li @click="alertar(1)" style="justify-content: left; flex-direction: column; align-items: initial; padding: 5px 20px; gap: .5rem">
+                                                <li style="justify-content: left; flex-direction: column; align-items: initial; padding: 5px 20px; gap: .5rem">
                                                     <span>Tipo <b style="color: var(--color-red)">*</b></span>
                                                     <div>
                                                         <input type="radio" name="type" id="text" value="text" required v-model="forms.edit.questions.inputs.type">
@@ -418,14 +407,14 @@
                                                 </li>
                                             </template>
                                             <template v-if="forms.edit.questions.data.type === 'radio'">
-                                                <li @click="alertar(1)" style="justify-content: left; flex-direction: column; align-items: initial; padding: 5px 20px; gap: .5rem">
+                                                <li style="justify-content: left; flex-direction: column; align-items: initial; padding: 5px 20px; gap: .5rem">
                                                     <span>Tipo <b style="color: var(--color-red)">*</b></span>
                                                     <div>
                                                         <input type="radio" name="radio" id="radio" value="radio" required v-model="forms.edit.questions.inputs.type">
                                                         <label for="radio">Múltiplas escolhas</label>
                                                     </div>
                                                 </li>
-                                                <li @click="modal_form_edit(2)" style="cursor: pointer">
+                                                <li @click="modal_form_edit(7,4, modal.form.edit.id)" style="cursor: pointer">
                                                     <span>Editar escolhas</span>
                                                 </li>
                                             </template>
@@ -437,7 +426,16 @@
                         </template>
                         <template v-if="modal.form.edit.chooses === 2">
                             <div class="new-chooses">
-                                <h6>Remover campos</h6>
+                                <div class="chooses">
+                                    <div class="choose">
+                                        <input type="text" name="answer" id="answer" v-model="forms.new.questions.inputs.radio_answer">
+                                    </div>
+                                    <div class="choose" @click="add_answer_radio(modal.form.edit.id, 1)">
+                                        <i class="fi fi-rr-add" style="color: #132e7d"></i>
+                                        <span style="font-size: 1.2rem; color:#646464;">Adicionar</span>
+                                    </div>
+                                </div>
+                                <h6>Campos</h6>
                                 <div class="chooses">
                                     <div class="choose" v-for="an in forms.edit.questions.data.answers" @click="delete_answers(an.id, 2, an.form_id, an.question_id)">
                                         <span>{{ an.answer }}</span>
@@ -529,7 +527,7 @@ export default {
     name: "Form",
     props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id',
         'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status',
-        'edit_question', 'delete_answer'],
+        'edit_question', 'delete_answer', 'new_answer_radio'],
     methods: {
         modal_actions(on, step, id, form_name){
             if(on === 0) {
@@ -568,10 +566,17 @@ export default {
                 this.questions_answers(id)
             }
 
-            if(step === 2) {
+            if(action === 2) {
+                this.modal.form.edit.step = 7
+                this.questions_answers(id)
+
+            }
+
+            if(action === 4) {
                 this.modal.form.edit.step = 7
                 this.modal.form.edit.chooses = 2
             }
+
 
         },
         form_action(action, id) {
@@ -711,8 +716,8 @@ export default {
                 }
             })
                 .then((res) => {
-                    this.modal.form.edit.step = 7
                     this.forms.edit.questions.data = res.data
+                    this.modal.form.edit.id = id
                 })
                 .catch((error) => {
                 })
@@ -734,21 +739,26 @@ export default {
                     type: this.forms.new.questions.inputs.type,
                     form_id: id,
                     user_id: this.user_id,
-                    type_answer: this.forms.new.questions.inputs.radio_answer
+                    data_answer: this.forms.new.questions.inputs.radio_answer
 
                 }
             })
                 .then((res) => {
-                    console.log(res.data)
                     this.form_questions_answers(id)
-                    this.modal.form.edit.step = 1
+                    this.modal.form.edit.id = res.data
+                    if(this.forms.new.questions.inputs.type === 'radio'){
+                        this.modal_form_edit(7, 4, this.modal.form.edit.id)
+                        this.questions_answers(this.modal.form.edit.id)
+                    } else {
+                        this.modal.form.edit.step = 1
+                    }
                     this.forms.new.questions.inputs.radio_answer = ''
                 })
                 .catch((error) => {
                 })
         },
         alertar(n){
-
+            alert(n)
         },
         edit_name_form(id){
             axios
@@ -810,7 +820,6 @@ export default {
                 }
             })
                 .then((res) => {
-                    console.log(res.data)
                     this.questions_answers(id)
                     this.modal.form.edit.step = 7
                 })
@@ -837,7 +846,32 @@ export default {
                 })
                 .catch((error) => {
                 })
-            }
+            },
+        add_answer_radio(id, id_form){
+            axios
+            ({
+                method: 'post',
+                url: this.new_answer_radio,
+                data: {
+                    token: this.token,
+                    hash: this.access.hash,
+                    user: this.access.user,
+                    password: this.access.password,
+                    status_id: 1,
+                    form_id: id_form,
+                    question_id: id,
+                    user_id: this.user_id,
+                    answer: this.forms.new.questions.inputs.radio_answer
+                }
+            })
+                .then((res) => {
+                    this.questions_answers(res.data)
+                    this.modal.form.edit.step = 7
+
+                })
+                .catch((error) => {
+                })
+        }
     },
     data () {
         return {
@@ -853,7 +887,8 @@ export default {
                         id: 0,
                         form_id: 0,
                         step: 1,
-                        chooses: 1
+                        chooses: 1,
+                        oldId: 0
 
                     },
                     new_question: {
