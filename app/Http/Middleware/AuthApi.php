@@ -34,29 +34,11 @@ class AuthApi
 
 
         } else {
-            return response('token inválido');
+            return response([
+                'mensagem' => 'token inválido',
+                '_token' => $request->header('_token')
+            ]);
         }
-
-        return response($result);
-
-//        if ($request->has('_token')) {
-//
-//            $token = \App\Models\AuthToken::where('status_id', 1)
-//                ->where('token', $request->input('_token'))
-//                ->where('user', $request->input('user'))
-//                ->first();
-//
-//            if (Hash::check($request->input('password'), $token->password)) {
-//
-//                return $next($request);
-//
-//            } else {
-//                return response('Data invalid[2]!');
-//            }
-//
-//        };
-//
-//        return response('Data invalid[1]!');
 
     }
 };
