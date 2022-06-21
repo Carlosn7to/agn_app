@@ -36,11 +36,19 @@ class PatternSeeder extends Seeder
         ]);
 
         DB::table('hash_apis')->insert([
-            'id' => 1,
             'status_id' => 1,
             'hash' => 'd41d8cd98f00b204e9800998ecf8427e',
             'user'=> 'system',
             'password' => bcrypt('jF7s3o1oecRka2&ru^ovt'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        DB::table('hash_apis')->insert([
+            'status_id' => 1,
+            'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+            'user'=> 'bi_agent',
+            'password' => bcrypt('&Ql0W&^Ac9emR1lJqycy'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
