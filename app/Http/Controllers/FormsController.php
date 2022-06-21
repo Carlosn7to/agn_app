@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\FormAnswer;
 use App\Models\FormQuestion;
-use App\Models\HashApi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -148,6 +147,7 @@ class FormsController extends Controller
 
     public function all_forms()
     {
+
         $form = Form::with('questions')->with('status')->with('users')->orderBy('id', 'desc')->get();
 
         return response($form, 200);

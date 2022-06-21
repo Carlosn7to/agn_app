@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class HashApi extends Model
+class AuthToken extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'hash_apis';
-    protected $fillable = ['status_id', 'hash'];
+    protected $fillable = ['user', 'password', '_token'];
+    protected $table = 'auth_token';
 }

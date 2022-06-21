@@ -19,6 +19,7 @@
         edit_question="{{ route('api.questions.edit') }}"
         delete_answer="{{ route('api.answers.delete') }}"
         new_answer_radio="{{ route('api.answer.new') }}"
+        _token="{{ $_SESSION['token'] }}"
 
     >
 

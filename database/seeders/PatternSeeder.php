@@ -35,20 +35,18 @@ class PatternSeeder extends Seeder
             'updated_at' => Carbon::now()
         ]);
 
-        DB::table('hash_apis')->insert([
-            'status_id' => 1,
-            'hash' => 'd41d8cd98f00b204e9800998ecf8427e',
+        DB::table('auth_token')->insert([
             'user'=> 'system',
-            'password' => bcrypt('jF7s3o1oecRka2&ru^ovt'),
+            'password' => bcrypt('z9Z2O^QcAD#u2eT9c&bw'),
+            '_token' => '794f36dfa3d83918b758ae1634ff5cca99c32c8c3f898e87b1ba11580f712a45e6e6d8c3a11a1cb9ffb574c025bf065c845f16ce004eb91d87950ac9426a4ef7',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
 
-        DB::table('hash_apis')->insert([
-            'status_id' => 1,
-            'hash' => 'da39a3ee5e6b4b0d3255bfef95601890afd80709',
+        DB::table('auth_token')->insert([
             'user'=> 'bi_agent',
             'password' => bcrypt('&Ql0W&^Ac9emR1lJqycy'),
+            '_token' => '277bae7c29762a1e33f5d1bccf39715c35d7e009fd3d7b76d97ab3f7bd0b1cb0f140c0dc6f1f3c357601aacd834996a41659eeef047379d59ee3f45d7b16a88c',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

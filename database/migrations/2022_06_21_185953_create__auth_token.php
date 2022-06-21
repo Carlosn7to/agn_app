@@ -13,19 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hash_apis', function (Blueprint $table) {
+        Schema::create('auth_token', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('status_id');
-            $table->string('hash', 255);
             $table->string('user', 255);
-            $table->string('password', 255);
+            $table->string('password');
+            $table->string('_token', 255);
             $table->timestamps();
             $table->softDeletes();
-
-
-            // Relacionamento
-
-            $table->foreign('status_id')->references('id')->on('status');
         });
     }
 
@@ -36,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hash_apis');
+        Schema::dropIfExists('auth_token');
     }
 };

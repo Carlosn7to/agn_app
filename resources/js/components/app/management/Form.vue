@@ -527,7 +527,7 @@ export default {
     name: "Form",
     props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id',
         'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status',
-        'edit_question', 'delete_answer', 'new_answer_radio'],
+        'edit_question', 'delete_answer', 'new_answer_radio', '_token'],
     methods: {
         modal_actions(on, step, id, form_name){
             if(on === 0) {
@@ -581,18 +581,16 @@ export default {
         },
         form_action(action, id) {
                 // Ativar ou inativar o formulário
-
             axios
             ({
                 method: 'post',
                 url: this.update_status_form,
                 data: {
-                    token: this.token,
-                    hash: this.access.hash,
-                    user: this.access.user,
-                    password: this.access.password,
                     action: action,
                     form_id: id,
+                },
+                headers: {
+                    _token:this._token
                 }
             })
                 .then((res) => {
@@ -607,8 +605,13 @@ export default {
 
         },
         get_all_forms(){
-            axios
-                .get(this.get_forms_all)
+            axios({
+                method: 'get',
+                url: this.get_forms_all,
+                headers: {
+                    _token: this.access._token
+                }
+            })
                 .then((res) => {
                     this.data = res.data
                 })
@@ -616,8 +619,13 @@ export default {
                 })
         },
         get_form(id) {
-            axios
-                .get(this.get_questions+'/'+id)
+            axios({
+                method: 'get',
+                url: this.get_questions+'/'+id,
+                headers: {
+                    _token:this._token
+                }
+            })
                 .then((res) => {
                     this.form_data = res.data
                 })
@@ -646,19 +654,17 @@ export default {
             this.class.form.id = n
         },
         post_form(){
-
             axios
                 ({
                     method: 'post',
                     url: this.form_new,
                     data: {
-                        token: this.token,
-                        hash: 'd41d8cd98f00b204e9800998ecf8427e',
-                        user: 'system',
-                        password: 'jF7s3o1oecRka2&ru^ovt',
                         user_id: this.user_id,
                         name: this.forms.new.inputs.name,
                         description: this.forms.new.inputs.description
+                    },
+                    headers: {
+                        _token: this._token
                     }
                 })
                 .then((res) => {
@@ -688,11 +694,10 @@ export default {
                 method: 'post',
                 url: this.get_form_questions_answers,
                 data: {
-                    token: this.token,
-                    hash: 'd41d8cd98f00b204e9800998ecf8427e',
-                    user: 'system',
-                    password: 'jF7s3o1oecRka2&ru^ovt',
                     form_id: id,
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -702,17 +707,15 @@ export default {
                 })
         },
         questions_answers(id){
-
             axios
             ({
                 method: 'post',
                 url: this.get_question_answers,
                 data: {
-                    token: this.token,
-                    hash: 'd41d8cd98f00b204e9800998ecf8427e',
-                    user: 'system',
-                    password: 'jF7s3o1oecRka2&ru^ovt',
                     question_id: id,
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -729,10 +732,6 @@ export default {
                 method: 'post',
                 url: this.new_question,
                 data: {
-                    token: this.token,
-                    hash: 'd41d8cd98f00b204e9800998ecf8427e',
-                    user: 'system',
-                    password: 'jF7s3o1oecRka2&ru^ovt',
                     status_id: 1,
                     question: this.forms.new.questions.inputs.question,
                     force: this.forms.new.questions.inputs.force,
@@ -740,7 +739,9 @@ export default {
                     form_id: id,
                     user_id: this.user_id,
                     data_answer: this.forms.new.questions.inputs.radio_answer
-
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -766,12 +767,11 @@ export default {
                 method: 'post',
                 url: this.edit_form,
                 data: {
-                    token: this.token,
-                    hash: 'd41d8cd98f00b204e9800998ecf8427e',
-                    user: 'system',
-                    password: 'jF7s3o1oecRka2&ru^ovt',
                     form_id: id,
                     name: this.forms.edit.inputs.name
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -789,12 +789,11 @@ export default {
                 method: 'post',
                 url: this.edit_question_status,
                 data: {
-                    token: this.token,
-                    hash: this.access.hash,
-                    user: this.access.user,
-                    password: this.access.password,
                     question_id: id,
                     status: status
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -810,13 +809,12 @@ export default {
                 method: 'post',
                 url: this.edit_question,
                 data: {
-                    token: this.token,
-                    hash: this.access.hash,
-                    user: this.access.user,
-                    password: this.access.password,
                     question_id: id,
                     question: this.forms.edit.questions.inputs.question,
                     type: this.forms.edit.questions.inputs.type
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -832,12 +830,11 @@ export default {
                 method: 'post',
                 url: this.delete_answer,
                 data: {
-                    token: this.token,
-                    hash: this.access.hash,
-                    user: this.access.user,
-                    password: this.access.password,
                     answer_id: id,
                     status: status
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -853,15 +850,14 @@ export default {
                 method: 'post',
                 url: this.new_answer_radio,
                 data: {
-                    token: this.token,
-                    hash: this.access.hash,
-                    user: this.access.user,
-                    password: this.access.password,
                     status_id: 1,
                     form_id: id_form,
                     question_id: id,
                     user_id: this.user_id,
                     answer: this.forms.new.questions.inputs.radio_answer
+                },
+                headers: {
+                    _token: this._token
                 }
             })
                 .then((res) => {
@@ -952,7 +948,7 @@ export default {
                 }
             },
             access: {
-                hash: 'd41d8cd98f00b204e9800998ecf8427e',
+                _token: this._token,
                 user: 'system',
                 password: 'jF7s3o1oecRka2&ru^ovt',
             }

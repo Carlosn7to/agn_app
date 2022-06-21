@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\AuthApi;
+use App\Models\AuthToken;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,6 +21,11 @@ class ActionsController extends Controller
         {
             $_SESSION['email'] = $user->email;
             $_SESSION['id'] = $user->id;
+
+            $token = AuthToken::where('user','system')->first();
+
+            $_SESSION['token'] = $token->_token;
+
             return redirect()->route('app.home');
         } else {
             return redirect()->route('web.home');
