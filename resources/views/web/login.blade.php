@@ -1,7 +1,7 @@
 
 @extends('web._layout.base')
 
-@section('title', 'Login - Agn Tools')
+@section('title', 'Login - Age Tools')
 
 @section('content')
     <login-component

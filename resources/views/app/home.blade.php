@@ -1,7 +1,7 @@
 
 @extends('app._layout.base')
 
-@section('title', 'Início - Agn Tools')
+@section('title', 'Início - Age Tools')
 
 @section('content')
     <home-app-component

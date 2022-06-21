@@ -1,7 +1,7 @@
 
 @extends('app._layout.base')
 
-@section('title', 'Formulários - Agn Tools')
+@section('title', 'Formulários - Age Tools')
 
 @section('content')
 
