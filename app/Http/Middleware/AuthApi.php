@@ -35,8 +35,7 @@ class AuthApi
 
         } else {
             return response([
-                'mensagem' => 'token inválido',
-                '_token' => $request->header('auth')
+                'mensagem' => 'token inválido'
             ]);
         }
 
