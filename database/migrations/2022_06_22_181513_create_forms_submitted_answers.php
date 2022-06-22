@@ -13,17 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('worksheets', function (Blueprint $table) {
+        Schema::create('forms_submitted_answers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('status_id');
-            $table->string('name', 255);
+            $table->unsignedBigInteger('worksheet_id');
             $table->unsignedBigInteger('form_id');
+            $table->unsignedBigInteger('form_submitted_id');
+            $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('answer', 500);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('status_id')->references('id')->on('status');
+            $table->foreign('worksheet_id')->references('id')->on('worksheets');
             $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('form_submitted_id')->references('id')->on('forms_submitted');
+            $table->foreign('question_id')->references('id')->on('forms_questions');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -35,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('worksheets');
+        Schema::dropIfExists('forms_submitted_answers');
     }
 };

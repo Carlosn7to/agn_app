@@ -90,6 +90,6 @@ export default {
 
 <style scoped>
     .management-form {
-        width: 80%;
+        width: 90%;
     }
 </style>

@@ -9,6 +9,10 @@
 
         <Worksheet
             v-if="step === 'Worksheet'"
+            :api_worksheet_answers="this.api_worksheet_answers"
+            :api_questions_list="this.api_questions_list"
+            :authorization="this.authorization"
+            :string_sanitize="this.string_sanitize"
         />
     </div>
 </template>
@@ -16,15 +20,25 @@
 <script>
 
 import ListWorksheets from "./ListWorksheets";
-
+import Worksheet from "./Worksheet";
 export default {
     name: "Worksheets",
     props: {
         authorization: {
-            type: String
+            type: String,
+            required: true
         },
         api_worksheets_list: {
-            type: String
+            type: String,
+            required: true
+        },
+        api_worksheet_answers: {
+            type: String,
+            required: true
+        },
+        api_questions_list: {
+            type: String,
+            required: true
         }
     },
     methods: {
@@ -42,12 +56,13 @@ export default {
     },
     data () {
         return {
-            step: 'ListWorksheets',
+            step: 'Worksheet',
             data: {}
         }
     },
     components: {
         ListWorksheets,
+        Worksheet
     },
     computed: {},
     beforeMount() {

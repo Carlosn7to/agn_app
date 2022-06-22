@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Worksheets;
 
 use App\Http\Controllers\Controller;
-use App\Models\WorkSheets;
+use App\Models\WorkSheet;
+use App\Models\FormSubmittedAnswer;
 use Illuminate\Http\Request;
 
 class WorksheetController extends Controller
@@ -15,7 +16,16 @@ class WorksheetController extends Controller
 
     public function list(Request $request)
     {
-        $worksheet = WorkSheets::select('id', 'name', 'status_id', 'form_id', 'user_id')->where('status_id', 1)->with('users')->with('status')->get();
+        $worksheet = WorkSheet::select('id', 'name', 'status_id', 'user_id')->where('status_id', 1)->with('users')->with('status')->get();
+
+        return response()->json($worksheet);
+    }
+
+    public function list_answers(Request $request, $id)
+    {
+
+        $worksheet = WorkSheet::where('id', $id)->select('id', 'name', 'user_id', 'status_id')->with('formsSubmitteds')->first();
+
 
         return response()->json($worksheet);
     }

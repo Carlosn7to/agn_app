@@ -12,7 +12,7 @@ class Form extends Model
     use SoftDeletes;
 
     protected $table = 'forms';
-    protected $fillable = ['status_id', 'name','description', 'icon_id', 'user_id', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['status_id', 'name','description', 'icon_id', 'user_id','worksheet_id', 'created_at', 'updated_at', 'deleted_at'];
 
     public function questions()
     {
@@ -22,6 +22,11 @@ class Form extends Model
     public function questions_answers()
     {
         return $this->hasMany(FormQuestion::class, 'form_id')->where('status_id', 1)->with('answers');
+    }
+
+    public function questions_worksheet()
+    {
+        return $this->hasMany(FormQuestion::class, 'form_id')->select('id', 'question', 'form_id')->with('answers_user');
     }
 
 

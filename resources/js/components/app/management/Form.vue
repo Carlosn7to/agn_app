@@ -745,6 +745,7 @@ export default {
                 }
             })
                 .then((res) => {
+                    console.log(res)
                     this.form_questions_answers(id)
                     this.modal.form.edit.id = res.data
                     if(this.forms.new.questions.inputs.type === 'radio'){
@@ -966,5 +967,9 @@ export default {
 </script>
 
 <style scoped>
+
+.management-form {
+    width: 90%;
+}
 
 </style>

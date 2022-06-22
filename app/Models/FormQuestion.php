@@ -23,4 +23,9 @@ class FormQuestion extends Model
     {
         return $this->hasMany(FormAnswer::class, 'question_id')->where('status_id', 1);
     }
+
+    public function answers_user()
+    {
+        return $this->hasMany(FormSubmittedAnswer::class, 'question_id')->select('id', 'question_id', 'answer', 'user_id');
+    }
 }

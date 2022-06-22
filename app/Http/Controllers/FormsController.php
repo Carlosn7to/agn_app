@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\FormAnswer;
 use App\Models\FormQuestion;
-use App\Models\WorkSheets;
+use App\Models\WorkSheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -25,21 +25,24 @@ class FormsController extends Controller
 
         } else {
 
+            $worksheet = WorkSheet::create([
+                'status_id' => 3,
+                'name' => $request->input('name'),
+                'user_id' => $request->input('user_id')
+            ]);
+
+
             $form = Form::create([
                         'status_id' => 3,
                         'name' => $request->input('name'),
                         'description' => $request->input('description'),
                         'user_id' => $request->input('user_id'),
+                        'worksheet_id' => $worksheet->id,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
 
-            $worksheet = WorkSheets::create([
-                        'status_id' => 3,
-                        'name' => $request->input('name'),
-                        'form_id' => $form->id,
-                        'user_id' => $request->input('user_id')
-                    ]);
+
 
         };
 
@@ -61,22 +64,24 @@ class FormsController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
+
         if($question->question) {
 
             $form = Form::where('id', $question->form_id)->where('status_id', 3)->first();
 
             if(isset($form->name)) {
+
+                $worksheet = WorkSheet::where('id', $form->worksheet_id)->first();
+
+                $worksheet->update(['status_id' => 1]);
+
                 $form = $form->update(['status_id' => 1]);
 
-                WorkSheets::update([
-                    'status_id' => 1
-                ]);
             }
 
             if($request->input('type') === 'radio'){
 
                 return response()->json($question->id);
-
 
             } else {
 
@@ -93,8 +98,7 @@ class FormsController extends Controller
                 return response($formAnswer);
             }
 
-        }
-
+          }
 
         return response("Adicionado com sucesso!");
     }
@@ -104,6 +108,16 @@ class FormsController extends Controller
         $form = Form::where('status_id', 1)->with('questions')->with('status')->with('users')->get();
 
         return response($form, 200);
+    }
+
+    public function get_questions(Request $request, $id)
+    {
+        // Trás as perguntas que estão disponíveis no formulário
+
+        $questions = FormQuestion::where('form_id', $id)->select('id', 'question')->get();
+
+        return response($questions, 200);
+
     }
 
     public function questions_index(Request $request, $id)
