@@ -23,6 +23,7 @@
             mng_form="{{ route('app.management.forms') }}"
             get_user="{{ route('api.user') }}"
             user_id="{{ $_SESSION['id'] }}"
+            page_worksheets="{{ route('app.worksheets') }}"
         ></menu-app-component>
         @yield('content')
     </div>

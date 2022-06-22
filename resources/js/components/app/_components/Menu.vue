@@ -31,13 +31,18 @@
                     </div>
                 </div>
                 <div class="list-menu">
-                    <span>Agendamentos</span>
+                    <span>Operacional</span>
                     <nav>
                         <ul>
                             <li>
                                 <a :href="page_forms">
-                                    <i class="fi fi-rr-add"></i>
-                                    <span>Novo agendamento</span>
+                                    <i class="fi fi-rr-form"></i>
+                                    <span>Formulários</span>
+                                </a>
+                            </li><li>
+                                <a :href="page_worksheets">
+                                    <i class="fi fi-rr-file-spreadsheet"></i>
+                                    <span>Planilhas</span>
                                 </a>
                             </li>
                         </ul>
@@ -77,7 +82,7 @@
 <script>
 export default {
     name: "Menu",
-    props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form', 'get_user', 'user_id'],
+    props: ['logo_company', 'user_photo', 'page_home', 'page_forms', 'mng_form', 'get_user', 'user_id', 'page_worksheets'],
     methods: {},
     data () {
         return {

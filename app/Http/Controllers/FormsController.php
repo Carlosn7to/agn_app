@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\FormAnswer;
 use App\Models\FormQuestion;
+use App\Models\WorkSheets;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -15,25 +16,34 @@ class FormsController extends Controller
         return view('app.forms.home');
     }
 
-    public function new(Request $request)
+    public function create(Request $request)
     {
         $form = Form::where('name', $request->input('name'))->where('status_id', '<>' ,2)->first();
 
         if(isset($form->name)) {
             return response(['message' => 'Formulário já existe!', 'type' => 'trigger']);
+
         } else {
-            Form::create([
-                'status_id' => 3,
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'user_id' => $request->input('user_id'),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]);
+
+            $form = Form::create([
+                        'status_id' => 3,
+                        'name' => $request->input('name'),
+                        'description' => $request->input('description'),
+                        'user_id' => $request->input('user_id'),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+
+            $worksheet = WorkSheets::create([
+                        'status_id' => 3,
+                        'name' => $request->input('name'),
+                        'form_id' => $form->id,
+                        'user_id' => $request->input('user_id')
+                    ]);
+
         };
 
-        return response("formulário criado com sucesso!");
-
+        return response($worksheet);
 
     }
 

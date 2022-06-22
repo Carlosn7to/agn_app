@@ -1,5 +1,5 @@
 <template>
-    <div class="container-app" style="padding: 2vh 2vw;">
+    <div class="container-app">
         <h6>Gerenciamento de formulários</h6>
         <button @click="add_form(1)" class="new-btn">Novo formulário</button>
         <div class="management-form">
@@ -56,7 +56,7 @@
                             <div style="display: flex; align-items: center; gap: 1rem">
                                 <i class="fi fi-rr-checkbox" style="font-size: 1.8rem; color: #EC344E"></i>
                                 <p>
-                                    Remoção da agenda vinculada
+                                    Remoção da planilha vinculada
                                 </p>
                             </div>
                             <div style="display: flex; align-items: center; gap: 1rem">
@@ -96,7 +96,7 @@
                             <div style="display: flex; align-items: center; gap: 1rem">
                                 <i class="fi fi-rr-checkbox" style="font-size: 1.8rem; color: #4AD09E"></i>
                                 <p>
-                                    Adição da agenda vinculada
+                                    Adição da planilha vinculada
                                 </p>
                             </div>
                             <div style="display: flex; align-items: center; gap: 1rem">
@@ -136,7 +136,7 @@
                             <div style="display: flex; align-items: center; gap: 1rem">
                                 <i class="fi fi-rr-checkbox" style="font-size: 1.8rem; color: #EC344E"></i>
                                 <p>
-                                    Remoção da agenda vinculada
+                                    Remoção da planilha vinculada
                                 </p>
                             </div>
                             <div style="display: flex; align-items: center; gap: 1rem">
@@ -164,7 +164,7 @@
                 <div class="selections-form">
                     <h6>Formulário de {{ this.modal.form.use.name }}</h6>
                     <form :action="new_form" method="POST" name="form" autocomplete="off" id="form">
-                        <input type="hidden" name="auth" :value="token">
+                        <input type="hidden" name="authorization" :value="token">
                         <template v-for="data in form_data">
                             <div class="item-selection-form">
                                 <template v-if="data.force === 1">
@@ -527,7 +527,7 @@ export default {
     name: "Form",
     props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id',
         'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status',
-        'edit_question', 'delete_answer', 'new_answer_radio', 'auth'],
+        'edit_question', 'delete_answer', 'new_answer_radio', 'authorization'],
     methods: {
         modal_actions(on, step, id, form_name){
             if(on === 0) {
@@ -590,7 +590,7 @@ export default {
                     form_id: id,
                 },
                 headers: {
-                    auth:this.auth
+                    authorization:this.authorization
                 }
             })
                 .then((res) => {
@@ -609,7 +609,7 @@ export default {
                 method: 'get',
                 url: this.get_forms_all,
                 headers: {
-                    auth: this.access.auth
+                    authorization: this.access.authorization
                 }
             })
                 .then((res) => {
@@ -623,7 +623,7 @@ export default {
                 method: 'get',
                 url: this.get_questions+'/'+id,
                 headers: {
-                    auth:this.auth
+                    authorization:this.authorization
                 }
             })
                 .then((res) => {
@@ -664,7 +664,7 @@ export default {
                         description: this.forms.new.inputs.description
                     },
                     headers: {
-                        auth: this.auth
+                        authorization: this.authorization
                     }
                 })
                 .then((res) => {
@@ -697,7 +697,7 @@ export default {
                     form_id: id,
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -715,7 +715,7 @@ export default {
                     question_id: id,
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -741,7 +741,7 @@ export default {
                     data_answer: this.forms.new.questions.inputs.radio_answer
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -771,7 +771,7 @@ export default {
                     name: this.forms.edit.inputs.name
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -793,7 +793,7 @@ export default {
                     status: status
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -814,7 +814,7 @@ export default {
                     type: this.forms.edit.questions.inputs.type
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -834,7 +834,7 @@ export default {
                     status: status
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -857,7 +857,7 @@ export default {
                     answer: this.forms.new.questions.inputs.radio_answer
                 },
                 headers: {
-                    auth: this.auth
+                    authorization: this.authorization
                 }
             })
                 .then((res) => {
@@ -948,7 +948,7 @@ export default {
                 }
             },
             access: {
-                auth: this.auth,
+                authorization: this.authorization,
                 user: 'system',
                 password: 'jF7s3o1oecRka2&ru^ovt',
             }

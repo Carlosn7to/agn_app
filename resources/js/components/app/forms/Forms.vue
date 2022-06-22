@@ -1,11 +1,11 @@
 <template>
-    <div class="container-app" style="padding: 2vh 0vw">
+    <div class="container-app">
         <div class="container-form">
             <h6>Formulários disponíveis</h6>
             <div class="items-form">
                 <div class="item-form" @click="formStep(1, data.id)" v-for="data in this.data" :key="data.id" :id="data.id">
                     <i class="fi fi-rr-form"></i>
-                    <span>Formulário de {{ data.name }}</span>
+                    <span>{{ data.name }}</span>
                 </div>
             </div>
         </div>

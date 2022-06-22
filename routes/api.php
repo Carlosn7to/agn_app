@@ -25,7 +25,7 @@ Route::middleware(\App\Http\Middleware\AuthApi::class)->prefix('formularios')->g
 
     Route::post('perguntas/escolhas', [\App\Http\Controllers\FormsController::class, 'get_form_questions_answers'])->name('api.form.questions.answers');
     Route::post('/editar', [\App\Http\Controllers\FormsController::class, 'edit_form'])->name('api.form.edit');
-    Route::post('/new', [\App\Http\Controllers\FormsController::class,'new'])->name('api.form.new');
+    Route::post('/new', [\App\Http\Controllers\FormsController::class,'create'])->name('api.form.new');
     Route::post('update/', [\App\Http\Controllers\FormsController::class, 'update_status_form'])->name('api.form.update.status');
     Route::get('/all', [\App\Http\Controllers\FormsController::class, 'all_forms'])->name('api.form.all');
 
@@ -42,6 +42,11 @@ Route::middleware(\App\Http\Middleware\AuthApi::class)->prefix('formularios')->g
             Route::post('/new', [\App\Http\Controllers\FormsController::class, 'new_answer'])->name('api.answer.new');
         });
     });
+});
+
+Route::middleware(\App\Http\Middleware\AuthApi::class)->prefix('planilhas')->group(function ()
+{
+    Route::get('', [\App\Http\Controllers\Worksheets\WorksheetController::class,'list'])->name('api.worksheets.list');
 });
 
 Route::post('formularios/adicionar/perguntas', [\App\Http\Controllers\FormsController::class, 'add_form_questions_answers'] )->name('api.form.add.questions');

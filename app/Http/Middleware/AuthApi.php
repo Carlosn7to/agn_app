@@ -20,9 +20,9 @@ class AuthApi
     public function handle(Request $request, Closure $next)
     {
 
-        if($request->header('auth')){
+        if($request->header('authorization')){
 
-            $token = AuthToken::where('_token', $request->header('auth'))->first();
+            $token = AuthToken::where('_token', $request->header('authorization'))->first();
 
             if($token->user) {
 

@@ -5,6 +5,9 @@
 
 @section('content')
 
-    <worksheet />
+    <worksheets
+        authorization="{{ $_SESSION['token'] }}"
+        api_worksheets_list="{{ route('api.worksheets.list') }}"
+    />
 
 @endsection

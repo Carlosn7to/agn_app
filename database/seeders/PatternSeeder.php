@@ -93,15 +93,7 @@ class PatternSeeder extends Seeder
             'image' => 'padrao.png',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
-
         ]);
-
-        DB::table('forms')->insert([
-            'status_id' => 1,
-            'name' => 'Mudança de endereço',
-            'user_id' => 1
-        ]);
-
 
     }
 }
