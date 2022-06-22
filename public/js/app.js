@@ -6180,7 +6180,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
-  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status', 'edit_question', 'delete_answer', 'new_answer_radio', '_token'],
+  props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id', 'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status', 'edit_question', 'delete_answer', 'new_answer_radio', 'auth'],
   methods: {
     modal_actions: function modal_actions(on, step, id, form_name) {
       if (on === 0) {
@@ -6241,7 +6241,7 @@ __webpack_require__.r(__webpack_exports__);
           form_id: id
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this.modal.status = false;
@@ -6258,7 +6258,7 @@ __webpack_require__.r(__webpack_exports__);
         method: 'get',
         url: this.get_forms_all,
         headers: {
-          _token: this.access._token
+          auth: this.access.auth
         }
       }).then(function (res) {
         _this2.data = res.data;
@@ -6271,7 +6271,7 @@ __webpack_require__.r(__webpack_exports__);
         method: 'get',
         url: this.get_questions + '/' + id,
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this3.form_data = res.data;
@@ -6308,7 +6308,7 @@ __webpack_require__.r(__webpack_exports__);
           description: this.forms["new"].inputs.description
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this4.get_all_forms();
@@ -6337,7 +6337,7 @@ __webpack_require__.r(__webpack_exports__);
           form_id: id
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this5.forms.edit.data = res.data;
@@ -6353,7 +6353,7 @@ __webpack_require__.r(__webpack_exports__);
           question_id: id
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this6.forms.edit.questions.data = res.data;
@@ -6376,7 +6376,7 @@ __webpack_require__.r(__webpack_exports__);
           data_answer: this.forms["new"].questions.inputs.radio_answer
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this7.form_questions_answers(id);
@@ -6408,7 +6408,7 @@ __webpack_require__.r(__webpack_exports__);
           name: this.forms.edit.inputs.name
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this8.form_questions_answers(id);
@@ -6428,7 +6428,7 @@ __webpack_require__.r(__webpack_exports__);
           status: status
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this9.form_questions_answers(form_id);
@@ -6448,7 +6448,7 @@ __webpack_require__.r(__webpack_exports__);
           type: this.forms.edit.questions.inputs.type
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this10.questions_answers(id);
@@ -6467,7 +6467,7 @@ __webpack_require__.r(__webpack_exports__);
           status: status
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this11.questions_answers(id_question);
@@ -6489,7 +6489,7 @@ __webpack_require__.r(__webpack_exports__);
           answer: this.forms["new"].questions.inputs.radio_answer
         },
         headers: {
-          _token: this._token
+          auth: this.auth
         }
       }).then(function (res) {
         _this12.questions_answers(res.data);
@@ -6576,7 +6576,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       access: {
-        _token: this._token,
+        auth: this.auth,
         user: 'system',
         password: 'jF7s3o1oecRka2&ru^ovt'
       }
@@ -30391,7 +30391,7 @@ var render = function () {
                   },
                   [
                     _c("input", {
-                      attrs: { type: "hidden", name: "_token" },
+                      attrs: { type: "hidden", name: "auth" },
                       domProps: { value: _vm.token },
                     }),
                     _vm._v(" "),

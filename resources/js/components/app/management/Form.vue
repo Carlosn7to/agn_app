@@ -164,7 +164,7 @@
                 <div class="selections-form">
                     <h6>Formulário de {{ this.modal.form.use.name }}</h6>
                     <form :action="new_form" method="POST" name="form" autocomplete="off" id="form">
-                        <input type="hidden" name="_token" :value="token">
+                        <input type="hidden" name="auth" :value="token">
                         <template v-for="data in form_data">
                             <div class="item-selection-form">
                                 <template v-if="data.force === 1">
@@ -527,7 +527,7 @@ export default {
     name: "Form",
     props: ['get_forms_all', 'update_status_form', 'new_form', 'get_questions', 'token', 'form_new', 'user_id',
         'get_form_questions_answers', 'edit_form', 'new_question', 'get_question_answers', 'edit_question_status',
-        'edit_question', 'delete_answer', 'new_answer_radio', '_token'],
+        'edit_question', 'delete_answer', 'new_answer_radio', 'auth'],
     methods: {
         modal_actions(on, step, id, form_name){
             if(on === 0) {
@@ -590,7 +590,7 @@ export default {
                     form_id: id,
                 },
                 headers: {
-                    _token:this._token
+                    auth:this.auth
                 }
             })
                 .then((res) => {
@@ -609,7 +609,7 @@ export default {
                 method: 'get',
                 url: this.get_forms_all,
                 headers: {
-                    _token: this.access._token
+                    auth: this.access.auth
                 }
             })
                 .then((res) => {
@@ -623,7 +623,7 @@ export default {
                 method: 'get',
                 url: this.get_questions+'/'+id,
                 headers: {
-                    _token:this._token
+                    auth:this.auth
                 }
             })
                 .then((res) => {
@@ -664,7 +664,7 @@ export default {
                         description: this.forms.new.inputs.description
                     },
                     headers: {
-                        _token: this._token
+                        auth: this.auth
                     }
                 })
                 .then((res) => {
@@ -697,7 +697,7 @@ export default {
                     form_id: id,
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -715,7 +715,7 @@ export default {
                     question_id: id,
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -741,7 +741,7 @@ export default {
                     data_answer: this.forms.new.questions.inputs.radio_answer
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -771,7 +771,7 @@ export default {
                     name: this.forms.edit.inputs.name
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -793,7 +793,7 @@ export default {
                     status: status
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -814,7 +814,7 @@ export default {
                     type: this.forms.edit.questions.inputs.type
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -834,7 +834,7 @@ export default {
                     status: status
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -857,7 +857,7 @@ export default {
                     answer: this.forms.new.questions.inputs.radio_answer
                 },
                 headers: {
-                    _token: this._token
+                    auth: this.auth
                 }
             })
                 .then((res) => {
@@ -948,7 +948,7 @@ export default {
                 }
             },
             access: {
-                _token: this._token,
+                auth: this.auth,
                 user: 'system',
                 password: 'jF7s3o1oecRka2&ru^ovt',
             }

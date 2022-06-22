@@ -20,9 +20,9 @@ class AuthApi
     public function handle(Request $request, Closure $next)
     {
 
-        if($request->header('_token')){
+        if($request->header('auth')){
 
-            $token = AuthToken::where('_token', $request->header('_token'))->first();
+            $token = AuthToken::where('_token', $request->header('auth'))->first();
 
             if($token->user) {
 
@@ -36,7 +36,7 @@ class AuthApi
         } else {
             return response([
                 'mensagem' => 'token inválido',
-                '_token' => $request->header('_token')
+                '_token' => $request->header('auth')
             ]);
         }
 
