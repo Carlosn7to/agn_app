@@ -67,6 +67,10 @@ class FormsController extends Controller
 
             if(isset($form->name)) {
                 $form = $form->update(['status_id' => 1]);
+
+                WorkSheets::update([
+                    'status_id' => 1
+                ]);
             }
 
             if($request->input('type') === 'radio'){
