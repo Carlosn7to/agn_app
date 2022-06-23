@@ -16,33 +16,47 @@
                 </div>
                 <div class="selections-form">
                        <h6>Formulário</h6>
-                    <form :action="actions_new" method="POST" name="form" autocomplete="off" id="form">
+                    <form :action="new_form_submitted" method="POST" autocomplete="off" id="formsubmitted">
                         <input type="hidden" name="_token" :value="token">
+                        <input type="hidden" name="authorization" :value="authorization">
                         <template v-for="data in form_data">
-                        <div class="item-selection-form">
-                            <template v-if="data.force === 1">
-                                <span>{{ data.question }} <b style="color: var(--color-red)">*</b></span>
+                            <input type="hidden" name="form_id" :value="data.form_id">
+                            <input type="hidden" name="worksheet_id" :value="data.form_id">
+                            <input type="hidden" name="user_id" :value="user_id">
+                            <template v-if="data.status_id === 2">
+                                <input type="hidden" :name="data.id">
                             </template>
-                            <template v-if="data.force === 0">
-                                <span>{{ data.question }}</span>
+                            <template v-if="data.status_id === 1">
+                                <div class="item-selection-form">
+                                    <template v-if="data.force === 1">
+                                        <span>{{ data.question }} <b style="color: var(--color-red)">*</b></span>
+                                    </template>
+                                    <template v-if="data.force === 0">
+                                        <span>{{ data.question }}</span>
+                                    </template>
+                                    <div class="input-selection-form" v-for="an in data.answers">
+                                        <template v-if="data.force === 1">
+                                            <template v-if="data.type === 'radio'">
+                                                <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" required>
+                                            </template>
+                                            <template v-if="data.type !== 'radio'">
+                                                <input :type="data.type" :name="data.id" :id="an.id" required>
+                                            </template>
+                                        </template>
+                                        <template v-if="data.force === 0">
+                                            <template v-if="data.type === 'radio'">
+                                                <input :type="data.type" :name="data.id" :value="an.id" :id="an.id">
+                                            </template>
+                                            <template v-if="data.type !== 'radio'">
+                                                <input :type="data.type" :name="data.id" :id="an.id">
+                                            </template>
+                                        </template>
+                                        <label for="type">{{ an.answer }}</label>
+                                    </div>
+                                </div>
                             </template>
-                            <div class="input-selection-form" v-for="an in data.answers">
-                                <template v-if="data.force === 1">
-                                    <template v-if="data.type === 'radio'">
-                                        <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" required>
-                                    </template>
-                                    <template v-if="data.type !== 'radio'">
-                                        <input :type="data.type" :name="data.id" :id="an.id" required>
-                                    </template>
-                                </template>
-                                <template v-if="data.force === 0">
-                                    <input :type="data.type" :name="data.id" :value="an.id" :id="an.id">
-                                </template>
-                                <label for="type">{{ an.answer }}</label>
-                            </div>
-                        </div>
                         </template>
-                        <input type="submit" value="Enviar" form="form" >
+                        <input type="submit" value="Enviar" form="formsubmitted" >
                     </form>
                 </div>
             </div>
@@ -53,7 +67,7 @@
 <script>
 export default {
     name: "Forms",
-    props: ['actions_new', 'token', 'forms', 'get_forms', 'get_questions'],
+    props: ['actions_new', 'token', 'forms', 'get_forms', 'get_questions', 'new_form_submitted', 'user_id', 'authorization'],
     methods: {
         formStep(status, id) {
 

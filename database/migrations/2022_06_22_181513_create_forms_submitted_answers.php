@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('form_submitted_id');
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('answer', 500);
+            $table->string('answer', 500)->nullable()->default(' ');
             $table->timestamps();
             $table->softDeletes();
 

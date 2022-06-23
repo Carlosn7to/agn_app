@@ -51,9 +51,15 @@ Route::middleware(\App\Http\Middleware\AuthApi::class)->prefix('planilhas')->gro
     Route::get('{id?}', [\App\Http\Controllers\Worksheets\WorksheetController::class, 'list_answers'])->name('api.worksheet.answers');
 });
 
+Route::middleware(\App\Http\Middleware\AuthApi::class)->prefix('forms-submitteds')->group(function ()
+{
+});
+
 Route::post('formularios/adicionar/perguntas', [\App\Http\Controllers\FormsController::class, 'add_form_questions_answers'] )->name('api.form.add.questions');
 
 
 Route::get('formularios', [\App\Http\Controllers\FormsController::class, 'index'])->name('api.form.list');
 
 Route::get('formularios/{id?}', [\App\Http\Controllers\FormsController::class, 'questions_index'])->name('api.questions.list');
+
+Route::post('forms-submitted/create', [\App\Http\Controllers\Forms\FormsSubmittedController::class, 'create'])->name('api.form-submitted.create');

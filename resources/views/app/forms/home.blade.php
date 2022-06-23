@@ -10,5 +10,8 @@
     token="{{ @csrf_token() }}"
     get_forms="{{ route('api.form.list') }}"
     get_questions="{{ route('api.questions.list') }}"
+    new_form_submitted="{{ route('api.form-submitted.create') }}"
+    user_id="{{ $_SESSION['id'] }}"
+    authorization="{{ $_SESSION['token'] }}"
     ></forms-app-component>
 @endsection

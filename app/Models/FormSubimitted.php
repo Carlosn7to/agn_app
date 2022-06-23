@@ -16,12 +16,12 @@ class FormSubimitted extends Model
 
     public function answers()
     {
-        return $this->hasMany(FormSubmittedAnswer::class, 'form_submitted_id')->select('id', 'form_submitted_id', 'question_id', 'answer')
-            ->orderBy('form_submitted_id');
+        return $this->hasMany(FormSubmittedAnswer::class, 'form_submitted_id')->select('id', 'form_submitted_id', 'question_id', 'answer')->orderBy('question_id');
     }
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'id')->select('id', 'first_name', 'last_name');
     }
+
 }

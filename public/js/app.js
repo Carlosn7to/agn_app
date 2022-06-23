@@ -5469,7 +5469,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     str_sanitize: function str_sanitize(string) {
       return this.string_sanitize(string);
-    }
+    },
+    alert: function (_alert) {
+      function alert(_x) {
+        return _alert.apply(this, arguments);
+      }
+
+      alert.toString = function () {
+        return _alert.toString();
+      };
+
+      return alert;
+    }(function (worksheet_id) {
+      alert(worksheet_id);
+    })
   },
   data: function data() {
     return {
@@ -5498,9 +5511,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
 //
 //
 //
@@ -5562,7 +5572,7 @@ __webpack_require__.r(__webpack_exports__);
           authorization: this.authorization
         }
       }).then(function (res) {
-        _this.data.questions = res.data;
+        _this.data.questions.data = res.data;
       })["catch"](function (error) {});
     },
     get_worksheet_answers: function get_worksheet_answers() {
@@ -5583,7 +5593,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       data: {
         answers: {},
-        questions: {}
+        questions: {
+          id: 1,
+          data: {}
+        }
       }
     };
   },
@@ -5860,9 +5873,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Forms",
-  props: ['actions_new', 'token', 'forms', 'get_forms', 'get_questions'],
+  props: ['actions_new', 'token', 'forms', 'get_forms', 'get_questions', 'new_form_submitted', 'user_id', 'authorization'],
   methods: {
     formStep: function formStep(status, id) {
       var _this = this;
@@ -12061,7 +12088,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-654e63c6] {\n    width: 90%;\n    background-color: #fff;\n    border-radius: 10px;\n    text-align: left;\n    margin-top: 2vh;\n    border-collapse: collapse;\n}\ntable th[data-v-654e63c6] {\n    font-size: 1.4rem;\n    color: #4a5568;\n    font-weight: 600;\n    height: 7vh;\n    border-bottom: 2px solid #cccccc40;\n    padding: 0 1vw;\n}\ntable th[data-v-654e63c6] {\n    border-right: 2px solid #cccccc40;\n}\ntable th[data-v-654e63c6]:last-child {\n    border-right: none;\n}\ntable tr td[data-v-654e63c6] {\n    font-size: 1.2rem;\n    font-weight: 500;\n    color: #333;\n    padding: 0 1vw;\n    height: 6vh\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-654e63c6] {\n    width: 90%;\n    background-color: #fff;\n    border-radius: 10px;\n    text-align: left;\n    margin-top: 2vh;\n    border-collapse: collapse;\n}\ntable th[data-v-654e63c6] {\n    font-size: 1.4rem;\n    color: #4a5568;\n    font-weight: 600;\n    height: 7vh;\n    border-bottom: 2px solid #cccccc40;\n    padding: 0 1vw;\n}\ntable th[data-v-654e63c6] {\n    border-right: 2px solid #cccccc40;\n}\ntable th[data-v-654e63c6]:last-child {\n    border-right: none;\n}\ntable tr td[data-v-654e63c6] {\n    font-size: 1.2rem;\n    font-weight: 500;\n    color: #333;\n    padding: 0 1vw;\n    height: 6vh;\n    border-bottom: 1px solid #cccccc60;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12085,7 +12112,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.management-form[data-v-ab0c1772] {\r\n    width: 90%;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.management-form[data-v-ab0c1772] {\n    width: 90%;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -30674,7 +30701,14 @@ var render = function () {
                       ? [
                           _c("i", { staticClass: "fi fi-rr-box" }),
                           _vm._v(" "),
-                          _c("i", { staticClass: "fi fi-rr-redo" }),
+                          _c("i", {
+                            staticClass: "fi fi-rr-redo",
+                            on: {
+                              click: function ($event) {
+                                return _vm.alert(worksheet.id)
+                              },
+                            },
+                          }),
                         ]
                       : _vm._e(),
                     _vm._v(" "),
@@ -30746,16 +30780,20 @@ var render = function () {
       _c("thead", [
         _c(
           "tr",
-          _vm._l(_vm.data.questions, function (question) {
-            return _c("th", [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(question.question) +
-                  "\n                "
-              ),
-            ])
-          }),
-          0
+          [
+            _vm._l(_vm.data.questions.data, function (question) {
+              return [
+                _c("th", [
+                  _vm._v(
+                    "\n                       " +
+                      _vm._s(question.question) +
+                      "\n                   "
+                  ),
+                ]),
+              ]
+            }),
+          ],
+          2
         ),
       ]),
       _vm._v(" "),
@@ -30769,17 +30807,13 @@ var render = function () {
                 [
                   _vm._l(forms.answers, function (an) {
                     return [
-                      [
-                        _c("td", [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(an.answer) +
-                              "\n                            "
-                          ),
-                        ]),
-                      ],
-                      _vm._v(" "),
-                      void 0,
+                      _c("td", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(an.answer) +
+                            "\n                        "
+                        ),
+                      ]),
                     ]
                   }),
                 ],
@@ -31055,11 +31089,10 @@ var render = function () {
                 "form",
                 {
                   attrs: {
-                    action: _vm.actions_new,
+                    action: _vm.new_form_submitted,
                     method: "POST",
-                    name: "form",
                     autocomplete: "off",
-                    id: "form",
+                    id: "formsubmitted",
                   },
                 },
                 [
@@ -31068,97 +31101,153 @@ var render = function () {
                     domProps: { value: _vm.token },
                   }),
                   _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "authorization" },
+                    domProps: { value: _vm.authorization },
+                  }),
+                  _vm._v(" "),
                   _vm._l(_vm.form_data, function (data) {
                     return [
-                      _c(
-                        "div",
-                        { staticClass: "item-selection-form" },
-                        [
-                          data.force === 1
-                            ? [
-                                _c("span", [
-                                  _vm._v(_vm._s(data.question) + " "),
-                                  _c(
-                                    "b",
-                                    {
-                                      staticStyle: {
-                                        color: "var(--color-red)",
-                                      },
-                                    },
-                                    [_vm._v("*")]
-                                  ),
-                                ]),
-                              ]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          data.force === 0
-                            ? [_c("span", [_vm._v(_vm._s(data.question))])]
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm._l(data.answers, function (an) {
-                            return _c(
+                      _c("input", {
+                        attrs: { type: "hidden", name: "form_id" },
+                        domProps: { value: data.form_id },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "hidden", name: "worksheet_id" },
+                        domProps: { value: data.form_id },
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: { type: "hidden", name: "user_id" },
+                        domProps: { value: _vm.user_id },
+                      }),
+                      _vm._v(" "),
+                      data.status_id === 2
+                        ? [
+                            _c("input", {
+                              attrs: { type: "hidden", name: data.id },
+                            }),
+                          ]
+                        : _vm._e(),
+                      _vm._v(" "),
+                      data.status_id === 1
+                        ? [
+                            _c(
                               "div",
-                              { staticClass: "input-selection-form" },
+                              { staticClass: "item-selection-form" },
                               [
                                 data.force === 1
                                   ? [
-                                      data.type === "radio"
-                                        ? [
-                                            _c("input", {
-                                              attrs: {
-                                                type: data.type,
-                                                name: data.id,
-                                                id: an.id,
-                                                required: "",
-                                              },
-                                              domProps: { value: an.id },
-                                            }),
-                                          ]
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      data.type !== "radio"
-                                        ? [
-                                            _c("input", {
-                                              attrs: {
-                                                type: data.type,
-                                                name: data.id,
-                                                id: an.id,
-                                                required: "",
-                                              },
-                                            }),
-                                          ]
-                                        : _vm._e(),
+                                      _c("span", [
+                                        _vm._v(_vm._s(data.question) + " "),
+                                        _c(
+                                          "b",
+                                          {
+                                            staticStyle: {
+                                              color: "var(--color-red)",
+                                            },
+                                          },
+                                          [_vm._v("*")]
+                                        ),
+                                      ]),
                                     ]
                                   : _vm._e(),
                                 _vm._v(" "),
                                 data.force === 0
                                   ? [
-                                      _c("input", {
-                                        attrs: {
-                                          type: data.type,
-                                          name: data.id,
-                                          id: an.id,
-                                        },
-                                        domProps: { value: an.id },
-                                      }),
+                                      _c("span", [
+                                        _vm._v(_vm._s(data.question)),
+                                      ]),
                                     ]
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _c("label", { attrs: { for: "type" } }, [
-                                  _vm._v(_vm._s(an.answer)),
-                                ]),
+                                _vm._l(data.answers, function (an) {
+                                  return _c(
+                                    "div",
+                                    { staticClass: "input-selection-form" },
+                                    [
+                                      data.force === 1
+                                        ? [
+                                            data.type === "radio"
+                                              ? [
+                                                  _c("input", {
+                                                    attrs: {
+                                                      type: data.type,
+                                                      name: data.id,
+                                                      id: an.id,
+                                                      required: "",
+                                                    },
+                                                    domProps: { value: an.id },
+                                                  }),
+                                                ]
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            data.type !== "radio"
+                                              ? [
+                                                  _c("input", {
+                                                    attrs: {
+                                                      type: data.type,
+                                                      name: data.id,
+                                                      id: an.id,
+                                                      required: "",
+                                                    },
+                                                  }),
+                                                ]
+                                              : _vm._e(),
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      data.force === 0
+                                        ? [
+                                            data.type === "radio"
+                                              ? [
+                                                  _c("input", {
+                                                    attrs: {
+                                                      type: data.type,
+                                                      name: data.id,
+                                                      id: an.id,
+                                                    },
+                                                    domProps: { value: an.id },
+                                                  }),
+                                                ]
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            data.type !== "radio"
+                                              ? [
+                                                  _c("input", {
+                                                    attrs: {
+                                                      type: data.type,
+                                                      name: data.id,
+                                                      id: an.id,
+                                                    },
+                                                  }),
+                                                ]
+                                              : _vm._e(),
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c("label", { attrs: { for: "type" } }, [
+                                        _vm._v(_vm._s(an.answer)),
+                                      ]),
+                                    ],
+                                    2
+                                  )
+                                }),
                               ],
                               2
-                            )
-                          }),
-                        ],
-                        2
-                      ),
+                            ),
+                          ]
+                        : _vm._e(),
                     ]
                   }),
                   _vm._v(" "),
                   _c("input", {
-                    attrs: { type: "submit", value: "Enviar", form: "form" },
+                    attrs: {
+                      type: "submit",
+                      value: "Enviar",
+                      form: "formsubmitted",
+                    },
                   }),
                 ],
                 2

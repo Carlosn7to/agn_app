@@ -5,23 +5,20 @@
         <table>
             <thead>
                 <tr>
-                    <th v-for="question in data.questions">
-                        {{  question.question }}
-                    </th>
+                   <template v-for="question in data.questions.data">
+                       <th>
+                           {{  question.question }}
+                       </th>
+                   </template>
                 </tr>
             </thead>
             <tbody>
                 <template v-for="forms in data.answers.forms_submitteds">
                     <tr>
                         <template v-for="an in forms.answers">
-                            <template>
-                                <td>
-                                    {{ an.answer }}
-                                </td>
-                            </template>
-                            <template>
-
-                            </template>
+                            <td>
+                                {{ an.answer }}
+                            </td>
                         </template>
                     </tr>
                 </template>
@@ -63,7 +60,7 @@ export default {
                  }
              })
                  .then((res) => {
-                     this.data.questions = res.data
+                     this.data.questions.data = res.data
                  })
                  .catch((error) => {
                  })
@@ -87,7 +84,10 @@ export default {
         return {
             data: {
                 answers: {},
-                questions: {}
+                questions: {
+                    id: 1,
+                    data: {}
+                }
             }
         }
     },
@@ -136,6 +136,7 @@ table tr td {
     font-weight: 500;
     color: #333;
     padding: 0 1vw;
-    height: 6vh
+    height: 6vh;
+    border-bottom: 1px solid #cccccc60;
 }
 </style>

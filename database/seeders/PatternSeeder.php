@@ -95,130 +95,198 @@ class PatternSeeder extends Seeder
             'updated_at' => Carbon::now()
         ]);
 
-        DB::table('worksheets')->insert([
-            'status_id' => 1,
-            'name' => 'Planilha de instalação',
-            'user_id' => 1
-        ]);
-
-        DB::table('forms')->insert([
-            'status_id' => 1,
-            'name' => 'Formulário de instalação',
-            'user_id' => 1,
-            'worksheet_id' => 1
-        ]);
-
-        DB::table('forms_questions')->insert([
-            'status_id' => 1,
-            'question' => 'Nome do cliente',
-            'force' => 1,
-            'type' => 'text',
-            'form_id' => 1,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_questions')->insert([
-            'status_id' => 1,
-            'question' => 'Endereço',
-            'force' => 1,
-            'type' => 'text',
-            'form_id' => 1,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_questions')->insert([
-            'status_id' => 1,
-            'question' => 'Cidade',
-            'force' => 1,
-            'type' => 'text',
-            'form_id' => 1,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_questions')->insert([
-            'status_id' => 1,
-            'question' => 'Data da instalação',
-            'force' => 1,
-            'type' => 'date',
-            'form_id' => 1,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_answers')->insert([
-            'status_id' => 1,
-            'answer' => '',
-            'form_id' => 1,
-            'question_id' => 1,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_answers')->insert([
-            'status_id' => 1,
-            'answer' => '',
-            'form_id' => 1,
-            'question_id' => 2,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_answers')->insert([
-            'status_id' => 1,
-            'answer' => '',
-            'form_id' => 1,
-            'question_id' => 3,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_answers')->insert([
-            'status_id' => 1,
-            'answer' => '',
-            'form_id' => 1,
-            'question_id' => 4,
-            'user_id' => 1
-        ]);
-
-        DB::table('forms_submitted')->insert([
-            'status_id' => 1,
-            'worksheet_id' => 1,
-            'form_id' => 1,
-            'user_id' => 1,
-        ]);
-
-        DB::table('forms_submitted_answers')->insert([
-            'worksheet_id' => 1,
-            'form_id' => 1,
-            'form_submitted_id' => 1,
-            'question_id' => 1,
-            'user_id' => 1,
-            'answer' => 'Carlos Neto'
-        ]);
-
-        DB::table('forms_submitted_answers')->insert([
-            'worksheet_id' => 1,
-            'form_id' => 1,
-            'form_submitted_id' => 1,
-            'question_id' => 2,
-            'user_id' => 1,
-            'answer' => 'Qn 7d conjunto 6'
-        ]);
-
-        DB::table('forms_submitted_answers')->insert([
-            'worksheet_id' => 1,
-            'form_id' => 1,
-            'form_submitted_id' => 1,
-            'question_id' => 3,
-            'user_id' => 1,
-            'answer' => 'Riacho fundo II'
-        ]);
-
-        DB::table('forms_submitted_answers')->insert([
-            'worksheet_id' => 1,
-            'form_id' => 1,
-            'form_submitted_id' => 1,
-            'question_id' => 4,
-            'user_id' => 1,
-            'answer' => '28/07/2022'
-        ]);
-
+//        DB::table('worksheets')->insert([
+//            'status_id' => 1,
+//            'name' => 'Planilha de instalação',
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms')->insert([
+//            'status_id' => 1,
+//            'name' => 'Formulário de instalação',
+//            'user_id' => 1,
+//            'worksheet_id' => 1
+//        ]);
+//
+//        DB::table('forms_questions')->insert([
+//            'status_id' => 1,
+//            'question' => 'Nome do cliente',
+//            'force' => 1,
+//            'type' => 'text',
+//            'form_id' => 1,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_questions')->insert([
+//            'status_id' => 1,
+//            'question' => 'Endereço',
+//            'force' => 1,
+//            'type' => 'text',
+//            'form_id' => 1,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_questions')->insert([
+//            'status_id' => 1,
+//            'question' => 'Cidade',
+//            'force' => 1,
+//            'type' => 'text',
+//            'form_id' => 1,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_questions')->insert([
+//            'status_id' => 1,
+//            'question' => 'Data da instalação',
+//            'force' => 1,
+//            'type' => 'date',
+//            'form_id' => 1,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_answers')->insert([
+//            'status_id' => 1,
+//            'answer' => '',
+//            'form_id' => 1,
+//            'question_id' => 1,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_answers')->insert([
+//            'status_id' => 1,
+//            'answer' => '',
+//            'form_id' => 1,
+//            'question_id' => 2,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_answers')->insert([
+//            'status_id' => 1,
+//            'answer' => '',
+//            'form_id' => 1,
+//            'question_id' => 3,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_answers')->insert([
+//            'status_id' => 1,
+//            'answer' => '',
+//            'form_id' => 1,
+//            'question_id' => 4,
+//            'user_id' => 1
+//        ]);
+//
+//        DB::table('forms_submitted')->insert([
+//            'status_id' => 1,
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'user_id' => 1,
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 1,
+//            'question_id' => 1,
+//            'user_id' => 1,
+//            'answer' => 'Carlos Neto'
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 1,
+//            'question_id' => 2,
+//            'user_id' => 1,
+//            'answer' => 'Qn 7d conjunto 6'
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 1,
+//            'question_id' => 3,
+//            'user_id' => 1,
+//            'answer' => 'Riacho fundo II'
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 1,
+//            'question_id' => 4,
+//            'user_id' => 1,
+//            'answer' => '28/07/2022'
+//        ]);
+//
+//
+//        DB::table('forms_submitted')->insert([
+//            'status_id' => 1,
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'user_id' => 1,
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 2,
+//            'question_id' => 2,
+//            'user_id' => 1,
+//            'answer' => 'Qn 7c conjunto 26'
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 2,
+//            'question_id' => 3,
+//            'user_id' => 1,
+//            'answer' => 'Riacho das Emas I'
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 2,
+//            'question_id' => 4,
+//            'user_id' => 1,
+//            'answer' => '23/06/2022'
+//        ]);
+//
+//        DB::table('forms_submitted')->insert([
+//            'status_id' => 1,
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'user_id' => 1,
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' =>3,
+//            'question_id' => 1,
+//            'user_id' => 1,
+//            'answer' => 'Eduardo Neto'
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 3,
+//            'question_id' => 3,
+//            'user_id' => 1,
+//            'answer' => 'Taguatiro'
+//        ]);
+//
+//        DB::table('forms_submitted_answers')->insert([
+//            'worksheet_id' => 1,
+//            'form_id' => 1,
+//            'form_submitted_id' => 3,
+//            'question_id' => 4,
+//            'user_id' => 1,
+//            'answer' => '17/08/2022'
+//        ]);
 
 
     }

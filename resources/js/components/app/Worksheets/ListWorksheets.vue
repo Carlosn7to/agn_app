@@ -20,7 +20,7 @@
                         <i class="fi fi-rr-edit"></i>
                         <template v-if="worksheet.status_id === 1">
                             <i class="fi fi-rr-box"></i>
-                            <i class="fi fi-rr-redo"></i>
+                            <i class="fi fi-rr-redo" @click="alert(worksheet.id)"></i>
                         </template>
                         <template v-if="worksheet.status_id === 2">
                             <i class="fi fi-rr-checkbox"></i>
@@ -69,6 +69,9 @@ export default {
         },
         str_sanitize: function (string) {
             return this.string_sanitize(string)
+        },
+        alert: function (worksheet_id) {
+            alert(worksheet_id)
         }
     },
     data () {

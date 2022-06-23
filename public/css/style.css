@@ -469,10 +469,10 @@ ul {
 
 .selections-form form {
     width: 80%;
-    height: 70%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    padding: 0 0 2vh 0;
 }
 
 .item-selection-form {
