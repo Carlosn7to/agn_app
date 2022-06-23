@@ -37,7 +37,7 @@
                                     <div class="input-selection-form" v-for="an in data.answers">
                                         <template v-if="data.force === 1">
                                             <template v-if="data.type === 'radio'">
-                                                <input :type="data.type" :name="data.id" :value="an.id" :id="an.id" required>
+                                                <input :type="data.type" :name="data.id" :value="an.answer" :id="an.id" required>
                                             </template>
                                             <template v-if="data.type !== 'radio'">
                                                 <input :type="data.type" :name="data.id" :id="an.id" required>
@@ -45,7 +45,7 @@
                                         </template>
                                         <template v-if="data.force === 0">
                                             <template v-if="data.type === 'radio'">
-                                                <input :type="data.type" :name="data.id" :value="an.id" :id="an.id">
+                                                <input :type="data.type" :name="data.id" :value="an.an.answer" :id="an.id">
                                             </template>
                                             <template v-if="data.type !== 'radio'">
                                                 <input :type="data.type" :name="data.id" :id="an.id">

@@ -31178,7 +31178,9 @@ var render = function () {
                                                       id: an.id,
                                                       required: "",
                                                     },
-                                                    domProps: { value: an.id },
+                                                    domProps: {
+                                                      value: an.answer,
+                                                    },
                                                   }),
                                                 ]
                                               : _vm._e(),
@@ -31208,7 +31210,9 @@ var render = function () {
                                                       name: data.id,
                                                       id: an.id,
                                                     },
-                                                    domProps: { value: an.id },
+                                                    domProps: {
+                                                      value: an.an.answer,
+                                                    },
                                                   }),
                                                 ]
                                               : _vm._e(),

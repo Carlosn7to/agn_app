@@ -12,7 +12,7 @@ class FormSubmittedAnswer extends Model
     use SoftDeletes;
 
     protected $table = 'forms_submitted_answers';
-    protected $fillable = ['worksheet_id', 'form_id','form_submitted_id', 'question_id', 'user_id', 'answer'];
+    protected $fillable = ['status_id', 'worksheet_id', 'form_id','form_submitted_id', 'question_id', 'user_id', 'answer'];
 
 
     public function users()

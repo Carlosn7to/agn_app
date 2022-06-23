@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\FormAnswer;
 use App\Models\FormQuestion;
+use App\Models\FormSubmittedAnswer;
 use App\Models\WorkSheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -114,7 +115,7 @@ class FormsController extends Controller
     {
         // Trás as perguntas que estão disponíveis no formulário
 
-        $questions = FormQuestion::where('form_id', $id)->select('id', 'question')->get();
+        $questions = FormQuestion::where('form_id', $id)->where('status_id', 1)->select('id', 'question')->get();
 
         return response($questions, 200);
 
@@ -145,6 +146,12 @@ class FormsController extends Controller
         $question = FormQuestion::findOrFail($request->input('question_id'));
 
         $question = $question->update(['status_id' => $request->input('status')]);
+
+        $answersSubmitted = FormSubmittedAnswer::where('question_id', $request->input('question_id'));
+
+        $answersSubmitted->update([
+            'status_id' => 2
+        ]);
 
         return response('Ok');
     }

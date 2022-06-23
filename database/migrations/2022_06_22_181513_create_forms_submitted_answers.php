@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('forms_submitted_answers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('worksheet_id');
             $table->unsignedBigInteger('form_id');
             $table->unsignedBigInteger('form_submitted_id');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('status_id')->references('id')->on('status');
             $table->foreign('worksheet_id')->references('id')->on('worksheets');
             $table->foreign('form_id')->references('id')->on('forms');
             $table->foreign('form_submitted_id')->references('id')->on('forms_submitted');

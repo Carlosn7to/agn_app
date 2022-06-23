@@ -29,6 +29,7 @@ class FormsSubmittedController extends Controller
             if($request->has($valor->id)){
 
                 FormSubmittedAnswer::create([
+                    'status_id' => 1,
                     'worksheet_id' => $request->input('worksheet_id'),
                     'form_id' => $request->input('form_id'),
                     'form_submitted_id' => $formSubmitted->id,
