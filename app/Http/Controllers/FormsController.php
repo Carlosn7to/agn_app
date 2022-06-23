@@ -115,7 +115,7 @@ class FormsController extends Controller
     {
         // Trás as perguntas que estão disponíveis no formulário
 
-        $questions = FormQuestion::where('form_id', $id)->where('status_id', 1)->select('id', 'question')->get();
+        $questions = FormQuestion::where('form_id', $id)->select('id', 'question')->get();
 
         return response($questions, 200);
 

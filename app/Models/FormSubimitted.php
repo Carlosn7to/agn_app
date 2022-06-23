@@ -16,7 +16,7 @@ class FormSubimitted extends Model
 
     public function answers()
     {
-        return $this->hasMany(FormSubmittedAnswer::class, 'form_submitted_id')->where('status_id', 1)->select('id', 'form_submitted_id', 'question_id', 'answer')->orderBy('question_id');
+        return $this->hasMany(FormSubmittedAnswer::class, 'form_submitted_id')->select('id', 'form_submitted_id', 'question_id', 'answer')->orderBy('question_id');
     }
 
     public function users()

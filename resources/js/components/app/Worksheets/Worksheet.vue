@@ -131,12 +131,15 @@ table th:last-child {
     border-right: none;
 }
 
+table tbody tr {
+    border-bottom: 1px solid #cccccc40;
+}
+
 table tr td {
     font-size: 1.2rem;
     font-weight: 500;
     color: #333;
     padding: 0 1vw;
     height: 6vh;
-    border-bottom: 1px solid #cccccc60;
 }
 </style>
