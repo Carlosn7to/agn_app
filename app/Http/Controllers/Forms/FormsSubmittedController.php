@@ -7,6 +7,7 @@ use App\Models\FormQuestion;
 use App\Models\FormSubimitted;
 use App\Models\FormSubmittedAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FormsSubmittedController extends Controller
 {
@@ -15,6 +16,7 @@ class FormsSubmittedController extends Controller
         // Busca as perguntas vinculadas ao formulário
         $formQuestions = FormQuestion::where('form_id', $request->input('form_id'))->select('id', 'question')->get();
 
+        // Cria um formulário sumbmetido
         $formSubmitted = FormSubimitted::create([
             'status_id' => 1,
             'worksheet_id' => $request->input('worksheet_id'),
@@ -44,13 +46,35 @@ class FormsSubmittedController extends Controller
 
         return redirect()->route('app.worksheets');
 
-
-
     }
-
 
     public function teste(Request $request)
     {
-        return 'oi';
+//        $formSubAns = FormSubmittedAnswer::where('question_id', $request->input('question_id'))->select('form_submitted_id')->distinct()->get();
+//
+//        //return $formSubAns->form_submitted_id;
+//
+//        foreach($formSubAns as $form ) {
+//
+//            $formSub = FormSubimitted::where('id', '<>' , $form->form_submitted_id)->get();
+//
+////            $formSubAns = FormSubmittedAnswer::create([
+////                'status_id' => 1,
+////                'worksheet_id' => 1,
+////                'form_id' => 1,
+////                'form_submitted_id' => $formSub->id,
+////                'question_id' => $request->input('question_id'),
+////                'user_id' => 1,
+////                'answer' => ' ',
+////            ]);
+//
+//
+//            echo $formSub."<br><br>";
+//            echo $formSubAns."<br><br>";
+//
+//
+//        }
+
     }
+
 }
