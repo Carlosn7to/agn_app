@@ -47,4 +47,10 @@ class FormsSubmittedController extends Controller
 
 
     }
+
+
+    public function teste(Request $request)
+    {
+        return 'oi';
+    }
 }

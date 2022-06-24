@@ -63,3 +63,5 @@ Route::get('formularios', [\App\Http\Controllers\FormsController::class, 'index'
 Route::get('formularios/{id?}', [\App\Http\Controllers\FormsController::class, 'questions_index'])->name('api.questions.list');
 
 Route::post('forms-submitted/create', [\App\Http\Controllers\Forms\FormsSubmittedController::class, 'create'])->name('api.form-submitted.create');
+
+Route::post('teste', [\App\Http\Controllers\Forms\FormsSubmittedController::class, 'teste'])->name('api.teste');
