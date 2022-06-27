@@ -21,7 +21,7 @@
                             <i class="fi fi-rr-edit" @click="modal_actions(1, 1, form.id, form.name)"></i>
                             <template v-if="form.status_id === 1">
                                 <i class="fi fi-rr-box" @click="modal_actions(1, 2, form.id, form.name)"></i>
-                                <i class="fi fi-rr-redo" @click="modal_actions(1, 4, form.id, form.name)"></i>
+<!--                                <i class="fi fi-rr-redo" @click="modal_actions(1, 4, form.id, form.name)"></i>-->
                             </template>
                             <template v-if="form.status_id === 2">
                                 <i class="fi fi-rr-checkbox" @click="modal_actions(1, 3, form.id, form.name)"></i>
@@ -745,7 +745,7 @@ export default {
                 }
             })
                 .then((res) => {
-                    console.log(res)
+                    this.forms.new.questions.inputs.question = ''
                     this.form_questions_answers(id)
                     this.modal.form.edit.id = res.data
                     if(this.forms.new.questions.inputs.type === 'radio'){
@@ -862,6 +862,7 @@ export default {
                 }
             })
                 .then((res) => {
+                    this.forms.new.questions.inputs.radio_answer = ''
                     this.questions_answers(res.data)
                     this.modal.form.edit.step = 7
 

@@ -6667,7 +6667,7 @@ __webpack_require__.r(__webpack_exports__);
           authorization: this.authorization
         }
       }).then(function (res) {
-        console.log(res);
+        _this7.forms["new"].questions.inputs.question = '';
 
         _this7.form_questions_answers(id);
 
@@ -6782,6 +6782,8 @@ __webpack_require__.r(__webpack_exports__);
           authorization: this.authorization
         }
       }).then(function (res) {
+        _this12.forms["new"].questions.inputs.radio_answer = '';
+
         _this12.questions_answers(res.data);
 
         _this12.modal.form.edit.step = 7;
@@ -12088,7 +12090,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-654e63c6] {\n    width: 90%;\n    background-color: #fff;\n    border-radius: 10px;\n    text-align: left;\n    margin-top: 2vh;\n    border-collapse: collapse;\n}\ntable th[data-v-654e63c6] {\n    font-size: 1.4rem;\n    color: #4a5568;\n    font-weight: 600;\n    height: 7vh;\n    border-bottom: 2px solid #cccccc40;\n    padding: 0 1vw;\n}\ntable th[data-v-654e63c6] {\n    border-right: 2px solid #cccccc40;\n}\ntable th[data-v-654e63c6]:last-child {\n    border-right: none;\n}\ntable tbody tr[data-v-654e63c6] {\n    border-bottom: 1px solid #cccccc40;\n}\ntable tr td[data-v-654e63c6] {\n    font-size: 1.2rem;\n    font-weight: 500;\n    color: #333;\n    padding: 0 1vw;\n    height: 6vh;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-654e63c6] {\r\n    width: 90%;\r\n    background-color: #fff;\r\n    border-radius: 10px;\r\n    text-align: left;\r\n    margin-top: 2vh;\r\n    border-collapse: collapse;\n}\ntable th[data-v-654e63c6] {\r\n    font-size: 1.4rem;\r\n    color: #4a5568;\r\n    font-weight: 600;\r\n    height: 7vh;\r\n    border-bottom: 2px solid #cccccc40;\r\n    padding: 0 1vw;\n}\ntable th[data-v-654e63c6] {\r\n    border-right: 2px solid #cccccc40;\n}\ntable th[data-v-654e63c6]:last-child {\r\n    border-right: none;\n}\ntable tbody tr[data-v-654e63c6] {\r\n    border-bottom: 1px solid #cccccc40;\n}\ntable tr td[data-v-654e63c6] {\r\n    font-size: 1.2rem;\r\n    font-weight: 500;\r\n    color: #333;\r\n    padding: 0 1vw;\r\n    height: 6vh;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31362,15 +31364,6 @@ var render = function () {
                             },
                           },
                         }),
-                        _vm._v(" "),
-                        _c("i", {
-                          staticClass: "fi fi-rr-redo",
-                          on: {
-                            click: function ($event) {
-                              return _vm.modal_actions(1, 4, form.id, form.name)
-                            },
-                          },
-                        }),
                       ]
                     : _vm._e(),
                   _vm._v(" "),
@@ -33457,7 +33450,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Inacessiblidade dos links compartilhados\n                            "
+            "\n                                    Inacessiblidade dos links compartilhados\n                                "
           ),
         ]),
       ]
@@ -33480,7 +33473,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Remoção da planilha vinculada\n                            "
+            "\n                                    Remoção da planilha vinculada\n                                "
           ),
         ]),
       ]
@@ -33503,7 +33496,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Impossibilidade de relatórios\n                            "
+            "\n                                    Impossibilidade de relatórios\n                                "
           ),
         ]),
       ]
@@ -33536,7 +33529,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Acessiblidade dos links compartilhados\n                            "
+            "\n                                    Acessiblidade dos links compartilhados\n                                "
           ),
         ]),
       ]
@@ -33559,7 +33552,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Adição da planilha vinculada\n                            "
+            "\n                                    Adição da planilha vinculada\n                                "
           ),
         ]),
       ]
@@ -33582,7 +33575,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Possibilidade de relatórios\n                            "
+            "\n                                    Possibilidade de relatórios\n                                "
           ),
         ]),
       ]
@@ -33615,7 +33608,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Inacessiblidade dos links compartilhados\n                            "
+            "\n                                    Inacessiblidade dos links compartilhados\n                                "
           ),
         ]),
       ]
@@ -33638,7 +33631,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Remoção da planilha vinculada\n                            "
+            "\n                                    Remoção da planilha vinculada\n                                "
           ),
         ]),
       ]
@@ -33661,7 +33654,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Impossibilidade de relatórios\n                            "
+            "\n                                    Impossibilidade de relatórios\n                                "
           ),
         ]),
       ]
@@ -33746,7 +33739,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Remoção do campo no formulário vinculado\n                            "
+            "\n                                    Remoção do campo no formulário vinculado\n                                "
           ),
         ]),
       ]
@@ -33769,7 +33762,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                Impossibilidade de relatórios\n                            "
+            "\n                                    Impossibilidade de relatórios\n                                "
           ),
         ]),
       ]
